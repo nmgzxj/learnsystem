@@ -1,0 +1,62 @@
+<form   class="clearfix margin-top-25" id="myArticleForm" action="#(action)" method="post">
+#if(baseMsg.id??)
+		<input type="hidden" name="baseMsg.id" value="#(baseMsg.id ??)" />
+#end
+
+			<div class="form-group margin-bottom-20">
+				<label>消息名<font color="#ff0000">*</font></label>
+				<input type="text" class="form-control"  name="baseMsg.title" value="#(baseMsg.title ??)" placeholder="直观的消息名称"/>
+			</div>
+			
+			<div class="form-group margin-bottom-20">
+				<label>端口</label>
+				<select id="baseMsg.port" name="baseMsg.port" class="form-control" >
+					<option checked>#(baseMsg.port ??)</option>
+					<option>x1</option>
+					<option>x2</option>
+					<option>x3</option>
+				</select>
+			</div>
+
+			<div class="form-group margin-bottom-20">
+				<label>消息体</label>
+				<textarea name="baseMsg.msg" id="baseMsg.msg" class="form-control" rows="15" cols="300">#(baseMsg.msg ??)</textarea>
+			</div>
+			
+			<div class="pull-right margin-bottom-20" >
+					<input type="submit" value="确认提交"  class="btn btn-primary" />
+					<input type="button" value="返回"  class="btn btn-primary" onclick="history.back()"/>
+			</div>
+					
+	</form>
+	<script type="text/javascript">
+
+	function showFailedMsg(msg) {
+		layer.msg(msg, {
+				shift: 6
+				, shade: 0.4
+				, time: 0
+				, offset: "140px"
+				, closeBtn: 1
+				, shadeClose: true
+				,maxWidth: "1000"
+			}, function () {}
+		);
+	}
+
+	$(document).ready(function() {
+		$("#myArticleForm").ajaxForm({
+			dataType: "json"
+			, beforeSubmit: function(formData, jqForm, options) {}
+			, success: function(ret) {
+				if (ret.state == "ok") {
+					location.href = "/admin/basemsg?p=#(p)";
+				} else {
+					showFailMsg(ret.msg);
+				}
+			}
+			, error: function(ret) {alert(ret.statusText);}
+			, complete: function(ret) {} 	      // 无论是 success 还是 error，最终都会被回调
+		});
+	});
+	</script>							

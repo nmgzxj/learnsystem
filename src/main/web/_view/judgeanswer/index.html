@@ -1,0 +1,62 @@
+#set(seoTitle="判卷")
+#@adminLayout()
+#define main()
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+		
+		<div class="jfa-table-box margin-top-30">
+		<table class="table table-bordered table-hover margin-bottom-10">
+                                <thead>
+                                <tr>
+
+                                        <th>试卷</th>
+                                        <th>得分</th>
+                                        <th>判卷人</th>
+                                        <th>判卷时间</th>
+                                        <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                #for(exam:judgeAnswerPage.getList())
+                                <tr class="gradeX">
+                                        <td>#(exam.exam_name)</td>
+                                        <td>#number(exam.user_percent,"#.##%")</td>
+                                        <td>#(exam.official_name)</td>
+                                        <td>#(exam.judge_time)</td>
+                                        <td>
+                                        #if(exam.user_percent==null)
+                                                <div class="tpl-table-black-operation">
+                                                        <a href="/admin/judgeAnswer/edit?page=0&examId=#(exam.exam_id)&answer_no=#(exam.answer_no)" class="editor">
+                                                                <i class="am-icon-pencil"></i>判卷
+                                                        </a>
+                                                </div>
+                                        #else
+                                        			<div class="tpl-table-black-operation">
+                                                        <a href="/admin/judgeAnswer/read?page=0&examId=#(exam.exam_id)&answer_no=#(exam.answer_no)" class="editor">
+                                                                <i class="am-icon-pencil"></i>查看
+                                                        </a>
+                                                </div>
+                                        #end
+                                        </td>
+                                </tr>
+                                #end
+                                <!-- more data -->
+                                </tbody>
+                        </table>
+                        <div>
+								#@adminPaginate(judgeAnswerPage.pageNumber, judgeAnswerPage.totalPage, "/admin/judgeAnswer?p=")
+						</div>
+		</div>
+	</div><!-- END OF jfa-content -->
+</div><!-- END OF jfa-content-box -->
+
+#end

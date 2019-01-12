@@ -1,0 +1,29 @@
+		<form class="form-horizontal clearfix margin-top-30" id="myArticleForm" action="#(action)" method="post">
+		#if(account.id??)
+			<input type="hidden" name="account.id" value="#(account.id??)" />
+		#end
+			<div class="form-group">
+				<label class="col-sm-4 control-label">头像</label>
+				<div class="col-sm-8">
+					<img src="/upload/avatar/#(account.avatar??)" >
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-4 control-label">昵称</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" name="account.nickName" value="#(account.nickName??)">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-4 control-label">邮箱</label>
+				<div class="col-sm-8">
+					<input type="email" class="form-control" name="account.userName" value="#(account.userName??)" placeholder="填写合法的 email">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-4 col-sm-8">
+					<input class="btn btn-primary" type="submit" value="提交" />
+				</div>
+			</div>
+		</form>

@@ -1,0 +1,81 @@
+#set(seoTitle="数据清理") 
+#@adminLayout() #define main()
+<!--用户管理-->
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		账户管理
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+
+		<div class="jfa-table-box margin-top-30">
+        <table class="table table-bordered table-hover margin-bottom-10">
+        <thead>
+        <tr>
+        <th>需要清理的数据</th>
+        <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr class="gradeX">
+            <td>X1数据</td>
+            <td>
+            <div class="tpl-table-black-operation">
+            <a href="/admin/system/data_delete?table=tx1msg" onclick="return confirm('确定要删除这些数据吗？')" class="tpl-table-black-operation-del">
+            <i class="am-icon-trash"></i> 删除
+            </a>
+            </div>
+            </td>
+            </tr>
+            <tr class="gradeX">
+            <td>X2数据</td>
+            <td>
+            <div class="tpl-table-black-operation">
+            <a href="/admin/system/data_delete?table=tx2msg" onclick="return confirm('确定要删除这些数据吗？')"  
+           class="tpl-table-black-operation-del">
+            <i class="am-icon-trash"></i> 删除
+            </a>
+            </div>
+            </td>
+            </tr>        
+            <tr class="gradeX">
+            <td>X3数据</td>
+            <td>
+            <div class="tpl-table-black-operation">
+            <a href="/admin/system/data_delete?table=tx3msg" onclick="return confirm('确定要删除这些数据吗？')" class="tpl-table-black-operation-del">
+            <i class="am-icon-trash"></i> 删除
+            </a>
+            </div>
+            </td>
+            </tr>
+           <tr class="gradeX">
+            <td>未提交考卷</td>
+            <td>
+            <div class="tpl-table-black-operation">
+            <a href="/admin/system/data_delete?table=tanswer" onclick="return confirm('确定要删除这些数据吗？')" class="tpl-table-black-operation-del">
+            <i class="am-icon-trash"></i> 删除
+            </a>
+            </div>
+            </td>
+            </tr>
+           <tr class="gradeX">
+            <td>已判分考卷</td>
+            <td>
+            <div class="tpl-table-black-operation">
+            <a href="/admin/system/data_delete?table=tsaved_answer" onclick="return confirm('确定要删除这些数据吗？')" class="tpl-table-black-operation-del">
+            <i class="am-icon-trash"></i> 删除
+            </a>
+            </div>
+            </td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+        </div>
+        </div>
+#end

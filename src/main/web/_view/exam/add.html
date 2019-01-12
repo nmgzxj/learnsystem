@@ -1,0 +1,24 @@
+#set(seoTitle="创建试卷")
+#@adminLayout()
+#define main()
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+		<div class="jfa-table-box margin-top-30">
+ 		<form id="exam_name_form" method="post" action="/admin/exam/save">
+ 			<input type="hidden" name="exam.id" value=#(exam.id)>
+            试卷名 : <input type="text" id="exam_name" name="exam.examName" value="#(exam.examName)">
+        </form>
+	<div class="pages-btn" style="text-align: center">
+	    <button class="btn btn-success" onclick='#("exam_name_form").submit()'>提交</button>
+    </div>
+	</div><!-- END OF jfa-content -->
+</div><!-- END OF jfa-content-box -->
+#end

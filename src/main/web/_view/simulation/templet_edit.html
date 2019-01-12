@@ -1,0 +1,124 @@
+#set(seoTitle="消息触发")
+#@adminLayout()
+#define main()
+<link rel="stylesheet" href="/assets/css/index.css">
+<script type="text/javascript">
+sendMsg = function(){
+	var form = document.getElementById("form1");
+	form.action = '/admin/unit/x1MsgAdd';
+	form.submit();
+}
+
+search = function(){
+	var form = document.getElementById("form1");
+	form.action = "/admin/unit/simulation1";
+	form.handle.value = "search";
+	form.submit();
+}
+
+</script>
+
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+
+					<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+						<div class="widget_heigh am-cf">
+							<div class="port_title">信息触发</div>
+
+							<div class="tabl_wrapper" style="margin-top:10px">
+								
+								
+									<form id="templet_form" method="post" action="#(templet==null?'/admin/templet/add_save':'/admin/templet/edit_save')">
+												<input type="hidden" name="templetId" value="#(templet.id??)">
+												模板名称 : <input type="text" id="templetName" name="templetName" value="#(templet.templetName??)">
+												模板说明 : <input type="text" id="description" name="description" value="#(templet.description??)">
+												<a class="btn btn-info" onclick="window.open('/admin/templet/templet_list','_self')">返回</a>
+												<button class="btn btn-success" onclick='#("templet_form").submit()'>保存</button>
+											</form>
+									
+									<table class="table table-bordered table-hover margin-bottom-20 margin-top-10">
+														<thead>
+															<tr>
+																<th>序号</th>
+																<th>排序</th>
+																<th>消息类型</th>
+																<th>端口</th>
+																<th>网元</th>
+																<th>LIC</th>
+																<th>选择<input type="checkbox" id="all" /></th>
+															</tr>
+														</thead>
+														<tbody>
+															#for(sub:subTemplets)
+																<tr class="gradeX">
+																	<td>#(sub.taxis)&nbsp;
+																	</td>
+																	<td>
+																	<div class="tpl-table-black-operation">
+																	<a href='/admin/templet/sort_up?templetId=#(templet.id)&subTempletId=#(sub.id )'>上移</a>&nbsp;
+																	<a href='/admin/templet/sort_down?templetId=#(templet.id)&subTempletId=#(sub.id )'>下移</a>
+																	</div></td>
+																	<td>#(sub.msgTypeView )</td>
+																	<td>#(sub.port )</td>
+																	<td>#(sub.unitView )</td>
+																	<td>#(sub.licId)</td>
+																	
+																	<td>
+																		<div class="tpl-table-black-operation">
+																			<a
+																				href="/admin/templet/templet_sub_edit?subTempletId=#(sub.id )"
+																				class="editor"> <i class="am-icon-pencil"></i>
+																				编辑
+																			</a> <a onclick="return confirm('确定要删除吗？')" 
+																				href="/admin/templet/templet_sub_edit_delete?templetId=#(templet.id)&subTempletId=#(sub.id )"
+																				class="tpl-table-black-operation-del"> <i
+																				class="am-icon-trash"></i> 删除
+																			</a>
+																		</div>
+																	</td>
+																</tr>
+															#end
+
+															<!-- more data -->
+														</tbody>
+													</table>
+												<a class="btn btn-info" href="/admin/templet/templet_sub_add?templetId=#(templet.id?? )">新建消息</a>
+								</dl>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+	
+
+
+	<script src="../assets/js/jquery-1.12.4.js"></script>
+	<script src="../assets/js/amazeui.min.js"></script>
+	<script src="../assets/js/amazeui.datatables.min.js"></script>
+	<script src="../assets/js/dataTables.responsive.min.js"></script>
+	<script src="../assets/js/app.js"></script>
+	<script src="../assets/js/Questions.js"></script>
+	<script type="text/javascript">
+$(document).ready(function(){
+
+	$('#all').click(function(){
+		 $("[name=id]:checkbox").prop('checked',this.checked);
+	})
+});
+</script>
+
+</body>
+
+</html>
+
+#end

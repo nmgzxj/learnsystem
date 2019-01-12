@@ -1,0 +1,69 @@
+#set(seoTitle="添加流程消息") 
+#@adminLayout() 
+#define main()
+
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+	<div class="jfa-table-box margin-top-30">
+	<table class="table table-bordered table-hover margin-bottom-10">
+        <thead>
+        <tr>
+
+                <th>流程名</th>
+                <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        #for(flow:flowList)
+        <tr class="gradeX">
+                <td>#(flow.title)</td>
+                <td>
+
+                        <div class="tpl-table-black-operation">
+
+                                <a href="/admin/question/flow_edit_choice?flow.id=#(flow.id)&questionId=#(questionId)" class="editor">
+                                        <i class="am-icon-pencil"></i> 查看
+                                </a>
+                        </div>
+                </td>
+        </tr>
+        #end
+        <!-- more data -->
+        </tbody>
+</table>
+         #(pageString)
+         	</div>
+  </div>
+  </div>             			
+
+<style type="text/css">
+
+	.form-group {
+		margin-bottom: 25px;
+	}
+
+	.jfa-content label {
+		line-height: 1;
+		vertical-align: baseline;
+		color: #23527c;
+		font-size: 20px;
+		font-weight: normal;
+		margin-bottom: 8px;;
+	}
+</style>
+
+
+
+
+#end
+         
+         

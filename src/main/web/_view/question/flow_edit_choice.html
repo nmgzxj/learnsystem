@@ -1,0 +1,83 @@
+#set(seoTitle="基础流程消息编辑") 
+#@adminLayout() 
+#define main()
+
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+	<form action="/admin/question/add_msg_to_question" method="post" id="form1" class="clearfix margin-top-25">
+					<input type="hidden" name="baseFlow.id" value="#(baseFlow.id)" />
+					<input type="hidden" name="questionId" value="#(questionId )"/>
+					<div class="form-group margin-bottom-30">
+								<label><font color="#ff0000">*</font> 
+								流程名:<input type="text" name="baseFlow.title" required
+									value="#(baseFlow.title)" class="ipt" />
+
+							</label>
+					</div>
+								
+					<table class="table table-bordered table-hover margin-bottom-10">
+						<thead>
+							<tr>
+								<th>选择<input type="checkbox" id="all" /></th>
+								<th>序号</th>
+								<th>消息名</th>
+								<th>查看</th>
+							</tr>
+						</thead>
+						<tbody>
+							#for(sub:flowMsgs)
+								<tr class="gradeX">
+									<td><input type="checkbox" name="flowMsgId" value="#(sub.id )"></td>
+									<td>#(sub.taxis)&nbsp;
+									</td>
+									<td>#(sub.title )</td>
+									
+									<td>
+										<div class="tpl-table-black-operation">
+											<a
+												href="/baseflow/flow_msg_edit_readonly?flowMsgId=#(sub.id )"
+												class="editor"> <i class="am-icon-pencil"></i>
+												查看
+											</a> 
+										</div>
+									</td>
+								</tr>
+							#end
+
+							<!-- more data -->
+						</tbody>
+					</table>
+			<a class="btn btn-info" onclick='document.getElementById("form1").submit();'>添加到题库</a>
+			</form>
+  </div>
+  </div>             			
+
+<style type="text/css">
+
+	.form-group {
+		margin-bottom: 25px;
+	}
+
+	.jfa-content label {
+		line-height: 1;
+		vertical-align: baseline;
+		color: #23527c;
+		font-size: 20px;
+		font-weight: normal;
+		margin-bottom: 8px;;
+	}
+</style>
+
+
+
+
+#end

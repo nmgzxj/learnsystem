@@ -1,0 +1,183 @@
+#set(seoTitle="考题编辑")
+#@adminLayout()
+#define main()
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		试题修改
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+<form action="/admin/question/update" method="post" id="myArticleForm" class="clearfix margin-top-25">
+	<input type="hidden" name="id" value="#(question.id)" />
+	<input type="hidden" name="p" value="#(p)" />
+	<input type="hidden" name="question.id" value="#(question.id)" />
+	<input type="hidden" name="question.questionType" value="#(question.questionType)"/>
+	<input type="hidden" id="questionItems" name="question.questionItems" value="#(question.questionItems )">
+	<input type="hidden" id="del_msg_id" name="question.del_msg_id" value="">
+	<input type="hidden" id="del_item" name="del_item" value="">
+	
+			<div class="form-group margin-bottom-30">
+				<label><font color="#ff0000">*</font> 题名</label>
+				<input type="text" name="question.questionId" required value="#(question.questionId)"  class="form-control" />
+
+			</div>
+			<div class="form-group margin-bottom-20">
+				<label><font color="#ff0000">*</font> 题目</label>
+				<textarea
+						name="question.questionTitle" id="questionTitle"
+						 class="form-control">#(question.questionTitle)</textarea>
+			</div>
+			#if(question.questionType=='radio' || question.questionType=='checkbox' )
+			#for(item:items)
+			<div class="form-group margin-bottom-20">
+				#(1+for.index). #(item)
+				<input type="submit" value="删除" onclick="item_del('#(item)')">
+			</div>
+			#end
+			<div class="form-group margin-bottom-20">
+				<font color="#ff0000">* </font>
+				选项:
+				<input type="text" id="item" name="question.item" value="">
+				是否正确答案:
+				<input type="radio" name="isTrue" value="yes">是&nbsp;
+				<input type="radio" name="isTrue" value="no">否
+				<input type="submit" name="itemsubmit" value="添加" onClick="item_add()">
+			</div>
+			<div class="form-group margin-bottom-20">
+				答案：<input type="text" readonly  name="question.questionAnswer" value="#(question.questionAnswer)"  class="form-control"/>
+			</div>			
+			#elseif(question.questionType=='checkbox')
+			<div class="form-group margin-bottom-20">
+				<font color="#ff0000">* </font>选项:
+				<input type="text" id="item" name="question.item" value="">
+				<input type="button" name="itemsubmit" value="添加">
+			</div>
+			<div class="form-group margin-bottom-20">
+				<font color="#ff0000">* </font>
+				答案：<input type="text"  name="question.questionAnswer" value="#(question.questionAnswer)" class="form-control"/>
+			</div>			
+			#elseif(question.questionType=='bigtext' )
+			<div class="form-group margin-bottom-20">
+				<font color="#ff0000">* </font>
+				<label>参考答案</label><textarea  name="question.questionAnswer" class="form-control">#(question.questionAnswer)</textarea>
+			</div>
+			#elseif(question.questionType=='flow' )
+			#for(flowMsg:flows)
+			<div class="form-group margin-bottom-20">
+				#(1+for.index).#(flowMsg.title)
+				<input type="button" value="编辑" onclick="window.open('/admin/question/flowmsg_edit?flowMsgId=#(flowMsg.id)','_blank');">
+				<input type="button" value="删除" onclick="flowmsg_del('#(flowMsg.id)')">
+				<a data-delete data-title="#escape(flowMsg.title)"
+					 data-action="/admin/question/flowmsg_delete?flowMsgId=#(flowMsg.id);location.reload();" href="">
+												<i class="fa fa-trash" title="删除">删除</i></a>
+			</div>
+			#end
+			<div class="form-group margin-bottom-20">
+				<input type="button" name="itemsubmit" value="添加流程" onclick="document.getElementById('myArticleForm').submit();window.open('/admin/question/flow_list_choice?questionId=#(question.id)','_blank');">
+			</div>
+			<div class="form-group margin-bottom-20">
+			<font color="#ff0000">* </font>
+			参考答案：<textarea  name="question.questionAnswer" class="form-control">#(question.questionAnswer)</textarea>
+			</div>
+			#end
+			
+				<input type="submit" value="确认提交" class="btn btn-primary btn-sm"/> 
+				<input type="button" value="返回" class="btn btn-primary btn-sm" onclick="window.open('/admin/question?searchKW=#(searchKW)&p=#(p)','_self');" />
+				<input type="button" value="基础消息参考" class="btn btn-primary btn-sm" onclick="window.open('/admin/basemsg/msg_list_readonly?id=#(question.id)','_blank');" />
+				<input type="button" value="基础流程参考" class="btn btn-primary btn-sm" onclick="window.open('/admin/baseflow/flow_list_readonly?id=#(question.id)','_blank');" />
+			
+			<!-- more data -->
+
+</form>
+
+	</div><!-- END OF jfa-content -->
+</div><!-- END OF jfa-content-box -->
+
+<style type="text/css">
+
+
+	.form-group {
+		margin-bottom: 25px;
+	}
+
+	.jfa-content label {
+		line-height: 1;
+		vertical-align: baseline;
+		color: #23527c;
+		font-size: 20px;
+		font-weight: normal;
+		margin-bottom: 8px;;
+	}
+</style>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#myArticleForm1").ajaxForm({
+			dataType: "json"
+			, beforeSubmit: function(formData, jqForm, options) {}
+			, success: function(ret) {
+				if (ret.state == "ok") {
+					location.href = "/admin/question/edit?id=#(question.id)";
+				} else {
+					showFailMsg(ret.msg);
+				}
+			}
+			, error: function(ret) {alert(ret.statusText);}
+			, complete: function(ret) {} 	      // 无论是 success 还是 error，最终都会被回调
+		});
+	});
+</script>
+
+
+
+
+
+	<script type="text/javascript">
+		function item_add(){
+/* 			document.getElementById("questionItems").value += ";";
+			document.getElementById("questionItems").value += document.getElementById("item").value; */
+			document.getElementById("myArticleForm").submit();
+		}
+		function item_del(v){
+/* 			var items = document.getElementById("questionItems").value.split(";");
+			var newItems="";
+			for (var i=0;i<items.length;i++)
+			{ 
+				if(items[i] != v){
+					newItems += items[i];
+					if(i != items.length-1)
+					{
+						newItems += ";";
+					}
+				}
+			} 
+			document.getElementById("questionItems").value = newItems;*/
+			document.getElementById("del_item").value = v;
+			document.getElementById("myArticleForm").submit();
+		}
+		function flowmsg_del(v){
+			document.getElementById("myArticleForm").action='/admin/question/flowmsg_delete';
+			document.getElementById("del_msg_id").value=v;
+			document.getElementById("myArticleForm").submit();
+			$.ajax({
+				dataType: "json"
+				, beforeSubmit: function(formData, jqForm, options) {}
+				, success: function(ret) {
+					if (ret.state == "ok") {
+						location.href = "/admin/question/edit?id=#(question.id)";
+					} else {
+						showFailMsg(ret.msg);
+					}
+				}
+				, error: function(ret) {alert(ret.statusText);}
+				, complete: function(ret) {} 	      // 无论是 success 还是 error，最终都会被回调
+			});
+		}
+	</script>
+
+#end

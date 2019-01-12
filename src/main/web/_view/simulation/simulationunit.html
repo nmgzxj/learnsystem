@@ -1,0 +1,247 @@
+#set(seoTitle="网元配置")
+#@adminLayout()
+#define main()
+<link rel="stylesheet" href="/assets/css/index.css">
+<script type="text/javascript">
+sendMsg = function(){
+	var form = document.getElementById("form1");
+	form.action = '/admin/unit/x1MsgAdd';
+	form.submit();
+}
+
+search = function(){
+	var form = document.getElementById("form1");
+	form.action = "/admin/unit/simulation1";
+	form.handle.value = "search";
+	form.submit();
+}
+
+</script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        label{
+            margin: 0;
+            padding: 0;
+        }
+
+        li{
+           list-style: none;
+        }
+
+        .fr{
+           float: right;
+        }
+
+        .fl{
+            float: left;
+        }
+    </style>
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+
+
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                    <div class="widget_heigh am-cf">
+                        <div class="port_title">网元配置</div>
+
+                        <div class="tabl_wrapper ">
+                            <div class="select_wrapper am-fl"  style="float: left">
+                            <form action="/admin/unit/add_save" id="form1" method="post">
+                            #include("_unit_form.html")
+                            </form>
+                            </div>
+
+                            <div class="table_box">
+                                <table class="table table-bordered table-hover margin-bottom-10">
+                                    <thead>
+                                    <tr>
+                                        <th>网元ID</th>
+                                        <th>网元描述</th>
+                                        <th>设备类型</th>
+                                        <th>网元状态</th>
+                                        <th>X1连接状态</th>
+                                        <th>X2连接状态</th>
+                                        <th>X3连接状态</th>
+                                        <th>修改</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    #for(unit:unitList)
+                                        <tr class="gradeX" >
+                                            <td>#(unit.unitId)</td>
+                                            <td>#(unit.unitDesc)</td>
+                                            <td>#(unit.unitTypeView)</td>
+                                            <td>
+                                            <input data-unit-id="#(unit.id)"
+					   #if(unit.unitStatus=='1') checked #end
+					   type="checkbox" class="js-switch">
+                                                <!-- <div class="tpl-table-black-operation">
+                                                    #if(unit.unitStatus=='0')
+                                                            <a href="javascript:;" onclick="func_change('1','#(unit.id)')" class="editor">
+                                                                <i class="am-icon-pencil"></i> 启用
+                                                            </a>
+                                                    #else
+                                                            <a href="javascript:;" onclick="func_change('0','#(unit.id)')" class="tpl-table-black-operation-del">
+                                                                <i class="am-icon-trash"></i> 禁用
+                                                            </a>
+                                                    #end
+                                                    
+                                                </div> -->
+                                            </td>
+                                            <td>
+                                            #if(unit.x1Status=='0')
+                                           			未连接
+											#else
+												<font color=red>已连接</font>
+											#end
+											</td>
+                                            <td>
+                                             #if(unit.x2Status=='0')
+                                           			未连接
+											#else
+												<font color=red>已连接</font>
+											#end
+											</td>
+                                            <td>
+                                             #if(unit.x3Status=='0')
+                                           			未连接
+											#else
+												<font color=red>已连接</font>
+											#end
+											</td>
+                                            <td>
+                                            <a href="javascript:;" onclick="javascript:unit_change('#(unit.id)','#(unit.unitType)','#(unit.unitTypeView)','#(unit.unitId)','#(unit.x1Ip)','#(unit.x1Port)',
+                                                '#(unit.unitDesc)','#(unit.licId)','#(unit.licIp)','#(unit.x2Port)','#(unit.x3Port)','#(unit.extX3Ip)','#(unit.extX3Port)',
+                                                '#(unit.x1Kt)','#(unit.x1Sqn)','#(unit.x1Pwd)','#(unit.x2Kt)','#(unit.x2Sqn)','#(unit.x2Pwd)')" class="tpl-table-black-operation-del">
+                                                                <i class="am-icon-pencil"></i> 修改
+                                                            </a>
+                                                            <a href="javascript:;" onclick="func_del('#(unit.id)')" class="tpl-table-black-operation-del">
+                                                                <i class="am-icon-trash"></i> 删除
+                                                            </a>
+                                            </td>
+                                        </tr>
+                                    #end
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+<!-- <script src="../assets/js/amazeui.min.js"></script> -->
+<script src="/assets/js/amazeui.datatables.min.js"></script>
+<script src="/assets/js/dataTables.responsive.min.js"></script>
+<!-- <script src="../assets/js/app.js"></script> -->
+<!--<script src="./assets/js/bootstrap.js"></script>-->
+<script src="/assets/js/Questions.js"></script>
+<script src="/assets/js/index.js"></script>
+<script>
+    function func_change(status,id){
+        var jqxhr = $.ajax( "/admin/unit/changeUnitStatus?id="+id+"&status="+status)
+            .done(function() {
+                alert( "网元状态已变。" );
+                window.open("/admin/unit/simulationunit","_self");
+            })
+            .fail(function() {
+                alert( "出现错误，网元状态未改变。" );
+            })
+    }
+    
+    function func_del(id){
+    		if(confirm("确定要删除该网元吗？")){
+    			window.open("/admin/unit/unit_delete?id="+id, '_self');
+    		}
+    }
+
+   
+    function unit_change(id,unit_type,unitTypeView,unit_id,x1_ip,x1_port,unit_desc,lic_id,lic_ip,x2_port,x3_port,ext_x3_ip,ext_x3_port,x1_kt,x1_sqn,x1_pwd,x2_kt,x2_sqn,x2_pwd){
+	    $("#id")[0].value = id;
+	    $("#unitId")[0].value = unit_id;
+	    $("#unitType")[0].selectedIndex = unit_type;
+	    $("#unitType")[0].text = unitTypeView;
+	    $("#x1Ip")[0].value = x1_ip;
+	    $("#x1Port")[0].value = x1_port;
+	    $("#unitDesc")[0].value = unit_desc;
+	    $("#licId")[0].value = lic_id;
+	    $("#licIp")[0].value = lic_ip;
+	    $("#x2Port")[0].value = x2_port;
+	    $("#x3Port")[0].value = x3_port;
+	    $("#extX3Ip")[0].value = ext_x3_ip;
+	    $("#extX3Port")[0].value = ext_x3_port;
+	    $("#x1Kt")[0].value = x1_kt;
+	    $("#x1Sqn")[0].value = x1_sqn;
+	    $("#x1Pwd")[0].value = x1_pwd;
+	    $("#x2Kt")[0].value = x2_kt;
+	    $("#x2Sqn")[0].value = x2_sqn;
+	    $("#x2Pwd")[0].value = x2_pwd;
+	    $("#form1")[0].action = '/unit/update_save';
+	}
+
+	function getIndex(unit_type) {
+	    var unit_index = 0;
+	    if(unit_type=='MME'){
+	        unit_index = 1;
+	    }
+	    else if(unit_type=='S-GW'){
+	        unit_index = 2;
+	    }
+	    else if(unit_type=='P-GW'){
+	        unit_index = 3;
+	    }
+	    else if(unit_type=='HSS'){
+	        unit_index = 4;
+	    }
+	    else if(unit_type=='S4-SGSN'){
+	        unit_index = 5;
+	    }
+	    else if(unit_type=='HSGW'){
+	        unit_index = 6;
+	    }
+	    else if(unit_type=='3GPP AAA'){
+	        unit_index = 7;
+	    }
+	    return unit_index;
+	}
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		initSwitchery(prepareAction, {size: "small"});
+	});
+
+	function prepareAction($this, state) {
+		return {
+			url: state ? "/admin/unit/startupUnit" : "/admin/unit/shutdownUnit",
+			data : {
+				id: $this.data("unit-id")
+			}
+		}
+	}
+
+</script>
+</body>
+
+</html>
+#end

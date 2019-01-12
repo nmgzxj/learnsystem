@@ -1,0 +1,48 @@
+#set(seoTitle="试题管理")
+#@adminLayout()
+#define main()
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+		<div class="jfa-table-box margin-top-30">
+                        <table class="table table-bordered table-hover margin-bottom-10">
+                                <thead>
+                                <tr>
+
+                                        <th>试卷</th>
+                                        <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                #for(exam:answerPage.getList())
+                                <tr class="gradeX">
+                                        <td>#(exam.examName)</td>
+                                        <td>
+                                                <div class="tpl-table-black-operation">
+                                                        <a href="/admin/answer/edit?page=0&examId=#(exam.id)&answer_no=#(answer_no)" class="editor">
+                                                                <i class="am-icon-pencil"></i>考试
+                                                        </a>
+                                                </div>
+                                        </td>
+                                </tr>
+                                #end
+                                <!-- more data -->
+                                </tbody>
+                        </table>
+                       
+                        <div>
+								#@adminPaginate(answerPage.pageNumber, answerPage.totalPage, "/answer?p=")
+						</div>
+		</div>
+	</div><!-- END OF jfa-content -->
+</div><!-- END OF jfa-content-box -->
+
+#end

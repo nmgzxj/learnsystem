@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<dl class="list_dl am-fl">
+    <!--主页上的标题-->
+    <dt class="list_dt">
+        <a class="" href="javascript:;">
+            <span class="_after"></span>
+            <i class="am-icon-folder sidebar-nav-link-logo"></i>
+            网元管理
+        </a>
+
+        <i class="list_dt_icon"></i>
+    </dt>
+    <dd class="list_dd">
+        <ul>
+            <li class="list_li">
+                <a onclick="window.open('/unit/simulationunit','_self');" target="_blank">
+                    网元配置
+                </a>
+            </li>
+            <c:if test="${fn:contains(sessionScope.rights,'考官')}">
+            <li class="list_li">
+                <a onclick="window.open('/unit/unitinfo','_self');" target="_blank">
+                    网元信息
+                </a>
+            </li>
+            </c:if>
+        </ul>
+    </dd>
+
+
+  
+
+
+    <dt class="list_dt">
+        <a class="" href="javascript:;">
+            <span class="_after"></span>
+            <i class="am-icon-folder sidebar-nav-link-logo"></i>
+            接口协议测试
+        </a>
+
+    </dt>
+    <dd class="list_dd">
+        <ul>
+            <li class="list_li">
+                <a onclick="window.open('/unit/simulation1','_self');" target="_blank">
+                    X1接口
+                </a>
+            </li>
+            <li class="list_li">
+                <a onclick="window.open('/unit/simulationmsg','_self');" target="_blank">
+                    X2/X3接口
+                </a>
+            </li>
+             <li class="list_li">
+                <a onclick="window.open('/templet/templet_list','_self');" target="_blank">
+                    消息触发
+                </a>
+            </li> 
+        </ul>
+    </dd>
+
+
+</dl>

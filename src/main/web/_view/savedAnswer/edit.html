@@ -1,0 +1,175 @@
+#set(seoTitle="未提交试卷")
+#@adminLayout()
+#define main()
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+		<div class="jfa-table-box margin-top-30">
+
+         <div class="pull-left" >
+             <!--已做答的数量和考题总数-->
+             当前第<span class="questioned">#(page.toInt()+1)</span>题/共<span class="question_sum">#(question_size)</span>题
+         </div>
+                                                    
+         <div style="width: 100%;height:80%;display: inline-block;border: 1px solid #CCC;border-bottom:1px dashed #CCC;background:#FFF;">
+             <div class="answer_arr"
+                  style="width: 100%; height:100%; padding:20px 20px 0px 20px;">
+                 <form action="/admin/answer/answer" method="post" id="thisform">
+                     <input type="hidden" name="userId" value="#(loginAccountId)">
+                     <input type="hidden" name="page" value="#(page)">
+                     <input type="hidden" name="newpage" value="">
+                     <input type="hidden" name="answer_no" value="#(answer_no)">
+                     <input type="hidden" name="examId" value="#(examId)">
+                     <input type="hidden" name="answerId" value="#(answerId)">
+                     <input type="hidden" name="answer_str" value="#(answer_str)">
+                     <input type="hidden" name="questionId" value="#(question.id)">
+                     <input type="hidden" name="answer" value="#(question.questionAnswer)">
+                     <input type="hidden" name="handle" value="save">
+                 <!--试题区域-->
+                 <ul class="list-unstyled question acur">
+                     <li class="question_title_text">
+                         <strong>第 #(page.toInt()+1) 题 、#(question.questionId)</strong>
+                     
+                     <textarea readonly class="form-control" rows="15" cols="300" style="overflow-y:scroll"> #(question.questionTitle)</textarea>
+                     </li>
+                     
+                     #if(question.questionType=='bigtext')
+                         <li  class="question_info_text" style="border: 0px;background-color: #ffffff;" onclick='clickTrim(this)'>
+                         <strong>请简答：</strong>
+                              <textarea name="item"  class="form-control" rows="15" cols="300" style="overflow-y:scroll">#(answer_str)</textarea>
+                         </li>
+                     #elseif(question.questionType=='flow')
+                             <!-- 列出流程信息 -->
+                        #for(flowMsg:flows)
+							<li class="question_info_text" style="border: 0px;background-color: #ffffff;" onclick='clickTrim(this)'>
+								#(flowMsg.title)
+								<input type="button" value="查看" class="btn btn-info" onclick="window.open('/admin/question/flowmsg_edit_readonly?flowMsgId=#(flowMsg.id)','_blank');">
+							</li>
+						#end
+                                <li  class="question_info_text" style="border: 0px;background-color: #ffffff;" onclick='clickTrim(this)'>
+                                 <textarea  name="item" >#(answer_str)</textarea>
+                                </li>
+                      #end
+                      #if(question.questionType=='radio'||question.questionType=='checkbox')
+	                     #for(ite:question.questionItems.split(';'))
+	                         <li class="question_info" >
+	
+	                             <input type="#(question.questionType)" name="item" value="#(for.index+1)">#(for.index+1)&nbsp;#(ite)
+	                         </li>
+	                     #end
+                     #end
+                         
+                 
+                 </ul>
+                 </form>
+             </div>
+         </div>
+
+         <div style="width: 100%;height:auto;display: inline-block;border: 1px solid #CCC;border-top:none;background:#FFF;">
+             <!--考题的操作区域-->
+             <div class="operation">
+                 <div class="text-right">
+                     <div class="form-group">
+                          #if(page.toInt() > 0)
+                             <a href="javascript:form_submit(#(page.toInt()-1))" class="btn btn-info" id="prevQuestion">上一题</a>
+                          #end
+                          #if(page.toInt() < question_size-1)
+                             <a href="javascript:form_submit(#(page.toInt()+1))" class="btn btn-info" id="nextQuestion">下一题</a>
+                          #end
+                         <!-- <button class="btn btn-success" id="submitQuestions" onclick='#("thisform").submit()'>保存</button> -->
+                         <button class="btn btn-success" id="submitExam"
+                                 onclick="javascript:form_submit_submit(#(page))">交卷</button>
+                     </div>
+                 </div>
+             </div>
+             #include("../answer/answer_card.html")
+         </div>
+     </div>
+ </div>
+
+</div>
+
+<link href="/assets/css/index.css" rel="stylesheet">
+<script src="/assets/js/amazeui.min.js"></script>
+<script src="/assets/js/amazeui.datatables.min.js"></script>
+<script src="/assets/js/dataTables.responsive.min.js"></script>
+<script src="/assets/js/app.js"></script>
+<!--<script src="./assets/js/bootstrap.js"></script>-->
+<script src="/assets/js/Questions.js"></script>
+<script src="/assets/js/index.js"></script>
+<script type="text/JavaScript">
+/* function next(page){
+	${"thisform"}.newpage.value=page;
+	${"thisform"}.handle.value="next";
+	${"thisform"}.action='/admin/answer/answerpage';
+	${"thisform"}.submit();
+}
+
+function prev(page){
+	${"thisform"}.newpage.value=page;
+	${"thisform"}.handle.value="prev";
+	${"thisform"}.action='/admin/answer/answerpage';
+	${"thisform"}.submit();
+}
+ */
+
+function form_submit(p){
+	document.getElementById("thisform").newpage.value=p;
+	document.getElementById("thisform").handle.value="save";
+	document.getElementById("thisform").action='/admin/savedanswer/edit';
+/* 	alert(${"thisform"}.page.value);
+	alert(${"thisform"}.newpage.value); */
+	document.getElementById("thisform").submit();
+}
+
+function form_submit_submit(page){
+	if(confirm('交卷后将不能修改，确定提交吗？')){
+		document.getElementById("thisform").newpage.value=page;
+		document.getElementById("thisform").handle.value="submit";
+		document.getElementById("thisform").action='/admin/answerd/saveAnswerPage';
+/* 	alert(${"thisform"}.page.value);
+	alert(${"thisform"}.newpage.value); */
+	document.getElementById("thisform").submit();
+	}
+}
+
+</script>
+<script type="text/javascript">
+    var itemArray = "#(answer_str)".split(";");
+    var i = 0;
+    //填空
+   $("input[name='item'][type=text]").each(function(){
+       $(this).val(itemArray[i]);
+       i++;
+   })
+
+    //单选
+   $("input[name='item'][type=radio]").each(function(){
+       if($(this).val()==itemArray[0]){
+           $(this).attr("checked",true);
+           return;
+       }
+       i++;
+   })
+
+   //复选
+   $("input[name='item'][type=checkbox]").each(function(){
+       if($(this).val()==itemArray[i]){
+           $(this).attr("checked","checked");
+       }
+       i++;
+   })
+
+</script>
+</body>
+
+</html>
+#end

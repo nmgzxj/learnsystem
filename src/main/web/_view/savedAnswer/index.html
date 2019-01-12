@@ -1,0 +1,47 @@
+#set(seoTitle="未提交试卷管理")
+#@adminLayout()
+#define main()
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+		<div class="jfa-table-box margin-top-30">
+		<table class="table table-bordered table-hover margin-bottom-10">
+                                <thead>
+                                <tr>
+
+                                        <th>试卷</th>
+                                        <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                #for(exam:savedAnswerPage.getList()??)
+                                <tr class="gradeX">
+                                        <td>#(exam.exam_name)</td>
+                                        <td>
+                                                <div class="tpl-table-black-operation">
+                                                        <a href="/admin/savedanswer/edit?page=0&examId=#(exam.exam_id)&answer_no=#(exam.answer_no)" class="editor">
+                                                                <i class="am-icon-pencil"></i>修改
+                                                        </a>
+                                                </div>
+                                        </td>
+                                </tr>
+                                #end
+                                <!-- more data -->
+                                </tbody>
+                        </table>
+                        <div>
+								#@adminPaginate(savedAnswerPage.pageNumber, savedAnswerPage.totalPage, "/savedanswer?p=")
+						</div>
+		</div>
+	</div><!-- END OF jfa-content -->
+</div><!-- END OF jfa-content-box -->
+
+#end

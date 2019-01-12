@@ -1,0 +1,61 @@
+	<form   class="clearfix margin-top-25" id="myArticleForm" action="#(action)" method="post">
+#if(sub.id??)
+<input type="hidden" name="flowId" value="#(sub.flowId==null?flowId:sub.flowId)">
+<input type="hidden" name="flowMsgId" value="#(sub.id??)">
+#else
+<input type="hidden" name="flowId" value="#(flowId)">
+#end
+
+			<div class="form-group margin-bottom-20">
+				<label>消息名<font color="#ff0000">*</font></label>
+				<input type="text" class="form-control"  name="title" required value="#(sub.title ??)" placeholder="消息名称"/>
+			</div>
+			<div class="form-group margin-bottom-20">
+				<label>网元<font color="#ff0000">*</font></label>
+				<select id="unitId" name="unitId"  class="form-control">
+				<option value="#(sub.unitId?? )" checked>#(sub.unitView?? )</option>
+				#for(u:unitList)
+					<option value="#(u.id??)" #if(u.id == sub.UnitId??) selected #end>#(u.unitDesc??)</option>
+				#end
+			</select>
+			</div>
+			<div class="form-group margin-bottom-20">
+				<label>端口<font color="#ff0000">*</font></label>
+				<select id="port" name="port" class="form-control" >
+					<option checked>#(sub.port ??)</option>
+					<option>x1</option>
+					<option>x2</option>
+					<option>x3</option>
+				</select>
+			</div>
+			<div class="form-group margin-bottom-20">
+			<label>方向</label>
+			<select id="direction" name="direction"  class="form-control">
+					<option checked>#(sub.direction?? )</option>
+					<option>Lic to Unit</option>
+					<option>Unit to Lic</option>
+			</select>
+			</div>
+			<div class="form-group margin-bottom-20">
+			<label>消息类型</label>
+			<select id="msgType" name="msgType"  class="form-control">
+					<option value="#(sub.msgType ??)">#(sub.msgTypeView ??)</option>
+			#for(u:msgTypeList)
+				<option value="#(u.resourceId)" #if(u.resourceId == sub.msgType??) selected #end>#(u.resourceName??)</option>
+			#end
+			</select>
+			</div>	
+			<div class="form-group margin-bottom-20">
+				<label>消息体</label>
+				<font color="#ff0000">* </font> 
+				<textarea name="msg" id="msg"
+					class="form-control" rows="15" cols="300">#(sub.msg ??)</textarea>
+			</div>
+			
+			<div class="pull-right margin-bottom-20" >
+					<input type="submit" value="确认提交"  class="btn btn-primary" />
+					<input type="button" value="返回"  class="btn btn-primary" onclick="history.back()"/>
+			</div>
+					
+	</form>
+	

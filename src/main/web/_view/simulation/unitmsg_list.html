@@ -1,0 +1,197 @@
+#set(seoTitle="网元信息")
+#@adminLayout()
+#define main()
+<link rel="stylesheet" href="/assets/css/index.css">
+<script type="text/javascript">
+sendMsg = function(){
+	var form = document.getElementById("form1");
+	form.action = '/admin/unit/x1MsgAdd';
+	form.submit();
+}
+
+search = function(){
+	var form = document.getElementById("form1");
+	form.action = "/admin/unit/simulation1";
+	form.handle.value = "search";
+	form.submit();
+}
+
+</script>
+
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+
+
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                    <div class="widget_heigh am-cf">
+                        <div class="port_title">网元信息</div>
+
+                        <div class="tabl_wrapper ">
+
+<!-- begin -->
+                            <div class="table_show">
+<!--                                 <div class="">
+                                    <span>试卷名</span>
+                                    <input type="text">
+                                </div>
+
+                                <div class="" style="margin: 10px;">
+                                    <span>
+                                        <button type="button" class="am-btn am-btn-secondary am-btn-xs">返回</button>
+                                    </span>
+
+                                    <span>
+                                        <button type="button" class="am-btn am-btn-success am-btn-xs">修改试卷名称</button>
+                                    </span>
+
+                                    <span>
+                                        <button type="button" class="am-btn am-btn-success am-btn-xs">修改试卷题目</button>
+                                    </span>
+                                </div> -->
+
+                                <div class="" style="margin-bottom: 10px">
+                                    <input type="text" class="">
+                                     <span class="">
+                                            <button class="am-btn am-btn-primary am-btn-xs" type="button">搜索</button>
+                                    </span>
+                                </div>
+                                <table class="am-table am-table-compact am-table-striped tpl-table-black "
+                                       id="example-r">
+                                    <thead>
+                                    <tr>
+                                        <th>考题号</th>
+                                        <th>类型</th>
+                                        <th>考题</th>
+                                        <th>选择</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="gradeX">
+                                        <td>01</td>
+                                        <td>简答</td>
+                                        <td>100</td>
+                                        <td>
+                                            <div class="tpl-table-black-operation">
+                                                <a href="edit.html" class="editor">
+                                                    <i class="am-icon-pencil"></i> 编辑
+                                                </a>
+                                                <a href="javascript:;" class="tpl-table-black-operation-del">
+                                                    <i class="am-icon-trash"></i> 删除
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="even gradeC">
+                                        <td>02</td>
+                                        <td>简答</td>
+                                        <td>60</td>
+                                        <td>
+                                            <div class="tpl-table-black-operation">
+                                                <a href="edit.html" class="editor">
+                                                    <i class="am-icon-pencil"></i> 编辑
+                                                </a>
+                                                <a href="javascript:;" class="tpl-table-black-operation-del">
+                                                    <i class="am-icon-trash"></i> 删除
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="gradeX">
+                                        <td>03</td>
+                                        <td>简答</td>
+                                        <td>80</td>
+                                        <td>
+                                            <div class="tpl-table-black-operation">
+                                                <a href="edit.html" class="editor">
+                                                    <i class="am-icon-pencil"></i> 编辑
+                                                </a>
+                                                <a href="javascript:;" class="tpl-table-black-operation-del">
+                                                    <i class="am-icon-trash"></i> 删除
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="even gradeC">
+                                        <td>04</td>
+                                        <td>简答</td>
+                                        <td>55</td>
+                                        <td>
+                                            <div class="tpl-table-black-operation">
+                                                <a href="edit.html" class="editor">
+                                                    <i class="am-icon-pencil"></i> 编辑
+                                                </a>
+                                                <a href="javascript:;" class="tpl-table-black-operation-del">
+                                                    <i class="am-icon-trash"></i> 删除
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="even gradeC">
+                                        <td>05</td>
+                                        <td>简答</td>
+                                        <td>59</td>
+                                        <td>
+                                            <div class="tpl-table-black-operation">
+                                                <a href="edit.html" class="editor">
+                                                    <i class="am-icon-pencil"></i> 编辑
+                                                </a>
+                                                <a href="javascript:;" class="tpl-table-black-operation-del">
+                                                    <i class="am-icon-trash"></i> 删除
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- more data -->
+                                    </tbody>
+                                </table>
+                                <ul class="am-pagination am-pagination-centered">
+                                    <li class="am-disabled"><a href="#">&laquo;</a></li>
+                                    <li class="am-active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><span>...</span></li>
+                                    <li><a href="#">10</a></li>
+                                    <li><a href="#">11</a></li>
+                                    <li><a href="#">12</a></li>
+                                    <li><a href="#">&raquo;</a></li>
+                                </ul>
+<!-- end -->
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script src="../assets/js/jquery-1.12.4.js"></script>
+<script src="../assets/js/amazeui.min.js"></script>
+<script src="../assets/js/amazeui.datatables.min.js"></script>
+<script src="../assets/js/dataTables.responsive.min.js"></script>
+<script src="../assets/js/app.js"></script>
+<!--<script src="./assets/js/bootstrap.js"></script>-->
+<script src="../assets/js/Questions.js"></script>
+<script src="../assets/js/index.js"></script>
+
+</body>
+
+</html>
+#end

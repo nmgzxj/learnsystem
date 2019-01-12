@@ -1,0 +1,62 @@
+#set(seoTitle="考试日志管理")
+#@adminLayout()
+#define main()
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+		<div class="jfa-table-box margin-top-30">
+                        <table class="table table-bordered table-hover margin-bottom-10">
+                                <thead>
+                                <tr>
+                                        <th>试卷名</th>
+                                        <th>考生名</th>
+                                        <th>开考时间</th>
+                                        <th>交卷时间</th>
+                                        <th>试卷总分</th>
+                                        <th>判卷人</th>
+                                        <th>判卷得分</th>
+                                        <th>判卷时间</th>
+                                        <th>得分百分比</th>
+                                        <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                #for(x:answerLogPage.getList())
+                                <tr class="gradeX">
+                                        <td>#(x.examName)</td>
+                                        <td>#(x.account_name)</td>
+                                        <td>#(x.answerBegin)</td>
+                                        <td>#(x.answerEnd)</td>
+                                        <td>#(x.examScore)</td>
+                                        <td>#(x.official_name)</td>
+                                        <td>#(x.user_score)</td>
+                                        <td>#(x.judgeTime)</td>
+                                        <td>#number(x.user_percent,"#.##%")</td>
+                                        <td>
+					                        <a data-delete
+											   data-title="#escape(x.examName+'的本次答题记录')"
+											   data-action="/admin/answerlog/delete?id=#(x.id)">
+												<i class="fa fa-trash" title="删除">删除</i>
+											</a>
+                                        </td>
+                                </tr>
+                                #end
+                                <!-- more data -->
+                                </tbody>
+                        </table>
+                        <div>
+								#@adminPaginate(answerLogPage.pageNumber, answerLogPage.totalPage, "/answerLog?p=")
+						</div>
+		</div>
+	</div><!-- END OF jfa-content -->
+</div><!-- END OF jfa-content-box -->
+
+#end

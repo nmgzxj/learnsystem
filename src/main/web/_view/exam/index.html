@@ -1,0 +1,75 @@
+#set(seoTitle="试卷管理")
+#@adminLayout()
+#define main()
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+		<div class="jfa-toolbar">
+			<a class="btn btn-primary btn-sm" href="/admin/exam/add"><i class="fa fa-plus"></i>创建</a>
+		</div>
+		<div class="jfa-table-box margin-top-30">
+                        <table class="table table-bordered table-hover margin-bottom-10">                      
+                                  <thead>
+
+                           <tr>
+					<th>试卷</th>
+                                   <th>总分</th>
+                                   <th width="500">操作</th>
+                           </tr>
+                           </thead>
+                           <tbody>
+                           #for(exam:examPage.getList())
+                           <tr class="gradeX">
+                                   <td>#(exam.examName)</td>
+                                   <td>#(exam.score ??)</td>
+                                   <td>
+                                   <div class="tpl-table-black-operation">
+                                      <a href="/admin/exam/copy?exam.id=#(exam.id)" class="editor">
+                                             <i class="am-icon-pencil"></i> 复制试卷
+                                     </a>
+                                   #if(exam.isReadonly=='0')
+                                           
+                                           			<a href="/admin/exam/setReadonly?exam.id=#(exam.id)" onclick="return confirm('可答后将不能修改试卷，确定要设置吗？')" class="editor">
+                                                           <i class="am-icon-pencil"></i>设为可答
+                                                   </a>
+                                                   <a href="/admin/exam/edit?exam.id=#(exam.id)" class="editor">
+                                                           <i class="am-icon-pencil"></i> 编辑
+                                                   </a>
+                                                   
+                                                   <a data-delete
+											   data-title="#escape(exam.examName)"
+											   data-action="/admin/exam/delete?exam.id=#(exam.id)" 
+											   class="tpl-table-black-operation-del">
+                                                           <i class="am-icon-trash"></i> 删除
+                                                   </a>
+                                    #else
+                                      <a href="/admin/exam/edit?exam.id=#(exam.id)" class="editor">
+                                             <i class="am-icon-pencil"></i> 查看
+                                     </a>
+                                      <a href="/admin/exam/allocate?exam.id=#(exam.id)" class="editor">
+                                             <i class="am-icon-pencil"></i> 分配试卷
+                                     </a>
+                                     #end
+                                     </div>
+                                   </td>
+                           </tr>
+                           #end
+                           <!-- more data -->
+                           </tbody>
+                   </table>
+                                    <!--生成试卷-->
+                                
+                                <div>
+								#@adminPaginate(examPage.pageNumber, examPage.totalPage, "/admin/exam/?p=")
+								</div>
+	</div><!-- END OF jfa-content -->
+</div><!-- END OF jfa-content-box -->
+#end

@@ -1,0 +1,127 @@
+#set(seoTitle="消息触发")
+#@adminLayout()
+#define main()
+<link rel="stylesheet" href="/assets/css/index.css">
+<script type="text/javascript">
+sendMsg = function(){
+	var form = document.getElementById("form1");
+	form.action = '/admin/unit/x1MsgAdd';
+	form.submit();
+}
+
+search = function(){
+	var form = document.getElementById("form1");
+	form.action = "/admin/unit/simulation1";
+	form.handle.value = "search";
+	form.submit();
+}
+
+</script>
+
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+
+
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                    <div class="widget_heigh am-cf">
+                        <div class="port_title">消息触发</div>
+
+                        <div class="tabl_wrapper ">
+
+<!-- begin -->
+                            <div style="margin-top: 10px">
+
+                                <div class="" style="margin-bottom: 10px">
+                                    <input type="text" class="">
+                                     <span class="">
+                                            <button class="am-btn am-btn-primary am-btn-xs" type="button">搜索</button>
+                                    </span>
+                                </div>
+                                <table class="table table-bordered table-hover margin-bottom-10">
+                                    <thead>
+                                    <tr>
+                                        <th>模板号</th>
+                                        <th>模板名称</th>
+                                        <th>描述</th>
+                                        <th>编辑</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                   #for(templet:templetPage.getList())
+                                    <tr class="gradeX">
+                                        <td>#(templet.id)</td>
+                                        <td>#(templet.templetName )</td>
+                                        <td>#(templet.description )</td>
+                                        <td>
+                                            <div class="tpl-table-black-operation">
+                                                <a href1="/admin/templet/templet_run?templetId=#(templet.id )" href="#" onclick="javascript:sendMsg(#(templet.id ))" class="editor">
+                                                    <i class="am-icon-pencil"></i> 触发
+                                                </a>
+                                               #role('考官')
+                                                <a href="/admin/templet/templet_edit?templetId=#(templet.id )" class="editor">
+                                                    <i class="am-icon-pencil"></i> 编辑
+                                                </a>
+                                                <a onclick="return confirm('确定要删除吗？');" href="/admin/templet/templet_delete?templetId=#(templet.id )" class="tpl-table-black-operation-del">
+                                                    <i class="am-icon-trash"></i> 删除
+                                                </a>
+                                               #end
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    #end
+
+                                    <!-- more data -->
+                                    </tbody>
+                                </table>
+                                 <a class="btn btn-info" href="/admin/templet/templet_add">新建模板</a>
+                    #@adminPaginate(templetPage.pageNumber, templetPage.totalPage, "/admin/templet/templet_list?p=")
+                                </div>
+                               
+<!-- end -->
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+<script src="/assets/js/amazeui.min.js"></script>
+<script src="/assets/js/amazeui.datatables.min.js"></script>
+<script src="/assets/js/dataTables.responsive.min.js"></script>
+<script src="/assets/js/app.js"></script>
+<!--<script src="./assets/js/bootstrap.js"></script>-->
+<script src="/assets/js/Questions.js"></script>
+<script src="/assets/js/index.js"></script>
+<script type="text/javascript">
+function sendMsg(v){
+	$.ajax({
+		type:"get",
+		url:"/admin/templet/templet_run?templetId="+v,
+		async:true,
+		dataType:'json',
+		success:function(data){
+			alert("消息已触发，请在各接口运行界面查看。");
+		}
+	});
+}
+
+</script>
+</body>
+
+</html>
+#end

@@ -1,0 +1,45 @@
+#set(seoTitle="基础流程管理")
+#@adminLayout()
+#define main()
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+		<div class="jfa-table-box margin-top-30">
+                        <table class="table table-bordered table-hover margin-bottom-10">
+                                <thead>
+                                <tr>
+                                        <th>流程名</th>
+                                        <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                #for(flow:baseFlowPage.getList())
+                      
+                                <tr class="gradeX">
+                                        <td>#(flow.title)</td>
+                                        <td>
+                                            <a href="/admin/baseflow/flow_edit_readonly?id=#(flow.id)" class="editor">
+                                                    <i class="fa fa-pencil" title="修改">查看</i>
+                                            </a>
+	                                                    
+					                        
+  
+                                        </td>
+                                </tr>
+                                #end
+                                <!-- more data -->
+                                </tbody>
+                        </table>
+								#@adminPaginate(baseFlowPage.pageNumber, baseFlowPage.totalPage, "/admin/baseflow?p=")
+</div>
+</div>
+</div>
+#end

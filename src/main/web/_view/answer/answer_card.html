@@ -1,0 +1,21 @@
+<div style="width: 100%; padding: 20px;">
+	<div class="panel-default">
+		<div class="panel-heading" id="closeCard"
+			style="color: #DCE4EC; font-size: 15px; display: none; background: none;">
+			<span>收起答题卡</span> <span class="glyphicon glyphicon-chevron-up"></span>
+		</div>
+		<div class="panel-heading" id="openCard"
+			style="font-size: 15px; background: none;">
+			<span>展开答题卡</span> <span class="glyphicon glyphicon-chevron-down"></span>
+		</div>
+		<div id="answerCard" style="display: none;">
+			<div class="panel-body form-horizontal" style="padding: 0px;">
+				<ul class="list-unstyled">
+					#for(i=0;i < question_size;i++)
+					<a class="questionId active_question_id"
+						href="javascript:form_submit(#(i))">#(i+1)</a> #end
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

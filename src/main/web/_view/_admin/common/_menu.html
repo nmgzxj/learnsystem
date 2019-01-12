@@ -1,0 +1,92 @@
+
+<a class="jfa-main-menu" href="/admin/welcome" home="true">
+	<i class="left-icon fa fa-dashboard"></i>
+	首页
+</a>
+
+###permission("/admin/basemsg","/admin/baseflow","/admin/question","/admin/answer","/admin/exam","/admin/savedanswer","/admin/judgeAnswer","/admin/answerd")
+<a class="jfa-main-menu" home="false">
+    <i class="left-icon fa fa-file-o"></i>
+    考试管理
+    <i class="right-icon fa fa-angle-up fa-lg"></i>
+</a>
+<ul class="jfa-sub-menu" >
+#permission("/admin/basemsg")
+    <li><a href="/admin/basemsg">基础消息</a></li>
+#end
+#permission("/admin/baseflow")
+    <li><a href="/admin/baseflow">流程管理 </a></li>
+#end
+#permission("/admin/question")
+    <li><a href="/admin/question">考题管理</a></li>
+#end
+#permission("/admin/exam")
+    <li><a href="/admin/exam">试卷管理</a></li>
+#end
+#permission("/admin/answer")
+    <li><a href="/admin/answer">考试</a></li>
+#end
+#permission("/admin/savedanswer")
+    <li><a href="/admin/savedanswer">未提交试卷</a></li>
+#end
+#permission("/admin/judgeAnswer")
+    <li><a href="/admin/judgeAnswer">判卷</a></li>
+#end
+#permission("/admin/answerd")
+    <li><a href="/admin/answerd">已提交试卷</a></li>
+#end
+#permission("/admin/answerlog")
+    <li><a href="/admin/answerlog">考试日志 </a></li>
+#end
+</ul>
+###end
+
+###permission("/admin/unit/simulationunit","/admin/unit/unitinfo","/admin/unit/simulation1","/admin/templet/templet_list","/admin/unit/simulationmsg")
+#role("上机学员","出题人","超级管理员","考官")
+<a class="jfa-main-menu" home="false">
+    <i class="left-icon fa fa-laptop"></i>
+    模拟上机
+    <i class="right-icon fa fa-angle-up fa-lg"></i>
+</a>
+<ul class="jfa-sub-menu" style="" display:none;>
+#permission("/admin/unit/simulationunit")
+    <li><a href="/admin/unit/simulationunit">网元配置</a></li>
+#end
+#permission("/admin/unit/unitinfo")
+    <li><a href="/admin/unit/unitinfo">LIC配置</a></li>
+#end
+#permission("/admin/unit/simulation1")
+    <li><a href="/admin/unit/simulation1">X1接口</a></li>
+#end
+#permission("/admin/templet/templet_list")
+    <li><a href="/admin/templet/templet_list">消息触发</a></li>
+#end
+#permission("/admin/unit/simulationmsg")
+    <li><a href="/admin/unit/simulationmsg">X2/X3运行界面</a></li>
+#end
+</ul>
+#end
+
+#role("超级管理员","考官")
+###permission("/admin/system/data_clear","/admin/permission","/admin/role","/admin/account")
+<a class="jfa-main-menu" home="false">
+    <i class="left-icon fa fa-user-o"></i>
+    权限管理
+    <i class="right-icon fa fa-angle-down fa-lg"></i>
+</a>
+<ul class="jfa-sub-menu" style="display:none;">
+#permission("/admin/account")
+    <li><a href="/admin/account">账户管理</a></li>
+#end
+#permission("/admin/role")
+    <li><a href="/admin/role">角色管理</a></li>
+#end
+#permission("/admin/permission")
+    <li><a href="/admin/permission">权限管理</a></li>
+#end
+#permission("/admin/system/data_clear")
+    <li><a href="/admin/system/data_clear">数据清理</a></li>
+#end
+</ul>
+#end
+

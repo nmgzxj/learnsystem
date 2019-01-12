@@ -1,0 +1,83 @@
+#set(seoTitle="基础消息管理")
+#@adminLayout()
+#define main()
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+	<!--查询层  -->
+	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
+	<form action="/admin/basemsg" method="post" name="thisform">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    消息名:<input type="text" name="title" class="form-control" value="#(title)"><br>
+                    消息体:<input type="text" name="msg" class="form-control" value="#(msg)"><br>
+                    端口：<select id="port" name="port" class="form-control" >
+					<option checked>#(port)</option>
+					<option>x1</option>
+					<option>x2</option>
+					<option>x3</option>
+				</select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary" >确定</button>
+                </div>
+            </div>
+         </div>
+         </form>
+    </div>
+		<div class="jfa-toolbar">
+			<a href="#" class="btn btn-info btn-sm"  data-toggle="modal" data-target="#searchModal">
+				<i class="fa fa-search"></i>
+				查询
+			</a>
+		</div>
+		<div class="jfa-table-box margin-top-30">
+                        <table class="table table-bordered table-hover margin-bottom-10">
+                                <thead>
+                                <tr>
+
+                                        <th>消息名</th>
+                                        <th>接口</th>
+                                        <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                #for(msg:basemsgPage.getList())
+                                <tr class="gradeX">
+                                        <td>#(msg.title)</td>
+                                        <td>#(msg.port)</td>
+                                        <td>
+                                            <a href="/admin/basemsg/msg_edit_readonly?id=#(msg.id)" >
+                                                    <i class="fa fa-pencil" title="查看">查看</i>
+                                            </a>
+	                                                    
+					                        
+                                        </td>
+                                </tr>
+                                #end
+                                <!-- more data -->
+                                </tbody>
+                        </table>
+                        <div>
+								#@adminPaginate(basemsgPage.pageNumber, basemsgPage.totalPage, "/admin/basemsg/msg_list_readonly?p=")
+						</div>
+		</div>
+	</div><!-- END OF jfa-content -->
+</div><!-- END OF jfa-content-box -->
+
+#end

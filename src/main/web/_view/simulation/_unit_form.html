@@ -1,0 +1,117 @@
+                                <input type="hidden" name="id" id="id" value="#(unit.id??)">
+                                <div><h5 style="text-align: center">TNE参数</h5></div>
+                                <div class="">
+                                    <span style="margin-right: 5px;">设备类型</span>
+                                    <select name="unitType" id="unitType" style="width: 168px;">
+                                        <option value=""></option>
+                                        #for(u:units)
+                                        <option value="#(u.resourceId??)" >#(u.resourceName??)</option>
+                                        #end
+                                    </select>
+                                </div>
+
+                                <div class="">
+                                    <span style="margin-right: 19px ;">网元ID</span>
+                                    <input name="unitId" id="unitId" type="text" style="width: 168px;" value="">
+                                </div>
+
+                                <div class="">
+                                    <span style="margin-right:27px">X1 IP</span>
+                                    <input name="x1Ip" id="x1Ip" type="text"  style="width: 168px;" value="">
+                                </div>
+
+                                <div>
+                                    <span style="margin-right: 14px;">X1 Port</span>
+                                    <input name="x1Port" id="x1Port" type="text" value="" style="width: 168px;">
+                                </div>
+
+                                <div>
+                                    <span style="margin-right: 5px;">网元描述</span>
+                                    <input name="unitDesc" id="unitDesc" type="text" value="" style="width: 168px;">
+                                </div>
+
+<!--52106lte123-->
+
+
+                                <div>
+                                    <h5 style="text-align: center">LIC参数</h5>
+                                </div>
+                                <div>
+                                    <span style="margin-right: 21px;">LIC ID</span>
+                                    <input name="licId" id="licId" type="text" value="" style="width: 168px;">
+                                </div>
+
+                                <div>
+                                    <span style="margin-right: 22px;">LIC IP</span>
+                                    <input name="licIp" id="licIp" type="text" value="" style="width: 168px;">
+                                </div>
+
+                                <div>
+                                    <label class="am-checkbox-inline" style="margin-right: 3px">
+                                        <input name="needX2Port" id="needX2Port" type="checkbox">X2Port
+                                    </label>
+                                        <input name="x2Port" id="x2Port" type="text" value="" style="width: 168px;">
+                                </div>
+
+                                <div>
+                                    <label class="am-checkbox-inline" style="margin-right: 3px">
+                                        <input type="checkbox" name="needX3Port" id="needX3Port" value="">X3Port
+                                    </label>
+                                    <input name="x3Port" id="x3Port" type="text" value="" style="width: 168px;">
+                                </div>
+
+                                <div>
+                                    <label class="am-checkbox-inline">
+                                        <input type="checkbox" name="needExtX3Ip" id="needExtX3Ip" value="">扩展X3IP
+                                    </label>
+                                    <input name="extX3Ip" id="extX3Ip" type="text" value="" style="width: 158px;">
+                                </div>
+
+                                <div>
+                                    <label class="am-checkbox-inline">
+                                        <input type="checkbox" name="needExtX3Port" id="needExtX3Port" value="">扩展X3Port
+                                    </label>
+                                    <input name="extX3Port" id="extX3Port" type="text" value="" style="width: 50px;">
+                                </div>
+
+
+
+                                <div><h5 style="text-align: center">X1认证参数</h5></div>
+                                <div>
+                                    <span style="margin-right: 41px;">KT</span>
+                                    <input style="width: 168px;" name="x1Kt" id="x1Kt" type="text" value="">
+                                </div>
+
+                                <div>
+                                    <span style="margin-right: 29px;">SQN</span>
+                                    <input name="x1Sqn" id="x1Sqn" type="text" value="" style="width: 168px;">
+                                </div>
+
+                                <div>
+                                    <span style="margin-right:26px ;">PWD</span>
+                                    <input name="x1Pwd" id="x1Pwd" type="text" value="" style="width: 168px;">
+                                </div>
+
+
+                                <div><h5 style="text-align: center">X2认证参数</h5></div>
+                                <div>
+                                    <span style="margin-right: 41px;">KT</span>
+                                    <input name="x2Kt" id="x2Kt" type="text" value="" style="width: 168px;">
+                                </div>
+
+                                <div>
+                                    <span style="margin-right: 29px;">SQN</span>
+                                    <input name="x2Sqn" id="x2Sqn" type="text" value="" style="width: 168px;">
+                                </div>
+
+                                <div>
+                                    <span style="margin-right:26px ;">PWD</span>
+                                    <input name="x2Pwd" id="x2Pwd" type="text" value="" style="width: 168px;">
+                                </div>
+
+                                <div style="margin-top: 15px">
+                                    <ul class="add_btn_wrapper">
+                                        <li class="btn_select_thre fl"><input class="btn btn-info btn-sm" type="submit" name="submit_btn"></li>
+                                        <li class="btn_select_thre fl"><input class="btn btn-info btn-sm" type="reset" name="reset_btn"></li>
+                                    </ul>
+                                </div>

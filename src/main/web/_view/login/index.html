@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>登录页面</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/assets/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <script src="/assets/jquery/jquery.min-v1.12.4.js"></script>
+
+</head>
+
+<body data-type="login" class="theme-white">
+<div class="am-g tpl-g">
+    <div class="tpl-login">
+    		<div class="tpl-login-content">
+			<!-- 内容容器 -->
+			<div class="" style="text-align: center;color:#999;">
+                <h3>4G仪表仿真培训考试系统</h3>
+            </div>
+            <form action="/login/doLogin?returnUrl=#(returnUrl)" id="login_form"  method="post" class="am-form tpl-form-line-form">
+                <!--账号-->
+                <div class="am-form-group">
+                    <input type="text" class="tpl-form-input" id="userName" name="userName" placeholder="请输入邮箱">
+                    <span id="userNameMsg"></span>
+                </div>
+                <!--密码-->
+                <div class="am-form-group">
+                    <input type="password" class="tpl-form-input" id="password" name="password" placeholder="请输入密码">
+
+                </div>
+				<div class="am-form-group">
+					<img title="点击刷新" class="captcha" src="/login/captcha" onclick="updateCaptcha();">
+					<input type="text" name="captcha" class="tpl-form-input" id="captchaInput">
+					<span id="captchaMsg"></span>
+				</div>
+                 <!--记住我-->
+                <div class="am-form-group tpl-login-remember-me">
+                    <input id="keepLogin" type="checkbox">
+                    <label for="keepLogin">记住密码</label>
+
+                </div>				
+                <!--提交密码--18733418803-->
+                <div class="am-form-group">
+                    <button type="submit" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">提交</button>
+                </div>
+</form>
+
+
+	<script type="text/javascript" src="/assets/jquery_form/jquery.form.min.js"></script>
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#login_form").ajaxForm({
+				dataType: "json"
+				, beforeSubmit: function(formData, jqForm, options) {       // 表单提交之前回调
+					$("div span").text("");                                    // 清空所有验证 msg
+				}
+				, success: function(ret) {
+					// 业务层验证成功
+					if(ret.state == "ok") {
+						location.href = ret.returnUrl;
+						return ;
+					}
+					
+					// 业务层验证失败
+					if (ret.state == "fail") {
+						layer.msg(ret.msg, {
+									shift: 6
+									, shade: 0.3
+									, time: 2500
+									, offset: "165px"
+									, closeBtn: 1
+									, shadeClose: true
+								} , function() {
+									updateCaptcha();
+								}
+						);
+						return ;
+					}
+					
+					// Validator 层验证失败
+					if (ret.userNameMsg) {
+						$("#userNameMsg").text(ret.userNameMsg);
+					}
+					if (ret.passwordMsg) {
+						$("#passwordMsg").text(ret.passwordMsg);
+					}
+					if (ret.captchaMsg) {
+						updateCaptcha();    // captcha 被验证过以后会立即失效，更新之
+						$("#captchaMsg").text(ret.captchaMsg);
+					}
+				}
+				, error: function(ret) { }              // ret.status != 200 时回调
+				, complete: function(ret) { }       // 无论是 success 还是 error，最终都会被回调
+			});
+		});
+
+		function updateCaptcha() {
+			$(".captcha").attr("src", "/login/captcha?v=" + Math.random());
+			$("#captchaInput").val("");
+		}
+	</script>
+
+</div>
+</div>
+</div>
+
+
+</body>
+
+</html>

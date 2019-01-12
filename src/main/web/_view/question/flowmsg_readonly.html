@@ -1,0 +1,72 @@
+#set(seoTitle="基础流程消息查看") 
+#@adminLayout() 
+#define main()
+
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+	<form   class="clearfix margin-top-25" id="myArticleForm" action="/admin/question/flowmsg_edit_save" method="post">
+#if(sub.id??)
+<input type="hidden" name="flowId" value="#(sub.flowId==null?flowId:sub.flowId)">
+<input type="hidden" name="flowMsgId" value="#(sub.id??)">
+#end
+
+			<div class="form-group margin-bottom-20">
+				<label>消息名<font color="#ff0000">*</font></label>
+				<input type="text" class="form-control"  name="title" required value="#(sub.title ??)" placeholder="项目唯一标识"/>
+			</div>
+			
+			<div class="form-group margin-bottom-20">
+				<label>端口<font color="#ff0000">*</font></label>
+				<select id="port" name="port" class="form-control" >
+					<option checked>#(sub.port ??)</option>
+					<option>x1</option>
+					<option>x2</option>
+					<option>x3</option>
+				</select>
+			</div>
+
+			<div class="form-group margin-bottom-20">
+				<label>消息体</label>
+				<font color="#ff0000">* </font> 
+				<textarea name="msg" id="msg"
+					class="form-control" rows="15" cols="300">#(sub.msg ??)</textarea>
+			</div>
+			
+			<div class="pull-right margin-bottom-20" >
+					<input type="submit" value="确认提交"  class="btn btn-primary" />
+			</div>
+					
+	</form>
+	
+               			
+
+<style type="text/css">
+
+
+	.form-group {
+		margin-bottom: 25px;
+	}
+
+	.jfa-content label {
+		line-height: 1;
+		vertical-align: baseline;
+		color: #23527c;
+		font-size: 20px;
+		font-weight: normal;
+		margin-bottom: 8px;;
+	}
+</style>
+
+
+
+
+#end
