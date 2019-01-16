@@ -9,35 +9,35 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseFavorite<M extends BaseFavorite<M>> extends Model<M> implements IBean {
 
-	public void setId(Integer id) {
+	public void setId(java.lang.Integer id) {
 		set("id", id);
 	}
 	
-	public Integer getId() {
+	public java.lang.Integer getId() {
 		return getInt("id");
 	}
 
-	public void setAccountId(Integer accountId) {
+	public void setAccountId(java.lang.Integer accountId) {
 		set("accountId", accountId);
 	}
 	
-	public Integer getAccountId() {
+	public java.lang.Integer getAccountId() {
 		return getInt("accountId");
 	}
 
-	public void setRefType(Integer refType) {
+	public void setRefType(java.lang.Integer refType) {
 		set("refType", refType);
 	}
 	
-	public Integer getRefType() {
+	public java.lang.Integer getRefType() {
 		return getInt("refType");
 	}
 
-	public void setRefId(Integer refId) {
+	public void setRefId(java.lang.Integer refId) {
 		set("refId", refId);
 	}
 	
-	public Integer getRefId() {
+	public java.lang.Integer getRefId() {
 		return getInt("refId");
 	}
 

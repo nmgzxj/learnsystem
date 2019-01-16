@@ -9,52 +9,52 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseResourceInfoCopy1<M extends BaseResourceInfoCopy1<M>> extends Model<M> implements IBean {
 
-	public void setResourceId(String resourceId) {
+	public void setResourceId(java.lang.String resourceId) {
 		set("resource_id", resourceId);
 	}
-
-	public String getResourceId() {
-		return get("resource_id");
+	
+	public java.lang.String getResourceId() {
+		return getStr("resource_id");
 	}
 
-	public void setTypeId(String typeId) {
+	public void setTypeId(java.lang.String typeId) {
 		set("type_id", typeId);
 	}
-
-	public String getTypeId() {
-		return get("type_id");
+	
+	public java.lang.String getTypeId() {
+		return getStr("type_id");
 	}
 
-	public void setResourceName(String resourceName) {
+	public void setResourceName(java.lang.String resourceName) {
 		set("resource_name", resourceName);
 	}
-
-	public String getResourceName() {
-		return get("resource_name");
+	
+	public java.lang.String getResourceName() {
+		return getStr("resource_name");
 	}
 
-	public void setTaxis(Integer taxis) {
+	public void setTaxis(java.lang.Integer taxis) {
 		set("taxis", taxis);
 	}
-
-	public Integer getTaxis() {
-		return get("taxis");
+	
+	public java.lang.Integer getTaxis() {
+		return getInt("taxis");
 	}
 
-	public void setPTypeId(String pTypeId) {
+	public void setPTypeId(java.lang.String pTypeId) {
 		set("p_type_id", pTypeId);
 	}
-
-	public String getPTypeId() {
-		return get("p_type_id");
+	
+	public java.lang.String getPTypeId() {
+		return getStr("p_type_id");
 	}
 
-	public void setDelFlag(String delFlag) {
+	public void setDelFlag(java.lang.String delFlag) {
 		set("del_flag", delFlag);
 	}
-
-	public String getDelFlag() {
-		return get("del_flag");
+	
+	public java.lang.String getDelFlag() {
+		return getStr("del_flag");
 	}
 
 }

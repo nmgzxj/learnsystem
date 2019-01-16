@@ -9,44 +9,44 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseResourceType<M extends BaseResourceType<M>> extends Model<M> implements IBean {
 
-	public void setTypeId(String typeId) {
+	public void setTypeId(java.lang.String typeId) {
 		set("type_id", typeId);
 	}
-
-	public String getTypeId() {
-		return get("type_id");
+	
+	public java.lang.String getTypeId() {
+		return getStr("type_id");
 	}
 
-	public void setTypeName(String typeName) {
+	public void setTypeName(java.lang.String typeName) {
 		set("type_name", typeName);
 	}
-
-	public String getTypeName() {
-		return get("type_name");
+	
+	public java.lang.String getTypeName() {
+		return getStr("type_name");
 	}
 
-	public void setTypeDesc(Integer typeDesc) {
+	public void setTypeDesc(java.lang.Integer typeDesc) {
 		set("type_desc", typeDesc);
 	}
-
-	public Integer getTypeDesc() {
-		return get("type_desc");
+	
+	public java.lang.Integer getTypeDesc() {
+		return getInt("type_desc");
 	}
 
-	public void setIsShow(String isShow) {
+	public void setIsShow(java.lang.String isShow) {
 		set("is_show", isShow);
 	}
-
-	public String getIsShow() {
-		return get("is_show");
+	
+	public java.lang.String getIsShow() {
+		return getStr("is_show");
 	}
 
-	public void setPTypeId(String pTypeId) {
+	public void setPTypeId(java.lang.String pTypeId) {
 		set("p_type_id", pTypeId);
 	}
-
-	public String getPTypeId() {
-		return get("p_type_id");
+	
+	public java.lang.String getPTypeId() {
+		return getStr("p_type_id");
 	}
 
 }

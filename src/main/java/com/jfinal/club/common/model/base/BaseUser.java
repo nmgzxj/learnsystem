@@ -9,18 +9,18 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implements IBean {
 
-	public void setId(Long id) {
+	public void setId(java.lang.Long id) {
 		set("id", id);
 	}
-
-	public Long getId() {
-		return get("id");
+	
+	public java.lang.Long getId() {
+		return getLong("id");
 	}
 
 	public void setCreatedatetime(java.util.Date createdatetime) {
 		set("createdatetime", createdatetime);
 	}
-
+	
 	public java.util.Date getCreatedatetime() {
 		return get("createdatetime");
 	}
@@ -28,31 +28,31 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
 	public void setModifydatetime(java.util.Date modifydatetime) {
 		set("modifydatetime", modifydatetime);
 	}
-
+	
 	public java.util.Date getModifydatetime() {
 		return get("modifydatetime");
 	}
 
-	public void setName(String name) {
+	public void setName(java.lang.String name) {
 		set("name", name);
 	}
-
-	public String getName() {
-		return get("name");
+	
+	public java.lang.String getName() {
+		return getStr("name");
 	}
 
-	public void setPwd(String pwd) {
+	public void setPwd(java.lang.String pwd) {
 		set("pwd", pwd);
 	}
-
-	public String getPwd() {
-		return get("pwd");
+	
+	public java.lang.String getPwd() {
+		return getStr("pwd");
 	}
 
 	public void setCreateTime(java.util.Date createTime) {
 		set("create_time", createTime);
 	}
-
+	
 	public java.util.Date getCreateTime() {
 		return get("create_time");
 	}
@@ -60,17 +60,17 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
 	public void setUpdateTime(java.util.Date updateTime) {
 		set("update_time", updateTime);
 	}
-
+	
 	public java.util.Date getUpdateTime() {
 		return get("update_time");
 	}
 
-	public void setEmployeeid(String employeeid) {
+	public void setEmployeeid(java.lang.String employeeid) {
 		set("employeeid", employeeid);
 	}
-
-	public String getEmployeeid() {
-		return get("employeeid");
+	
+	public java.lang.String getEmployeeid() {
+		return getStr("employeeid");
 	}
 
 }

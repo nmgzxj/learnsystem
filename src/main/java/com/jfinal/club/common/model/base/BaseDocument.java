@@ -9,35 +9,35 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseDocument<M extends BaseDocument<M>> extends Model<M> implements IBean {
 
-	public void setMainMenu(Integer mainMenu) {
+	public void setMainMenu(java.lang.Integer mainMenu) {
 		set("mainMenu", mainMenu);
 	}
 	
-	public Integer getMainMenu() {
+	public java.lang.Integer getMainMenu() {
 		return getInt("mainMenu");
 	}
 
-	public void setSubMenu(Integer subMenu) {
+	public void setSubMenu(java.lang.Integer subMenu) {
 		set("subMenu", subMenu);
 	}
 	
-	public Integer getSubMenu() {
+	public java.lang.Integer getSubMenu() {
 		return getInt("subMenu");
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(java.lang.String title) {
 		set("title", title);
 	}
 	
-	public String getTitle() {
+	public java.lang.String getTitle() {
 		return getStr("title");
 	}
 
-	public void setContent(String content) {
+	public void setContent(java.lang.String content) {
 		set("content", content);
 	}
 	
-	public String getContent() {
+	public java.lang.String getContent() {
 		return getStr("content");
 	}
 
@@ -57,11 +57,11 @@ public abstract class BaseDocument<M extends BaseDocument<M>> extends Model<M> i
 		return get("createAt");
 	}
 
-	public void setPublish(Integer publish) {
+	public void setPublish(java.lang.Integer publish) {
 		set("publish", publish);
 	}
 	
-	public Integer getPublish() {
+	public java.lang.Integer getPublish() {
 		return getInt("publish");
 	}
 

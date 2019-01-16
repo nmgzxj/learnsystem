@@ -9,28 +9,28 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseExamQuestion<M extends BaseExamQuestion<M>> extends Model<M> implements IBean {
 
-	public void setId(Long id) {
+	public void setId(java.lang.Long id) {
 		set("id", id);
 	}
-
-	public Long getId() {
-		return get("id");
+	
+	public java.lang.Long getId() {
+		return getLong("id");
 	}
 
-	public void setExamId(Long examId) {
+	public void setExamId(java.lang.Integer examId) {
 		set("exam_id", examId);
 	}
-
-	public Long getExamId() {
-		return get("exam_id");
+	
+	public java.lang.Integer getExamId() {
+		return getInt("exam_id");
 	}
 
-	public void setQuestionId(Long questionId) {
+	public void setQuestionId(java.lang.Long questionId) {
 		set("question_id", questionId);
 	}
-
-	public Long getQuestionId() {
-		return get("question_id");
+	
+	public java.lang.Long getQuestionId() {
+		return getLong("question_id");
 	}
 
 }

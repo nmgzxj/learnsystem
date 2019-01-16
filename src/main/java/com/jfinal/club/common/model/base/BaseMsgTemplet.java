@@ -9,180 +9,180 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseMsgTemplet<M extends BaseMsgTemplet<M>> extends Model<M> implements IBean {
 
-	public void setId(Long id) {
+	public void setId(java.lang.Long id) {
 		set("id", id);
 	}
-
-	public Long getId() {
-		return get("id");
+	
+	public java.lang.Long getId() {
+		return getLong("id");
 	}
 
-	public void setTempletName(String templetName) {
+	public void setTempletName(java.lang.String templetName) {
 		set("templet_name", templetName);
 	}
-
-	public String getTempletName() {
-		return get("templet_name");
+	
+	public java.lang.String getTempletName() {
+		return getStr("templet_name");
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(java.lang.String description) {
 		set("description", description);
 	}
-
-	public String getDescription() {
-		return get("description");
+	
+	public java.lang.String getDescription() {
+		return getStr("description");
 	}
 
-	public void setLicId(String licId) {
+	public void setLicId(java.lang.String licId) {
 		set("lic_id", licId);
 	}
-
-	public String getLicId() {
-		return get("lic_id");
+	
+	public java.lang.String getLicId() {
+		return getStr("lic_id");
 	}
 
-	public void setMsisdn(String msisdn) {
+	public void setMsisdn(java.lang.String msisdn) {
 		set("msisdn", msisdn);
 	}
-
-	public String getMsisdn() {
-		return get("msisdn");
+	
+	public java.lang.String getMsisdn() {
+		return getStr("msisdn");
 	}
 
-	public void setImei(String imei) {
+	public void setImei(java.lang.String imei) {
 		set("imei", imei);
 	}
-
-	public String getImei() {
-		return get("imei");
+	
+	public java.lang.String getImei() {
+		return getStr("imei");
 	}
 
-	public void setImsi(String imsi) {
+	public void setImsi(java.lang.String imsi) {
 		set("imsi", imsi);
 	}
-
-	public String getImsi() {
-		return get("imsi");
+	
+	public java.lang.String getImsi() {
+		return getStr("imsi");
 	}
 
-	public void setProposeType(String proposeType) {
+	public void setProposeType(java.lang.String proposeType) {
 		set("propose_type", proposeType);
 	}
-
-	public String getProposeType() {
-		return get("propose_type");
+	
+	public java.lang.String getProposeType() {
+		return getStr("propose_type");
 	}
 
-	public void setCreator(String creator) {
+	public void setCreator(java.lang.String creator) {
 		set("creator", creator);
 	}
-
-	public String getCreator() {
-		return get("creator");
+	
+	public java.lang.String getCreator() {
+		return getStr("creator");
 	}
 
 	public void setCreateTime(java.util.Date createTime) {
 		set("create_time", createTime);
 	}
-
+	
 	public java.util.Date getCreateTime() {
 		return get("create_time");
 	}
 
-	public void setModifyBy(String modifyBy) {
+	public void setModifyBy(java.lang.String modifyBy) {
 		set("modify_by", modifyBy);
 	}
-
-	public String getModifyBy() {
-		return get("modify_by");
+	
+	public java.lang.String getModifyBy() {
+		return getStr("modify_by");
 	}
 
 	public void setModifyTime(java.util.Date modifyTime) {
 		set("modify_time", modifyTime);
 	}
-
+	
 	public java.util.Date getModifyTime() {
 		return get("modify_time");
 	}
 
-	public void setEventSn(String eventSn) {
+	public void setEventSn(java.lang.String eventSn) {
 		set("event_sn", eventSn);
 	}
-
-	public String getEventSn() {
-		return get("event_sn");
+	
+	public java.lang.String getEventSn() {
+		return getStr("event_sn");
 	}
 
-	public void setCallSn(Integer callSn) {
+	public void setCallSn(java.lang.Integer callSn) {
 		set("call_sn", callSn);
 	}
-
-	public Integer getCallSn() {
-		return get("call_sn");
+	
+	public java.lang.Integer getCallSn() {
+		return getInt("call_sn");
 	}
 
-	public void setCallSnChild(Integer callSnChild) {
+	public void setCallSnChild(java.lang.Integer callSnChild) {
 		set("call_sn_child", callSnChild);
 	}
-
-	public Integer getCallSnChild() {
-		return get("call_sn_child");
+	
+	public java.lang.Integer getCallSnChild() {
+		return getInt("call_sn_child");
 	}
 
-	public void setGummeid(String gummeid) {
+	public void setGummeid(java.lang.String gummeid) {
 		set("gummeid", gummeid);
 	}
-
-	public String getGummeid() {
-		return get("gummeid");
+	
+	public java.lang.String getGummeid() {
+		return getStr("gummeid");
 	}
 
-	public void setLai(String lai) {
+	public void setLai(java.lang.String lai) {
 		set("lai", lai);
 	}
-
-	public String getLai() {
-		return get("lai");
+	
+	public java.lang.String getLai() {
+		return getStr("lai");
 	}
 
-	public void setLastVisitedTai(String lastVisitedTai) {
+	public void setLastVisitedTai(java.lang.String lastVisitedTai) {
 		set("last_visited_tai", lastVisitedTai);
 	}
-
-	public String getLastVisitedTai() {
-		return get("last_visited_tai");
+	
+	public java.lang.String getLastVisitedTai() {
+		return getStr("last_visited_tai");
 	}
 
-	public void setTaiList(String taiList) {
+	public void setTaiList(java.lang.String taiList) {
 		set("tai_list", taiList);
 	}
-
-	public String getTaiList() {
-		return get("tai_list");
+	
+	public java.lang.String getTaiList() {
+		return getStr("tai_list");
 	}
 
-	public void setEcgi(String ecgi) {
+	public void setEcgi(java.lang.String ecgi) {
 		set("ecgi", ecgi);
 	}
-
-	public String getEcgi() {
-		return get("ecgi");
+	
+	public java.lang.String getEcgi() {
+		return getStr("ecgi");
 	}
 
-	public void setOldMmeSgsn(String oldMmeSgsn) {
+	public void setOldMmeSgsn(java.lang.String oldMmeSgsn) {
 		set("old_mme_sgsn", oldMmeSgsn);
 	}
-
-	public String getOldMmeSgsn() {
-		return get("old_mme_sgsn");
+	
+	public java.lang.String getOldMmeSgsn() {
+		return getStr("old_mme_sgsn");
 	}
 
-	public void setGuti(String guti) {
+	public void setGuti(java.lang.String guti) {
 		set("guti", guti);
 	}
-
-	public String getGuti() {
-		return get("guti");
+	
+	public java.lang.String getGuti() {
+		return getStr("guti");
 	}
 
 }

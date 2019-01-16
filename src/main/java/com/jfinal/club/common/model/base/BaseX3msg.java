@@ -9,148 +9,148 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseX3msg<M extends BaseX3msg<M>> extends Model<M> implements IBean {
 
-	public void setId(Long id) {
+	public void setId(java.lang.Long id) {
 		set("id", id);
 	}
-
-	public Long getId() {
-		return get("id");
+	
+	public java.lang.Long getId() {
+		return getLong("id");
 	}
 
-	public void setUnit(String unit) {
+	public void setUnit(java.lang.String unit) {
 		set("unit", unit);
 	}
-
-	public String getUnit() {
-		return get("unit");
+	
+	public java.lang.String getUnit() {
+		return getStr("unit");
 	}
 
-	public void setLicX3Addr(String licX3Addr) {
+	public void setLicX3Addr(java.lang.String licX3Addr) {
 		set("lic_x3_addr", licX3Addr);
 	}
-
-	public String getLicX3Addr() {
-		return get("lic_x3_addr");
+	
+	public java.lang.String getLicX3Addr() {
+		return getStr("lic_x3_addr");
 	}
 
-	public void setMsgType(String msgType) {
+	public void setMsgType(java.lang.String msgType) {
 		set("msg_type", msgType);
 	}
-
-	public String getMsgType() {
-		return get("msg_type");
+	
+	public java.lang.String getMsgType() {
+		return getStr("msg_type");
 	}
 
-	public void setPerposeId(String perposeId) {
+	public void setPerposeId(java.lang.String perposeId) {
 		set("perpose_id", perposeId);
 	}
-
-	public String getPerposeId() {
-		return get("perpose_id");
+	
+	public java.lang.String getPerposeId() {
+		return getStr("perpose_id");
 	}
 
-	public void setRelation1(String relation1) {
+	public void setRelation1(java.lang.String relation1) {
 		set("relation1", relation1);
 	}
-
-	public String getRelation1() {
-		return get("relation1");
+	
+	public java.lang.String getRelation1() {
+		return getStr("relation1");
 	}
 
-	public void setRelation2(String relation2) {
+	public void setRelation2(java.lang.String relation2) {
 		set("relation2", relation2);
 	}
-
-	public String getRelation2() {
-		return get("relation2");
+	
+	public java.lang.String getRelation2() {
+		return getStr("relation2");
 	}
 
-	public void setMsgSn(String msgSn) {
+	public void setMsgSn(java.lang.String msgSn) {
 		set("msg_sn", msgSn);
 	}
-
-	public String getMsgSn() {
-		return get("msg_sn");
+	
+	public java.lang.String getMsgSn() {
+		return getStr("msg_sn");
 	}
 
-	public void setOppositeAddr(String oppositeAddr) {
+	public void setOppositeAddr(java.lang.String oppositeAddr) {
 		set("opposite_addr", oppositeAddr);
 	}
-
-	public String getOppositeAddr() {
-		return get("opposite_addr");
+	
+	public java.lang.String getOppositeAddr() {
+		return getStr("opposite_addr");
 	}
 
-	public void setOperationResult(String operationResult) {
+	public void setOperationResult(java.lang.String operationResult) {
 		set("operation_result", operationResult);
 	}
-
-	public String getOperationResult() {
-		return get("operation_result");
+	
+	public java.lang.String getOperationResult() {
+		return getStr("operation_result");
 	}
 
-	public void setFileName(String fileName) {
+	public void setFileName(java.lang.String fileName) {
 		set("file_name", fileName);
 	}
-
-	public String getFileName() {
-		return get("file_name");
+	
+	public java.lang.String getFileName() {
+		return getStr("file_name");
 	}
 
 	public void setEventTime(java.util.Date eventTime) {
 		set("event_time", eventTime);
 	}
-
+	
 	public java.util.Date getEventTime() {
 		return get("event_time");
 	}
 
-	public void setCreator(String creator) {
+	public void setCreator(java.lang.String creator) {
 		set("creator", creator);
 	}
-
-	public String getCreator() {
-		return get("creator");
+	
+	public java.lang.String getCreator() {
+		return getStr("creator");
 	}
 
 	public void setCreateTime(java.util.Date createTime) {
 		set("create_time", createTime);
 	}
-
+	
 	public java.util.Date getCreateTime() {
 		return get("create_time");
 	}
 
-	public void setModifyBy(String modifyBy) {
+	public void setModifyBy(java.lang.String modifyBy) {
 		set("modify_by", modifyBy);
 	}
-
-	public String getModifyBy() {
-		return get("modify_by");
+	
+	public java.lang.String getModifyBy() {
+		return getStr("modify_by");
 	}
 
 	public void setModifyTime(java.util.Date modifyTime) {
 		set("modify_time", modifyTime);
 	}
-
+	
 	public java.util.Date getModifyTime() {
 		return get("modify_time");
 	}
 
-	public void setPerposeType(String perposeType) {
+	public void setPerposeType(java.lang.String perposeType) {
 		set("perpose_type", perposeType);
 	}
-
-	public String getPerposeType() {
-		return get("perpose_type");
+	
+	public java.lang.String getPerposeType() {
+		return getStr("perpose_type");
 	}
 
-	public void setMemo(String memo) {
+	public void setMemo(java.lang.String memo) {
 		set("memo", memo);
 	}
-
-	public String getMemo() {
-		return get("memo");
+	
+	public java.lang.String getMemo() {
+		return getStr("memo");
 	}
 
 }

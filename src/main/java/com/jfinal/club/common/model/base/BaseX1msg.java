@@ -9,172 +9,172 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseX1msg<M extends BaseX1msg<M>> extends Model<M> implements IBean {
 
-	public void setId(Long id) {
+	public void setId(java.lang.Long id) {
 		set("id", id);
 	}
-
-	public Long getId() {
-		return get("id");
+	
+	public java.lang.Long getId() {
+		return getLong("id");
 	}
 
-	public void setUnit(String unit) {
+	public void setUnit(java.lang.String unit) {
 		set("unit", unit);
 	}
-
-	public String getUnit() {
-		return get("unit");
+	
+	public java.lang.String getUnit() {
+		return getStr("unit");
 	}
 
-	public void setMsgType(String msgType) {
+	public void setMsgType(java.lang.String msgType) {
 		set("msg_type", msgType);
 	}
-
-	public String getMsgType() {
-		return get("msg_type");
+	
+	public java.lang.String getMsgType() {
+		return getStr("msg_type");
 	}
 
-	public void setPerposeId(String perposeId) {
+	public void setPerposeId(java.lang.String perposeId) {
 		set("perpose_id", perposeId);
 	}
-
-	public String getPerposeId() {
-		return get("perpose_id");
+	
+	public java.lang.String getPerposeId() {
+		return getStr("perpose_id");
 	}
 
-	public void setOperationResult(String operationResult) {
+	public void setOperationResult(java.lang.String operationResult) {
 		set("operation_result", operationResult);
 	}
-
-	public String getOperationResult() {
-		return get("operation_result");
+	
+	public java.lang.String getOperationResult() {
+		return getStr("operation_result");
 	}
 
 	public void setMsgArriveTime(java.util.Date msgArriveTime) {
 		set("msg_arrive_time", msgArriveTime);
 	}
-
+	
 	public java.util.Date getMsgArriveTime() {
 		return get("msg_arrive_time");
 	}
 
-	public void setCreator(String creator) {
+	public void setCreator(java.lang.String creator) {
 		set("creator", creator);
 	}
-
-	public String getCreator() {
-		return get("creator");
+	
+	public java.lang.String getCreator() {
+		return getStr("creator");
 	}
 
 	public void setCreateTime(java.util.Date createTime) {
 		set("create_time", createTime);
 	}
-
+	
 	public java.util.Date getCreateTime() {
 		return get("create_time");
 	}
 
-	public void setModifyBy(String modifyBy) {
+	public void setModifyBy(java.lang.String modifyBy) {
 		set("modify_by", modifyBy);
 	}
-
-	public String getModifyBy() {
-		return get("modify_by");
+	
+	public java.lang.String getModifyBy() {
+		return getStr("modify_by");
 	}
 
 	public void setModifyTime(java.util.Date modifyTime) {
 		set("modify_time", modifyTime);
 	}
-
+	
 	public java.util.Date getModifyTime() {
 		return get("modify_time");
 	}
 
-	public void setMemo(String memo) {
+	public void setMemo(java.lang.String memo) {
 		set("memo", memo);
 	}
-
-	public String getMemo() {
-		return get("memo");
+	
+	public java.lang.String getMemo() {
+		return getStr("memo");
 	}
 
-	public void setX2ip(String x2ip) {
+	public void setX2ip(java.lang.String x2ip) {
 		set("x2ip", x2ip);
 	}
-
-	public String getX2ip() {
-		return get("x2ip");
+	
+	public java.lang.String getX2ip() {
+		return getStr("x2ip");
 	}
 
-	public void setX2port(String x2port) {
+	public void setX2port(java.lang.String x2port) {
 		set("x2port", x2port);
 	}
-
-	public String getX2port() {
-		return get("x2port");
+	
+	public java.lang.String getX2port() {
+		return getStr("x2port");
 	}
 
-	public void setX3ip(String x3ip) {
+	public void setX3ip(java.lang.String x3ip) {
 		set("x3ip", x3ip);
 	}
-
-	public String getX3ip() {
-		return get("x3ip");
+	
+	public java.lang.String getX3ip() {
+		return getStr("x3ip");
 	}
 
-	public void setX3port(String x3port) {
+	public void setX3port(java.lang.String x3port) {
 		set("x3port", x3port);
 	}
-
-	public String getX3port() {
-		return get("x3port");
+	
+	public java.lang.String getX3port() {
+		return getStr("x3port");
 	}
 
-	public void setMonType(String monType) {
+	public void setMonType(java.lang.String monType) {
 		set("mon_type", monType);
 	}
-
-	public String getMonType() {
-		return get("mon_type");
+	
+	public java.lang.String getMonType() {
+		return getStr("mon_type");
 	}
 
-	public void setAddType(String addType) {
+	public void setAddType(java.lang.String addType) {
 		set("add_type", addType);
 	}
-
-	public String getAddType() {
-		return get("add_type");
+	
+	public java.lang.String getAddType() {
+		return getStr("add_type");
 	}
 
-	public void setAdd(String add) {
+	public void setAdd(java.lang.String add) {
 		set("add", add);
 	}
-
-	public String getAdd() {
-		return get("add");
+	
+	public java.lang.String getAdd() {
+		return getStr("add");
 	}
 
-	public void setTp(String tp) {
+	public void setTp(java.lang.String tp) {
 		set("tp", tp);
 	}
-
-	public String getTp() {
-		return get("tp");
+	
+	public java.lang.String getTp() {
+		return getStr("tp");
 	}
 
-	public void setAppBizType(String appBizType) {
+	public void setAppBizType(java.lang.String appBizType) {
 		set("app_biz_type", appBizType);
 	}
-
-	public String getAppBizType() {
-		return get("app_biz_type");
+	
+	public java.lang.String getAppBizType() {
+		return getStr("app_biz_type");
 	}
 
-	public void setLnsAdd(String lnsAdd) {
+	public void setLnsAdd(java.lang.String lnsAdd) {
 		set("lns_add", lnsAdd);
 	}
-
-	public String getLnsAdd() {
-		return get("lns_add");
+	
+	public java.lang.String getLnsAdd() {
+		return getStr("lns_add");
 	}
 
 }

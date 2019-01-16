@@ -75,28 +75,7 @@ public class MsgTempletController extends BaseController {
 
 	public void templet_sub_add_save(){
 		MsgTempletSub e = new MsgTempletSub();
-		e.setCallSn(getPara("callSn"));
-		e.setCallSnChild(getPara("callSnChild"));
-		e.setDirection(getPara("direction"));
-		e.setEventSn(getPara("eventSn"));
-		e.setEventTime(getParaToDate("eventTime"));
-		e.setFileName(getPara("fileName"));
-		e.setLicId(getPara("licId"));
-		e.setLicX3Addr(getPara("licX3Addr"));
-		e.setMemo(getPara("memo"));
-		e.setMsg(Encrypt.encode(getPara("msg")));
-		e.setMsgArriveTime(getParaToDate("msgArriveTime"));
-		e.setMsgType(getPara("msgType"));
-		e.setNeX2Addr(getPara("neX2Addr"));
-		e.setOperationResult(getPara("operationResult"));
-		e.setOppositeAddr(getPara("oppositeAddr"));
-		e.setPerposeId(getPara("perposeId"));
-		e.setPerposeType(getPara("perposeType"));
-		e.setPort(getPara("port"));
-		e.setRelation1(getPara("relation1"));
-		e.setRelation2(getPara("relation2"));
-		e.setTempletId(getParaToInt("templetId"));
-		e.setUnitId(getPara("unitId"));
+		setTempletSubParam(e);
 		e.setTaxis(getMaxTaxis(e.getTempletId())+1);
 		e.save();
 		templet_edit();
@@ -111,6 +90,13 @@ public class MsgTempletController extends BaseController {
 
 	public void templet_sub_edit_save(){
 		MsgTempletSub e = MsgTempletSub.dao.findById(getPara("subTempletId"));
+		setTempletSubParam(e);
+//	    e.setTaxis(getParaToInt("taxis"));
+		e.update();
+		templet_edit();
+	}
+
+	private void setTempletSubParam(MsgTempletSub e) {
 		e.setCallSn(getPara("callSn"));
 		e.setCallSnChild(getPara("callSnChild"));
 		e.setDirection(getPara("direction"));
@@ -131,11 +117,10 @@ public class MsgTempletController extends BaseController {
 		e.setPort(getPara("port"));
 		e.setRelation1(getPara("relation1"));
 		e.setRelation2(getPara("relation2"));
+		e.setCccId(getPara("cccId"));
+		e.setIcid(getPara("icid"));
 		e.setTempletId(getParaToInt("templetId"));
 		e.setUnitId(getPara("unitId"));
-//	    e.setTaxis(getParaToInt("taxis"));
-		e.update();
-		templet_edit();
 	}
 
 	public void templet_sub_edit_delete(){
@@ -161,27 +146,7 @@ public class MsgTempletController extends BaseController {
 
 	public void add_save(){
 		MsgTemplet e = new MsgTemplet();
-		e.setTempletName(getPara("templetName"));
-		e.setDescription(getPara("description"));
-		e.setCallSn(getParaToInt("callSn"));
-		e.setCallSnChild(getParaToInt("callSnChild"));
-		e.setCreateTime(new Date());
-//        e.setCreator(getSessionAttr("userName"));
-		e.setEcgi(getPara("ecgi"));
-		e.setEventSn(getPara("eventSn"));
-		e.setGummeid(getPara("gummeid"));
-		e.setGuti(getPara("guti"));
-		e.setImei(getPara("imei"));
-		e.setImsi(getPara("imsi"));
-		e.setLai(getPara("lai"));
-		e.setLastVisitedTai("lastVisitedTai");
-		e.setLicId(getPara("licId"));
-//        e.setModifyBy(getSessionAttr("userName"));
-		e.setModifyTime(new Date());
-		e.setMsisdn(getPara("msisdn"));
-		e.setOldMmeSgsn(getPara("oldMmeSgsn"));
-		e.setProposeType(getPara("proposeType"));
-		e.setTaiList(getPara("taiList"));
+		setTempletParam(e);
 		e.save();
 
 		setAttr("templet",e);
@@ -194,12 +159,19 @@ public class MsgTempletController extends BaseController {
 
 	public void edit_save(){
 		MsgTemplet e = MsgTemplet.dao.findById(getParaToLong("templetId"));
+		setTempletParam(e);
+
+		e.update();
+		templet_list();
+	}
+
+	private void setTempletParam(MsgTemplet e) {
 		e.setTempletName(getPara("templetName"));
 		e.setDescription(getPara("description"));
 		e.setCallSn(getParaToInt("callSn"));
 		e.setCallSnChild(getParaToInt("callSnChild"));
 		e.setCreateTime(new Date());
-//        e.setCreator(getSessionAttr("userName"));
+		e.setCreator(""+getLoginAccountId());
 		e.setEcgi(getPara("ecgi"));
 		e.setEventSn(getPara("eventSn"));
 		e.setGummeid(getPara("gummeid"));
@@ -209,16 +181,14 @@ public class MsgTempletController extends BaseController {
 		e.setLai(getPara("lai"));
 		e.setLastVisitedTai("lastVisitedTai");
 		e.setLicId(getPara("licId"));
-//        e.setModifyBy(getSessionAttr("userName"));
+		e.setModifyBy(""+getLoginAccountId());
 		e.setModifyTime(new Date());
 		e.setMsisdn(getPara("msisdn"));
 		e.setOldMmeSgsn(getPara("oldMmeSgsn"));
 		e.setProposeType(getPara("proposeType"));
 		e.setTaiList(getPara("taiList"));
-
-		e.update();
-		templet_list();
 	}
+
 
 	public void templet_run() {
 		List<MsgTempletSub> mtsList = MsgTempletSub.dao.find("select * from tmsg_templet_sub where templet_id = "+getParaToLong("templetId")+ " order by taxis");

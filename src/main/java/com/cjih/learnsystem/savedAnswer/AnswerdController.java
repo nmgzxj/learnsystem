@@ -1,18 +1,16 @@
 package com.cjih.learnsystem.savedAnswer;
 
 
+import com.jfinal.club.common.model.*;
 import org.apache.log4j.Logger;
 
 import com.cjih.learnsystem.common.util.Encrypt;
 import com.jfinal.club.common.controller.BaseController;
-import com.jfinal.club.common.model.Answer;
-import com.jfinal.club.common.model.Question;
-import com.jfinal.club.common.model.QuestionFlow;
-import com.jfinal.club.common.model.SavedAnswer;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,10 +51,9 @@ public class AnswerdController extends BaseController {
 		int i = 0;
 		for (Question q : questions) {
 			Answer answer = new Answer();
-//			answer.setId(UUID.randomUUID().toString());
 			answer.setUserId(userId);
 			answer.setExamId(examId);
-			answer.setQuestionId(q.getId());
+			answer.setQuestionId(q.getId().intValue());
 			answer.setAnswerNo(answer_no);
 			answer.setAnswer("");
 			answer.save();// .insert(answer);
@@ -96,46 +93,46 @@ public class AnswerdController extends BaseController {
 }
 
 
-	public void editbak() {
-		String answer_no = getPara("answer_no");
-		String page = getPara("page");
-
-		if (answer_no == null || answer_no.equals("")) {
-			setSessionAttr("msg", "参数错误，请检查answer_no。");
-			renderJsp("/msg.jsp");
-		}
-		logger.debug("answer_no=" + answer_no);
-
-		if (page == null || page.equals("")) {
-			setSessionAttr("msg", "参数错误，请检查page。");
-			renderJsp("/msg.jsp");
-		}
-		logger.debug("page=" + page);
-
-		List<SavedAnswer> answers = SavedAnswer.dao.find(
-				"select id, user_id, exam_id, question_id, answer, official_id, user_score, answer_no from tsaved_answer\n"
-						+ "    where answer_no = '" + answer_no + "'");// .getAnsweredList(answer_no);
-		SavedAnswer answer = answers.get(Integer.parseInt(page));
-		setAttr("answer", answer);
-		Question question = Question.dao.findById(answer.getQuestionId());
-		setAttr("question", question);
-		setAttr("flows",QuestionFlow.dao.find("select * from tquestion_flow where question_id="+question.getId()));
-		setAttr("question_size", answers.size());
-		setAttr("answer_no", answer_no);
-		setAttr("examId", answer.getExamId());
-		setAttr("answerId", answer.getId());
-		logger.debug("debug===========");
-		for (SavedAnswer a : answers) {
-			logger.debug("examid=" + a.getExamId());
-			logger.debug("answer_no=" + a.getAnswerNo());
-			logger.debug("userid=" + a.getUserId());
-			logger.debug("officialid=" + a.getOfficialId());
-			logger.debug("userScore=" + a.getUserScore());
-			logger.debug("answer_str=" + a.getAnswer());
-			logger.debug("answerId=" + a.getId());
-		}
-		render("edit.html");
-	}
+//	public void editbak() {
+//		String answer_no = getPara("answer_no");
+//		String page = getPara("page");
+//
+//		if (answer_no == null || answer_no.equals("")) {
+//			setSessionAttr("msg", "参数错误，请检查answer_no。");
+//			renderJsp("/msg.jsp");
+//		}
+//		logger.debug("answer_no=" + answer_no);
+//
+//		if (page == null || page.equals("")) {
+//			setSessionAttr("msg", "参数错误，请检查page。");
+//			renderJsp("/msg.jsp");
+//		}
+//		logger.debug("page=" + page);
+//
+//		List<SavedAnswer> answers = SavedAnswer.dao.find(
+//				"select id, user_id, exam_id, question_id, answer, official_id, user_score, answer_no from tsaved_answer\n"
+//						+ "    where answer_no = '" + answer_no + "'");// .getAnsweredList(answer_no);
+//		SavedAnswer answer = answers.get(Integer.parseInt(page));
+//		setAttr("answer", answer);
+//		Question question = Question.dao.findById(answer.getQuestionId());
+//		setAttr("question", question);
+//		setAttr("flows",QuestionFlow.dao.find("select * from tquestion_flow where question_id="+question.getId()));
+//		setAttr("question_size", answers.size());
+//		setAttr("answer_no", answer_no);
+//		setAttr("examId", answer.getExamId());
+//		setAttr("answerId", answer.getId());
+//		logger.debug("debug===========");
+//		for (SavedAnswer a : answers) {
+//			logger.debug("examid=" + a.getExamId());
+//			logger.debug("answer_no=" + a.getAnswerNo());
+//			logger.debug("userid=" + a.getUserId());
+//			logger.debug("officialid=" + a.getOfficialId());
+//			logger.debug("userScore=" + a.getUserScore());
+//			logger.debug("answer_str=" + a.getAnswer());
+//			logger.debug("answerId=" + a.getId());
+//		}
+//		render("edit.html");
+//	}
 
 
 	public void answer() {
@@ -201,9 +198,8 @@ public class AnswerdController extends BaseController {
 
 	/**
 	 * 交卷
-	 * 
-	 * @param request
-	 *            来自前端的请求
+	 *
+	 * 来自前端的请求
 	 * @return 返回列表页
 	 */
 	public void saveAnswerPage() {
@@ -214,8 +210,9 @@ public class AnswerdController extends BaseController {
 
 		String answer_no = getPara("answer_no");
 		Db.update("insert tsaved_answer  select * from tanswer where answer_no = '" + answer_no + "'");
-		//// answerService.saveAnswerPage(answer_no);
-//		redirect("/answer/answered_list");
+		AnswerLog al = AnswerLog.dao.findFirst("select * from tanswer_log where  answer_no = '" + answer_no + "'");
+		al.setAnswerEnd(new Date());//保存交卷时间
+		al.update();
 		index();
 	}
 

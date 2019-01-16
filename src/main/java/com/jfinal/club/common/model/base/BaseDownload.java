@@ -9,43 +9,43 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseDownload<M extends BaseDownload<M>> extends Model<M> implements IBean {
 
-	public void setId(Integer id) {
+	public void setId(java.lang.Integer id) {
 		set("id", id);
 	}
 	
-	public Integer getId() {
+	public java.lang.Integer getId() {
 		return getInt("id");
 	}
 
-	public void setFileName(String fileName) {
+	public void setFileName(java.lang.String fileName) {
 		set("fileName", fileName);
 	}
 	
-	public String getFileName() {
+	public java.lang.String getFileName() {
 		return getStr("fileName");
 	}
 
-	public void setDescr(String descr) {
+	public void setDescr(java.lang.String descr) {
 		set("descr", descr);
 	}
 	
-	public String getDescr() {
+	public java.lang.String getDescr() {
 		return getStr("descr");
 	}
 
-	public void setFileType(String fileType) {
+	public void setFileType(java.lang.String fileType) {
 		set("fileType", fileType);
 	}
 	
-	public String getFileType() {
+	public java.lang.String getFileType() {
 		return getStr("fileType");
 	}
 
-	public void setSize(String size) {
+	public void setSize(java.lang.String size) {
 		set("size", size);
 	}
 	
-	public String getSize() {
+	public java.lang.String getSize() {
 		return getStr("size");
 	}
 
@@ -57,27 +57,27 @@ public abstract class BaseDownload<M extends BaseDownload<M>> extends Model<M> i
 		return get("createDate");
 	}
 
-	public void setPath(String path) {
+	public void setPath(java.lang.String path) {
 		set("path", path);
 	}
 	
-	public String getPath() {
+	public java.lang.String getPath() {
 		return getStr("path");
 	}
 
-	public void setDownloadCount(Integer downloadCount) {
+	public void setDownloadCount(java.lang.Integer downloadCount) {
 		set("downloadCount", downloadCount);
 	}
 	
-	public Integer getDownloadCount() {
+	public java.lang.Integer getDownloadCount() {
 		return getInt("downloadCount");
 	}
 
-	public void setIsShow(Integer isShow) {
+	public void setIsShow(java.lang.Integer isShow) {
 		set("isShow", isShow);
 	}
 	
-	public Integer getIsShow() {
+	public java.lang.Integer getIsShow() {
 		return getInt("isShow");
 	}
 

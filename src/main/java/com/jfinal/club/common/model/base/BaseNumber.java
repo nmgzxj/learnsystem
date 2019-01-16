@@ -9,76 +9,76 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseNumber<M extends BaseNumber<M>> extends Model<M> implements IBean {
 
-	public void setId(Long id) {
+	public void setId(java.lang.Long id) {
 		set("id", id);
 	}
-
-	public Long getId() {
-		return get("id");
+	
+	public java.lang.Long getId() {
+		return getLong("id");
 	}
 
-	public void setMsisdn(String msisdn) {
+	public void setMsisdn(java.lang.String msisdn) {
 		set("msisdn", msisdn);
 	}
-
-	public String getMsisdn() {
-		return get("msisdn");
+	
+	public java.lang.String getMsisdn() {
+		return getStr("msisdn");
 	}
 
-	public void setImsi(String imsi) {
+	public void setImsi(java.lang.String imsi) {
 		set("imsi", imsi);
 	}
-
-	public String getImsi() {
-		return get("imsi");
+	
+	public java.lang.String getImsi() {
+		return getStr("imsi");
 	}
 
-	public void setImei(String imei) {
+	public void setImei(java.lang.String imei) {
 		set("imei", imei);
 	}
-
-	public String getImei() {
-		return get("imei");
+	
+	public java.lang.String getImei() {
+		return getStr("imei");
 	}
 
-	public void setCreator(String creator) {
+	public void setCreator(java.lang.String creator) {
 		set("creator", creator);
 	}
-
-	public String getCreator() {
-		return get("creator");
+	
+	public java.lang.String getCreator() {
+		return getStr("creator");
 	}
 
 	public void setCreateTime(java.util.Date createTime) {
 		set("create_time", createTime);
 	}
-
+	
 	public java.util.Date getCreateTime() {
 		return get("create_time");
 	}
 
-	public void setUnit(String unit) {
+	public void setUnit(java.lang.String unit) {
 		set("unit", unit);
 	}
-
-	public String getUnit() {
-		return get("unit");
+	
+	public java.lang.String getUnit() {
+		return getStr("unit");
 	}
 
-	public void setNumberFormat(String numberFormat) {
+	public void setNumberFormat(java.lang.String numberFormat) {
 		set("number_format", numberFormat);
 	}
-
-	public String getNumberFormat() {
-		return get("number_format");
+	
+	public java.lang.String getNumberFormat() {
+		return getStr("number_format");
 	}
 
-	public void setLicId(String licId) {
+	public void setLicId(java.lang.String licId) {
 		set("lic_id", licId);
 	}
-
-	public String getLicId() {
-		return get("lic_id");
+	
+	public java.lang.String getLicId() {
+		return getStr("lic_id");
 	}
 
 }

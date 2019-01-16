@@ -19,6 +19,7 @@
             <input type="hidden" name="id" value="#(exam.id)">
             试卷名 : <input type="text" id="exam_name" name="exam.examName" value="#(exam.examName)">
             总分：<input type="text" id="score" name="score" value="#(exam.score )" readonly>
+     &nbsp;&nbsp;说明：单选题#(propKit.get("radio_score"))分、多选题#(propKit.get("checkbox_score"))分、简答题#(propKit.get("bigtext_score"))分、流程题#(propKit.get("flow_score"))分
         </form>
 <div class="pages-btn" style="text-align: center">
     <a class="btn btn-primary btn-sm" onclick="window.open('/admin/exam','_self')" >返回</a>

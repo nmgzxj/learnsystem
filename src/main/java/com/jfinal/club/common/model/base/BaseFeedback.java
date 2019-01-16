@@ -9,43 +9,43 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseFeedback<M extends BaseFeedback<M>> extends Model<M> implements IBean {
 
-	public void setId(Integer id) {
+	public void setId(java.lang.Integer id) {
 		set("id", id);
 	}
 	
-	public Integer getId() {
+	public java.lang.Integer getId() {
 		return getInt("id");
 	}
 
-	public void setAccountId(Integer accountId) {
+	public void setAccountId(java.lang.Integer accountId) {
 		set("accountId", accountId);
 	}
 	
-	public Integer getAccountId() {
+	public java.lang.Integer getAccountId() {
 		return getInt("accountId");
 	}
 
-	public void setProjectId(Integer projectId) {
+	public void setProjectId(java.lang.Integer projectId) {
 		set("projectId", projectId);
 	}
 	
-	public Integer getProjectId() {
+	public java.lang.Integer getProjectId() {
 		return getInt("projectId");
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(java.lang.String title) {
 		set("title", title);
 	}
 	
-	public String getTitle() {
+	public java.lang.String getTitle() {
 		return getStr("title");
 	}
 
-	public void setContent(String content) {
+	public void setContent(java.lang.String content) {
 		set("content", content);
 	}
 	
-	public String getContent() {
+	public java.lang.String getContent() {
 		return getStr("content");
 	}
 
@@ -57,35 +57,35 @@ public abstract class BaseFeedback<M extends BaseFeedback<M>> extends Model<M> i
 		return get("createAt");
 	}
 
-	public void setClickCount(Integer clickCount) {
+	public void setClickCount(java.lang.Integer clickCount) {
 		set("clickCount", clickCount);
 	}
 	
-	public Integer getClickCount() {
+	public java.lang.Integer getClickCount() {
 		return getInt("clickCount");
 	}
 
-	public void setReport(Integer report) {
+	public void setReport(java.lang.Integer report) {
 		set("report", report);
 	}
 	
-	public Integer getReport() {
+	public java.lang.Integer getReport() {
 		return getInt("report");
 	}
 
-	public void setLikeCount(Integer likeCount) {
+	public void setLikeCount(java.lang.Integer likeCount) {
 		set("likeCount", likeCount);
 	}
 	
-	public Integer getLikeCount() {
+	public java.lang.Integer getLikeCount() {
 		return getInt("likeCount");
 	}
 
-	public void setFavoriteCount(Integer favoriteCount) {
+	public void setFavoriteCount(java.lang.Integer favoriteCount) {
 		set("favoriteCount", favoriteCount);
 	}
 	
-	public Integer getFavoriteCount() {
+	public java.lang.Integer getFavoriteCount() {
 		return getInt("favoriteCount");
 	}
 

@@ -9,35 +9,35 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseReferMe<M extends BaseReferMe<M>> extends Model<M> implements IBean {
 
-	public void setId(Integer id) {
+	public void setId(java.lang.Integer id) {
 		set("id", id);
 	}
 	
-	public Integer getId() {
+	public java.lang.Integer getId() {
 		return getInt("id");
 	}
 
-	public void setReferAccountId(Integer referAccountId) {
+	public void setReferAccountId(java.lang.Integer referAccountId) {
 		set("referAccountId", referAccountId);
 	}
 	
-	public Integer getReferAccountId() {
+	public java.lang.Integer getReferAccountId() {
 		return getInt("referAccountId");
 	}
 
-	public void setNewsFeedId(Integer newsFeedId) {
+	public void setNewsFeedId(java.lang.Integer newsFeedId) {
 		set("newsFeedId", newsFeedId);
 	}
 	
-	public Integer getNewsFeedId() {
+	public java.lang.Integer getNewsFeedId() {
 		return getInt("newsFeedId");
 	}
 
-	public void setType(Integer type) {
+	public void setType(java.lang.Integer type) {
 		set("type", type);
 	}
 	
-	public Integer getType() {
+	public java.lang.Integer getType() {
 		return getInt("type");
 	}
 

@@ -9,124 +9,124 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseQuestion<M extends BaseQuestion<M>> extends Model<M> implements IBean {
 
-	public void setId(Long id) {
+	public void setId(java.lang.Integer id) {
 		set("id", id);
 	}
-
-	public Long getId() {
-		return get("id");
+	
+	public java.lang.Integer getId() {
+		return getInt("id");
 	}
 
-	public void setQuestionId(String questionId) {
+	public void setQuestionId(java.lang.String questionId) {
 		set("questionId", questionId);
 	}
-
-	public String getQuestionId() {
-		return get("questionId");
+	
+	public java.lang.String getQuestionId() {
+		return getStr("questionId");
 	}
 
-	public void setQuestionTitle(String questionTitle) {
+	public void setQuestionTitle(java.lang.String questionTitle) {
 		set("questionTitle", questionTitle);
 	}
-
-	public String getQuestionTitle() {
-		return get("questionTitle");
+	
+	public java.lang.String getQuestionTitle() {
+		return getStr("questionTitle");
 	}
 
-	public void setQuestionItems(String questionItems) {
+	public void setQuestionItems(java.lang.String questionItems) {
 		set("questionItems", questionItems);
 	}
-
-	public String getQuestionItems() {
-		return get("questionItems");
+	
+	public java.lang.String getQuestionItems() {
+		return getStr("questionItems");
 	}
 
-	public void setQuestionAnswer(String questionAnswer) {
+	public void setQuestionAnswer(java.lang.String questionAnswer) {
 		set("questionAnswer", questionAnswer);
 	}
-
-	public String getQuestionAnswer() {
-		return get("questionAnswer");
+	
+	public java.lang.String getQuestionAnswer() {
+		return getStr("questionAnswer");
 	}
 
-	public void setQuestionType(String questionType) {
+	public void setQuestionType(java.lang.String questionType) {
 		set("questionType", questionType);
 	}
-
-	public String getQuestionType() {
-		return get("questionType");
+	
+	public java.lang.String getQuestionType() {
+		return getStr("questionType");
 	}
 
-	public void setKeywords(String keywords) {
+	public void setKeywords(java.lang.String keywords) {
 		set("keywords", keywords);
 	}
-
-	public String getKeywords() {
-		return get("keywords");
+	
+	public java.lang.String getKeywords() {
+		return getStr("keywords");
 	}
 
-	public void setIsPassed(String isPassed) {
+	public void setIsPassed(java.lang.String isPassed) {
 		set("isPassed", isPassed);
 	}
-
-	public String getIsPassed() {
-		return get("isPassed");
+	
+	public java.lang.String getIsPassed() {
+		return getStr("isPassed");
 	}
 
-	public void setCreateBy(String createBy) {
+	public void setCreateBy(java.lang.String createBy) {
 		set("createBy", createBy);
 	}
-
-	public String getCreateBy() {
-		return get("createBy");
+	
+	public java.lang.String getCreateBy() {
+		return getStr("createBy");
 	}
 
 	public void setCreateTime(java.util.Date createTime) {
 		set("createTime", createTime);
 	}
-
+	
 	public java.util.Date getCreateTime() {
 		return get("createTime");
 	}
 
-	public void setModifyBy(String modifyBy) {
+	public void setModifyBy(java.lang.String modifyBy) {
 		set("modifyBy", modifyBy);
 	}
-
-	public String getModifyBy() {
-		return get("modifyBy");
+	
+	public java.lang.String getModifyBy() {
+		return getStr("modifyBy");
 	}
 
 	public void setModifyTime(java.util.Date modifyTime) {
 		set("modifyTime", modifyTime);
 	}
-
+	
 	public java.util.Date getModifyTime() {
 		return get("modifyTime");
 	}
 
-	public void setAuditBy(String auditBy) {
+	public void setAuditBy(java.lang.String auditBy) {
 		set("auditBy", auditBy);
 	}
-
-	public String getAuditBy() {
-		return get("auditBy");
+	
+	public java.lang.String getAuditBy() {
+		return getStr("auditBy");
 	}
 
 	public void setAuditTime(java.util.Date auditTime) {
 		set("auditTime", auditTime);
 	}
-
+	
 	public java.util.Date getAuditTime() {
 		return get("auditTime");
 	}
 
-	public void setRelationId(String relationId) {
+	public void setRelationId(java.lang.String relationId) {
 		set("relationId", relationId);
 	}
-
-	public String getRelationId() {
-		return get("relationId");
+	
+	public java.lang.String getRelationId() {
+		return getStr("relationId");
 	}
 
 }

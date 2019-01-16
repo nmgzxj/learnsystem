@@ -83,7 +83,7 @@ SavedAnswerService srv = SavedAnswerService.me;
 //			answer.setId(UUID.randomUUID().toString());
 			answer.setUserId(userId);
 			answer.setExamId(examId);
-			answer.setQuestionId(q.getId());
+			answer.setQuestionId(q.getId().intValue());
 			answer.setAnswerNo(answer_no);
 			answer.setAnswer("");
 			answer.save();// .insert(answer);

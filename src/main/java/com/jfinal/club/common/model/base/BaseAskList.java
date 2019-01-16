@@ -9,44 +9,44 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseAskList<M extends BaseAskList<M>> extends Model<M> implements IBean {
 
-	public void setId(Integer id) {
+	public void setId(java.lang.Integer id) {
 		set("id", id);
 	}
-
-	public Integer getId() {
-		return get("id");
+	
+	public java.lang.Integer getId() {
+		return getInt("id");
 	}
 
-	public void setType(Integer type) {
+	public void setType(java.lang.Integer type) {
 		set("type", type);
 	}
-
-	public Integer getType() {
-		return get("type");
+	
+	public java.lang.Integer getType() {
+		return getInt("type");
 	}
 
-	public void setRefId(Integer refId) {
+	public void setRefId(java.lang.Integer refId) {
 		set("refId", refId);
 	}
-
-	public Integer getRefId() {
-		return get("refId");
+	
+	public java.lang.Integer getRefId() {
+		return getInt("refId");
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(java.lang.Integer status) {
 		set("status", status);
 	}
-
-	public Integer getStatus() {
-		return get("status");
+	
+	public java.lang.Integer getStatus() {
+		return getInt("status");
 	}
 
-	public void setMsg(String msg) {
+	public void setMsg(java.lang.String msg) {
 		set("msg", msg);
 	}
-
-	public String getMsg() {
-		return get("msg");
+	
+	public java.lang.String getMsg() {
+		return getStr("msg");
 	}
 
 }

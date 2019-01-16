@@ -9,52 +9,52 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseExam<M extends BaseExam<M>> extends Model<M> implements IBean {
 
-	public void setId(Long id) {
+	public void setId(java.lang.Integer id) {
 		set("id", id);
 	}
-
-	public Long getId() {
-		return get("id");
+	
+	public java.lang.Integer getId() {
+		return getInt("id");
 	}
 
-	public void setExamName(String examName) {
+	public void setExamName(java.lang.String examName) {
 		set("exam_name", examName);
 	}
-
-	public String getExamName() {
-		return get("exam_name");
+	
+	public java.lang.String getExamName() {
+		return getStr("exam_name");
 	}
 
-	public void setCreator(String creator) {
+	public void setCreator(java.lang.String creator) {
 		set("creator", creator);
 	}
-
-	public String getCreator() {
-		return get("creator");
+	
+	public java.lang.String getCreator() {
+		return getStr("creator");
 	}
 
 	public void setCreateTime(java.util.Date createTime) {
 		set("create_time", createTime);
 	}
-
+	
 	public java.util.Date getCreateTime() {
 		return get("create_time");
 	}
 
-	public void setScore(Integer score) {
+	public void setScore(java.lang.Integer score) {
 		set("score", score);
 	}
-
-	public Integer getScore() {
-		return get("score");
+	
+	public java.lang.Integer getScore() {
+		return getInt("score");
 	}
 
-	public void setIsReadonly(String isReadonly) {
+	public void setIsReadonly(java.lang.String isReadonly) {
 		set("is_readonly", isReadonly);
 	}
-
-	public String getIsReadonly() {
-		return get("is_readonly");
+	
+	public java.lang.String getIsReadonly() {
+		return getStr("is_readonly");
 	}
 
 }

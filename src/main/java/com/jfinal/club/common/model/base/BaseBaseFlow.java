@@ -9,66 +9,66 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseBaseFlow<M extends BaseBaseFlow<M>> extends Model<M> implements IBean {
 
-	public void setId(Long id) {
+	public void setId(java.lang.Long id) {
 		set("id", id);
 	}
-
-	public Long getId() {
-		return get("id");
+	
+	public java.lang.Long getId() {
+		return getLong("id");
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(java.lang.String title) {
 		set("title", title);
 	}
-
-	public String getTitle() {
-		return get("title");
+	
+	public java.lang.String getTitle() {
+		return getStr("title");
 	}
 
-	public void setMsg(String msg) {
+	public void setMsg(java.lang.String msg) {
 		set("msg", msg);
 	}
-
-	public String getMsg() {
-		return get("msg");
+	
+	public java.lang.String getMsg() {
+		return getStr("msg");
 	}
 
-	public void setPort(String port) {
+	public void setPort(java.lang.String port) {
 		set("port", port);
 	}
-
-	public String getPort() {
-		return get("port");
+	
+	public java.lang.String getPort() {
+		return getStr("port");
 	}
 
-	public void setCreator(String creator) {
+	public void setCreator(java.lang.String creator) {
 		set("creator", creator);
 	}
-
-	public String getCreator() {
-		return get("creator");
+	
+	public java.lang.String getCreator() {
+		return getStr("creator");
 	}
 
 	public void setCreateTime(java.util.Date createTime) {
 		set("create_time", createTime);
 	}
-
+	
 	public java.util.Date getCreateTime() {
 		return get("create_time");
 	}
 
-	public void setModifyBy(String modifyBy) {
+	public void setModifyBy(java.lang.String modifyBy) {
 		set("modify_by", modifyBy);
 	}
-
-	public String getModifyBy() {
-		return get("modify_by");
+	
+	public java.lang.String getModifyBy() {
+		return getStr("modify_by");
 	}
 
 	public void setModifyTime(java.util.Date modifyTime) {
 		set("modify_time", modifyTime);
 	}
-
+	
 	public java.util.Date getModifyTime() {
 		return get("modify_time");
 	}

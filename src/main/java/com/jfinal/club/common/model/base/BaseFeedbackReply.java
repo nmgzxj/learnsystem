@@ -9,35 +9,35 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseFeedbackReply<M extends BaseFeedbackReply<M>> extends Model<M> implements IBean {
 
-	public void setId(Integer id) {
+	public void setId(java.lang.Integer id) {
 		set("id", id);
 	}
 	
-	public Integer getId() {
+	public java.lang.Integer getId() {
 		return getInt("id");
 	}
 
-	public void setFeedbackId(Integer feedbackId) {
+	public void setFeedbackId(java.lang.Integer feedbackId) {
 		set("feedbackId", feedbackId);
 	}
 	
-	public Integer getFeedbackId() {
+	public java.lang.Integer getFeedbackId() {
 		return getInt("feedbackId");
 	}
 
-	public void setAccountId(Integer accountId) {
+	public void setAccountId(java.lang.Integer accountId) {
 		set("accountId", accountId);
 	}
 	
-	public Integer getAccountId() {
+	public java.lang.Integer getAccountId() {
 		return getInt("accountId");
 	}
 
-	public void setContent(String content) {
+	public void setContent(java.lang.String content) {
 		set("content", content);
 	}
 	
-	public String getContent() {
+	public java.lang.String getContent() {
 		return getStr("content");
 	}
 
@@ -49,11 +49,11 @@ public abstract class BaseFeedbackReply<M extends BaseFeedbackReply<M>> extends 
 		return get("createAt");
 	}
 
-	public void setReport(Integer report) {
+	public void setReport(java.lang.Integer report) {
 		set("report", report);
 	}
 	
-	public Integer getReport() {
+	public java.lang.Integer getReport() {
 		return getInt("report");
 	}
 

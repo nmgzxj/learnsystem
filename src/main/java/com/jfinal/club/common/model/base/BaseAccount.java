@@ -9,51 +9,51 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseAccount<M extends BaseAccount<M>> extends Model<M> implements IBean {
 
-	public void setId(Integer id) {
+	public void setId(java.lang.Integer id) {
 		set("id", id);
 	}
 	
-	public Integer getId() {
+	public java.lang.Integer getId() {
 		return getInt("id");
 	}
 
-	public void setNickName(String nickName) {
+	public void setNickName(java.lang.String nickName) {
 		set("nickName", nickName);
 	}
 	
-	public String getNickName() {
+	public java.lang.String getNickName() {
 		return getStr("nickName");
 	}
 
-	public void setUserName(String userName) {
+	public void setUserName(java.lang.String userName) {
 		set("userName", userName);
 	}
 	
-	public String getUserName() {
+	public java.lang.String getUserName() {
 		return getStr("userName");
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(java.lang.String password) {
 		set("password", password);
 	}
 	
-	public String getPassword() {
+	public java.lang.String getPassword() {
 		return getStr("password");
 	}
 
-	public void setSalt(String salt) {
+	public void setSalt(java.lang.String salt) {
 		set("salt", salt);
 	}
 	
-	public String getSalt() {
+	public java.lang.String getSalt() {
 		return getStr("salt");
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(java.lang.Integer status) {
 		set("status", status);
 	}
 	
-	public Integer getStatus() {
+	public java.lang.Integer getStatus() {
 		return getInt("status");
 	}
 
@@ -65,27 +65,27 @@ public abstract class BaseAccount<M extends BaseAccount<M>> extends Model<M> imp
 		return get("createAt");
 	}
 
-	public void setIp(String ip) {
+	public void setIp(java.lang.String ip) {
 		set("ip", ip);
 	}
 	
-	public String getIp() {
+	public java.lang.String getIp() {
 		return getStr("ip");
 	}
 
-	public void setAvatar(String avatar) {
+	public void setAvatar(java.lang.String avatar) {
 		set("avatar", avatar);
 	}
 	
-	public String getAvatar() {
+	public java.lang.String getAvatar() {
 		return getStr("avatar");
 	}
 
-	public void setLikeCount(Integer likeCount) {
+	public void setLikeCount(java.lang.Integer likeCount) {
 		set("likeCount", likeCount);
 	}
 	
-	public Integer getLikeCount() {
+	public java.lang.Integer getLikeCount() {
 		return getInt("likeCount");
 	}
 

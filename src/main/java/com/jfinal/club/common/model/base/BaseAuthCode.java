@@ -9,35 +9,35 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseAuthCode<M extends BaseAuthCode<M>> extends Model<M> implements IBean {
 
-	public void setId(String id) {
+	public void setId(java.lang.String id) {
 		set("id", id);
 	}
 	
-	public String getId() {
+	public java.lang.String getId() {
 		return getStr("id");
 	}
 
-	public void setAccountId(Integer accountId) {
+	public void setAccountId(java.lang.Integer accountId) {
 		set("accountId", accountId);
 	}
 	
-	public Integer getAccountId() {
+	public java.lang.Integer getAccountId() {
 		return getInt("accountId");
 	}
 
-	public void setExpireAt(Long expireAt) {
+	public void setExpireAt(java.lang.Long expireAt) {
 		set("expireAt", expireAt);
 	}
 	
-	public Long getExpireAt() {
+	public java.lang.Long getExpireAt() {
 		return getLong("expireAt");
 	}
 
-	public void setType(Integer type) {
+	public void setType(java.lang.Integer type) {
 		set("type", type);
 	}
 	
-	public Integer getType() {
+	public java.lang.Integer getType() {
 		return getInt("type");
 	}
 

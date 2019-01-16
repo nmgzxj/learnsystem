@@ -92,6 +92,7 @@ public class UnitController extends BaseController {
 	@Before(UnitValidator.class)
 	public void X1MsgAdd() {
 		String operType = getPara("operType");
+		System.out.println("operType = " + operType);
 		if (operType == null || operType.isEmpty()) {
 			setAttr("msg", "操作类型不正确，请联系管理员。");
 			render("/msg.html");
@@ -173,7 +174,8 @@ public class UnitController extends BaseController {
 
 		msg.setMsgType("连接建立请求");
 		msg.setMemo("协议版本号........[1]<00 00 00 01 >\\n"
-				+ "消息类型..........[连接建立请求]\\n" + "LIC标 识(M).......[" + u.getLicId() + "]<" + BCD.str2HexStr(u.getLicId()) + ">\\n"
+				+ "消息类型..........[连接建立请求]\\n"
+				+ "LIC标 识(M).......[" + u.getLicId() + "]<" + BCD.str2HexStr(u.getLicId()) + ">\\n"
 				+ "网元标识(M).......[" + u.getUnitId() + "]<" + BCD.str2HexStr(u.getUnitId()) + " >\\n"
 				+ "SQN组号(M)........[" + u.getX1Sqn() + "]<00 00 00 02 >\\n"
 				+ "RAND(M)...........<ca f6 96 be dc b1 d2 >\\n"
@@ -603,24 +605,23 @@ public class UnitController extends BaseController {
         X1msg msg = new X1msg();
         setMsg(msg);
         msg.setMsgType("BK目标位置定位查询请求");
-        msg.setMemo("协议版本号........[2]<02>\n" +
-                "消息类型..........[BKMB参数修改请求]\n" +
-                "目标标识(M).......["+getPara("number")+"]<"+BCD.str2rBcdstr(getPara("number"))+">\n" +
-                "X2地址(C).........\n" +
-                "  Port:["+getPara("x2Port")+"]<13 88>\n" +
-                "  IP:["+getPara("x2Ip")+"]<0a b8 4d 49>\n");
+        msg.setMemo("AAA0 --- X1_QUERYLOCATION_REQ --- 2 \\n" +
+                "目标类型：3\n" +
+                "目标标识："+getPara("number")+"\\n");
         msg.setMemo(Encrypt.encode(msg.getMemo()));
         msg.save();
         msg = new X1msg();
         setMsg(msg);
         msg.setMsgType("BK目标位置定位查询响应");
-        msg.setMemo("协议版本号........[2]<02>\n" +
-                "消息类型..........[BKMB参数修改响应]\n" +
-                "目标标识(M).......["+getPara("number")+"]<"+BCD.str2rBcdstr(getPara("number"))+">\n" +
-                "操作结果(M).......[失败]<01>\n" +
-                "失败原因(C).......[被控目标不存在 (monitorNumberNotExist)]<01>\n");
+        msg.setMemo("AAA0 --- X1_QUERYLOCATION_ACK --- 3 \\n" +
+                "INE标识:AAA0 \\n" +
+                "成功标识: 0 \\n" +
+                "失败原因:\\n" +
+				"AP标识：17826644\n");
         msg.setMemo(Encrypt.encode(msg.getMemo()));
         msg.save();
+		System.out.println("=========================A10");
+        simulation1();
     }
 
 	/**
@@ -631,22 +632,22 @@ public class UnitController extends BaseController {
         X1msg msg = new X1msg();
         setMsg(msg);
         msg.setMsgType("目标内/外网IP地址关联查询请求");
-        msg.setMemo("协议版本号........[2]<02>\n" +
+        msg.setMemo("协议版本号........[2]<02>\\n" +
                 "消息类型..........[目标内/外网IP地址关联查询请求]\n" +
-                "目标标识(M).......["+getPara("number")+"]<"+BCD.str2rBcdstr(getPara("number"))+">\n" +
-                "X2地址(C).........\n" +
-                "  Port:["+getPara("x2Port")+"]<13 88>\n" +
-                "  IP:["+getPara("x2Ip")+"]<0a b8 4d 49>\n");
+                "目标标识(M).......["+getPara("number")+"]<"+BCD.str2rBcdstr(getPara("number"))+">\\n" +
+                "X2地址(C).........\\n" +
+                "  Port:["+getPara("x2Port")+"]<13 88>\\n" +
+                "  IP:["+getPara("x2Ip")+"]<0a b8 4d 49>\\n");
         msg.setMemo(Encrypt.encode(msg.getMemo()));
         msg.save();
         msg = new X1msg();
         setMsg(msg);
         msg.setMsgType("目标内/外网IP地址关联查询响应");
-        msg.setMemo("协议版本号........[2]<02>\n" +
-                "消息类型..........[目标内/外网IP地址关联查询响应]\n" +
-                "目标标识(M).......["+getPara("number")+"]<"+BCD.str2rBcdstr(getPara("number"))+">\n" +
-                "操作结果(M).......[失败]<01>\n" +
-                "失败原因(C).......[被控目标不存在 (monitorNumberNotExist)]<01>\n");
+        msg.setMemo("协议版本号........[2]<02>\\n" +
+                "消息类型..........[目标内/外网IP地址关联查询响应]\\n" +
+                "目标标识(M).......["+getPara("number")+"]<"+BCD.str2rBcdstr(getPara("number"))+">\\n" +
+                "操作结果(M).......[失败]<01>\\n" +
+                "失败原因(C).......[被控目标不存在 (monitorNumberNotExist)]<01>\\n");
         msg.setMemo(Encrypt.encode(msg.getMemo()));
         msg.save();
     }

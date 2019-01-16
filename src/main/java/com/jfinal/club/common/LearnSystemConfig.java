@@ -85,7 +85,7 @@ import com.jfinal.club.common.model.X3msg;
 import com.jfinal.club.common.model._MappingKit;
 import com.jfinal.club.common.interceptor.LoginSessionInterceptor;
 import com.jfinal.club.login.LoginService;
-import com.jfinal.club.my.friend.FriendInterceptor;
+
 
 
 /**
@@ -107,16 +107,13 @@ public class LearnSystemConfig extends JFinalConfig {
 	 * 上述 VM 配置可以缓解热加载功能出现的异常
 	 */
 	public static void main(String[] args) {
-		/**
+		/*
 		 * 特别注意：Eclipse 之下建议的启动方式
-		 */
-//		JFinal.start("web", 8080, "/", 5);
-		
-		/**
+		 * JFinal.start("web", 8080, "/", 5);
 		 * 特别注意：IDEA 之下建议的启动方式，仅比 eclipse 之下少了最后一个参数
 		 */
-//		UndertowServer.start(LearnSystemConfig.class);
 		 JFinal.start("src/main/web", 8080, "/", 5);
+//		UndertowServer.start(LearnSystemConfig.class);
 	}
 	
     public void configConstant(Constants me) {
@@ -251,8 +248,7 @@ public class LearnSystemConfig extends JFinalConfig {
 		// 调用不带参的 renderJson() 时，排除对 loginAccount、remind 的 json 转换
 		JsonRender.addExcludedAttrs(
                 LoginService.loginAccountCacheName,
-                LoginSessionInterceptor.remindKey,
-                FriendInterceptor.followNum, FriendInterceptor.fansNum, FriendInterceptor.friendRelation
+                LoginSessionInterceptor.remindKey
         );
 		
 		// 让 druid 允许在 sql 中使用 union

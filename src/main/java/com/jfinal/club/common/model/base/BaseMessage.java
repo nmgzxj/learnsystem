@@ -9,59 +9,59 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseMessage<M extends BaseMessage<M>> extends Model<M> implements IBean {
 
-	public void setId(Integer id) {
+	public void setId(java.lang.Integer id) {
 		set("id", id);
 	}
 	
-	public Integer getId() {
+	public java.lang.Integer getId() {
 		return getInt("id");
 	}
 
-	public void setUser(Integer user) {
+	public void setUser(java.lang.Integer user) {
 		set("user", user);
 	}
 	
-	public Integer getUser() {
+	public java.lang.Integer getUser() {
 		return getInt("user");
 	}
 
-	public void setFriend(Integer friend) {
+	public void setFriend(java.lang.Integer friend) {
 		set("friend", friend);
 	}
 	
-	public Integer getFriend() {
+	public java.lang.Integer getFriend() {
 		return getInt("friend");
 	}
 
-	public void setSender(Integer sender) {
+	public void setSender(java.lang.Integer sender) {
 		set("sender", sender);
 	}
 	
-	public Integer getSender() {
+	public java.lang.Integer getSender() {
 		return getInt("sender");
 	}
 
-	public void setReceiver(Integer receiver) {
+	public void setReceiver(java.lang.Integer receiver) {
 		set("receiver", receiver);
 	}
 	
-	public Integer getReceiver() {
+	public java.lang.Integer getReceiver() {
 		return getInt("receiver");
 	}
 
-	public void setType(Integer type) {
+	public void setType(java.lang.Integer type) {
 		set("type", type);
 	}
 	
-	public Integer getType() {
+	public java.lang.Integer getType() {
 		return getInt("type");
 	}
 
-	public void setContent(String content) {
+	public void setContent(java.lang.String content) {
 		set("content", content);
 	}
 	
-	public String getContent() {
+	public java.lang.String getContent() {
 		return getStr("content");
 	}
 

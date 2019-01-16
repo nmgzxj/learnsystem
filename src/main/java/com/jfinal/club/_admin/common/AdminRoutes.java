@@ -17,7 +17,6 @@ package com.jfinal.club._admin.common;
 import com.jfinal.club._admin.auth.AdminAuthInterceptor;
 import com.jfinal.club._admin.permission.PermissionAdminController;
 import com.jfinal.club._admin.role.RoleAdminController;
-import com.jfinal.club._admin.feedback.FeedbackAdminController;
 import com.jfinal.club._admin.index.IndexAdminController;
 import com.cjih.learnsystem.answer.AnswerController;
 import com.cjih.learnsystem.answerlog.AnswerLogController;
@@ -32,8 +31,6 @@ import com.cjih.learnsystem.savedAnswer.SavedAnswerController;
 import com.cjih.learnsystem.simulate.MsgTempletController;
 import com.cjih.learnsystem.simulate.UnitController;
 import com.jfinal.club._admin.account.AccountAdminController;
-import com.jfinal.club._admin.project.ProjectAdminController;
-import com.jfinal.club._admin.share.ShareAdminController;
 import com.jfinal.config.Routes;
 
 /**
@@ -55,9 +52,6 @@ public class AdminRoutes extends Routes {
 		
 		add("/admin", IndexAdminController.class, "/_admin/index");
 		add("/admin/account", AccountAdminController.class, "/_admin/account");
-		add("/admin/project", ProjectAdminController.class, "/_admin/project");
-		add("/admin/share", ShareAdminController.class, "/_admin/share");
-		add("/admin/feedback", FeedbackAdminController.class, "/_admin/feedback");
 
 		add("/admin/role", RoleAdminController.class, "/_admin/role");
 		add("/admin/permission", PermissionAdminController.class, "/_admin/permission");

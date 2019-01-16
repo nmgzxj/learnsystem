@@ -48,6 +48,7 @@ ExamService srv = ExamService.me;
 		//已选问题列表
 		  List<ExamQuestion> selectedQuestionList = ExamQuestion.dao.find("select * from texam_question where exam_id ="+getParaToInt("exam.id"));
 		  setAttr("selectedQuestionIds", selectedQuestionList);
+		  setAttr("propKit",PropKit.getProp());
 		  keepPara();
 		render("edit.html");
 	}
@@ -149,7 +150,7 @@ ExamService srv = ExamService.me;
       if(null != question_id ){
           ExamQuestion eq = new ExamQuestion();
 //          eq.setId(UUID.randomUUID().toString());
-          eq.setExamId(examId);
+          eq.setExamId(examId.intValue());
           eq.setQuestionId(question_id);
           eq.save();
       }
@@ -216,7 +217,7 @@ public void update_question() {
 		Page<Question> questionPage = srv.paginate_question(getParaToInt("p"),searchKW);
 		List<ExamQuestion> eqList = ExamQuestion.dao.find("select * from texam_question where exam_id = "+examId);
 		for(ExamQuestion eq:eqList) {
-			if(getParaToLong("exam.id") == eq.getExamId()) {
+			if(getParaToInt("exam.id") == eq.getExamId()) {
 				for(Question q:questionPage.getList()) {
 					if(q.getId().equals(eq.getQuestionId())) {
 						System.out.println(eq.getQuestionId()+" deleted."+eq.getId()+" "+eq.getExamId());
@@ -237,7 +238,7 @@ public void update_question() {
 	     	for(Long id:ids) {
 	         eq = new ExamQuestion();
 	//         eq.setId(UUID.randomUUID().toString());
-	         eq.setExamId(examId);
+	         eq.setExamId(examId.intValue());
 	         eq.setQuestionId(id);
 	         eq.save();
      	}
@@ -285,12 +286,12 @@ public void copy() {
 
 	public void exam_allocate_save() {
 		Exam e = Exam.dao.findById(getPara("exam.id"));
-		String[] users = getParaValues("userId");
+		Integer[] users = getParaValuesToInt("userId");
 		Db.update("delete from texam_user where exam_id="+e.getId());
 		ExamUser eu;
-		for(String user:users) {
+		for(Integer user:users) {
 			eu  = new ExamUser();
-			eu.setExamId(e.getId());
+			eu.setExamId(e.getId().intValue());
 			eu.setUserId(user);
 			eu.setCreator(Integer.toString(getLoginAccountId()));
 			eu.setCreateTime(new Date());

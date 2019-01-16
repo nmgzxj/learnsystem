@@ -9,35 +9,35 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BasePermission<M extends BasePermission<M>> extends Model<M> implements IBean {
 
-	public void setId(Integer id) {
+	public void setId(java.lang.Integer id) {
 		set("id", id);
 	}
 	
-	public Integer getId() {
+	public java.lang.Integer getId() {
 		return getInt("id");
 	}
 
-	public void setActionKey(String actionKey) {
+	public void setActionKey(java.lang.String actionKey) {
 		set("actionKey", actionKey);
 	}
 	
-	public String getActionKey() {
+	public java.lang.String getActionKey() {
 		return getStr("actionKey");
 	}
 
-	public void setController(String controller) {
+	public void setController(java.lang.String controller) {
 		set("controller", controller);
 	}
 	
-	public String getController() {
+	public java.lang.String getController() {
 		return getStr("controller");
 	}
 
-	public void setRemark(String remark) {
+	public void setRemark(java.lang.String remark) {
 		set("remark", remark);
 	}
 	
-	public String getRemark() {
+	public java.lang.String getRemark() {
 		return getStr("remark");
 	}
 

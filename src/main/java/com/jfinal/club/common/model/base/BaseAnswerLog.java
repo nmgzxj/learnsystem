@@ -9,42 +9,42 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseAnswerLog<M extends BaseAnswerLog<M>> extends Model<M> implements IBean {
 
-	public void setId(Integer id) {
+	public void setId(java.lang.Integer id) {
 		set("id", id);
 	}
-
-	public Integer getId() {
-		return get("id");
+	
+	public java.lang.Integer getId() {
+		return getInt("id");
 	}
 
-	public void setExamName(String examName) {
+	public void setExamName(java.lang.String examName) {
 		set("exam_name", examName);
 	}
-
-	public String getExamName() {
-		return get("exam_name");
+	
+	public java.lang.String getExamName() {
+		return getStr("exam_name");
 	}
 
-	public void setAccountId(Integer accountId) {
+	public void setAccountId(java.lang.Integer accountId) {
 		set("account_id", accountId);
 	}
-
-	public Integer getAccountId() {
-		return get("account_id");
+	
+	public java.lang.Integer getAccountId() {
+		return getInt("account_id");
 	}
 
-	public void setAnswerNo(String answerNo) {
+	public void setAnswerNo(java.lang.String answerNo) {
 		set("answer_no", answerNo);
 	}
-
-	public String getAnswerNo() {
-		return get("answer_no");
+	
+	public java.lang.String getAnswerNo() {
+		return getStr("answer_no");
 	}
 
 	public void setAnswerBegin(java.util.Date answerBegin) {
 		set("answer_begin", answerBegin);
 	}
-
+	
 	public java.util.Date getAnswerBegin() {
 		return get("answer_begin");
 	}
@@ -52,39 +52,39 @@ public abstract class BaseAnswerLog<M extends BaseAnswerLog<M>> extends Model<M>
 	public void setAnswerEnd(java.util.Date answerEnd) {
 		set("answer_end", answerEnd);
 	}
-
+	
 	public java.util.Date getAnswerEnd() {
 		return get("answer_end");
 	}
 
-	public void setExamScore(Double examScore) {
+	public void setExamScore(java.lang.Double examScore) {
 		set("exam_score", examScore);
 	}
-
-	public Double getExamScore() {
-		return get("exam_score");
+	
+	public java.lang.Double getExamScore() {
+		return getDouble("exam_score");
 	}
 
-	public void setUserScore(Double userScore) {
+	public void setUserScore(java.lang.Double userScore) {
 		set("user_score", userScore);
 	}
-
-	public Double getUserScore() {
-		return get("user_score");
+	
+	public java.lang.Double getUserScore() {
+		return getDouble("user_score");
 	}
 
-	public void setOfficialId(Integer officialId) {
+	public void setOfficialId(java.lang.Integer officialId) {
 		set("official_id", officialId);
 	}
-
-	public Integer getOfficialId() {
-		return get("official_id");
+	
+	public java.lang.Integer getOfficialId() {
+		return getInt("official_id");
 	}
 
 	public void setJudgeTime(java.util.Date judgeTime) {
 		set("judge_time", judgeTime);
 	}
-
+	
 	public java.util.Date getJudgeTime() {
 		return get("judge_time");
 	}

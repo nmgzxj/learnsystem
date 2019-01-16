@@ -9,204 +9,220 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseMsgTempletSub<M extends BaseMsgTempletSub<M>> extends Model<M> implements IBean {
 
-	public void setId(Long id) {
+	public void setId(java.lang.Long id) {
 		set("id", id);
 	}
-
-	public Long getId() {
-		return get("id");
+	
+	public java.lang.Long getId() {
+		return getLong("id");
 	}
 
-	public void setTempletId(Integer templetId) {
+	public void setTempletId(java.lang.Integer templetId) {
 		set("templet_id", templetId);
 	}
-
-	public Integer getTempletId() {
-		return get("templet_id");
+	
+	public java.lang.Integer getTempletId() {
+		return getInt("templet_id");
 	}
 
-	public void setTaxis(Integer taxis) {
+	public void setTaxis(java.lang.Integer taxis) {
 		set("taxis", taxis);
 	}
-
-	public Integer getTaxis() {
-		return get("taxis");
+	
+	public java.lang.Integer getTaxis() {
+		return getInt("taxis");
 	}
 
-	public void setUnitId(String unitId) {
+	public void setUnitId(java.lang.String unitId) {
 		set("unit_id", unitId);
 	}
-
-	public String getUnitId() {
-		return get("unit_id");
+	
+	public java.lang.String getUnitId() {
+		return getStr("unit_id");
 	}
 
-	public void setMsg(String msg) {
+	public void setMsg(java.lang.String msg) {
 		set("msg", msg);
 	}
-
-	public String getMsg() {
-		return get("msg");
+	
+	public java.lang.String getMsg() {
+		return getStr("msg");
 	}
 
-	public void setLicId(String licId) {
+	public void setLicId(java.lang.String licId) {
 		set("lic_id", licId);
 	}
-
-	public String getLicId() {
-		return get("lic_id");
+	
+	public java.lang.String getLicId() {
+		return getStr("lic_id");
 	}
 
-	public void setPort(String port) {
+	public void setPort(java.lang.String port) {
 		set("port", port);
 	}
-
-	public String getPort() {
-		return get("port");
+	
+	public java.lang.String getPort() {
+		return getStr("port");
 	}
 
-	public void setDirection(String direction) {
+	public void setDirection(java.lang.String direction) {
 		set("direction", direction);
 	}
-
-	public String getDirection() {
-		return get("direction");
+	
+	public java.lang.String getDirection() {
+		return getStr("direction");
 	}
 
-	public void setNeX2Addr(String neX2Addr) {
+	public void setNeX2Addr(java.lang.String neX2Addr) {
 		set("ne_x2_addr", neX2Addr);
 	}
-
-	public String getNeX2Addr() {
-		return get("ne_x2_addr");
+	
+	public java.lang.String getNeX2Addr() {
+		return getStr("ne_x2_addr");
 	}
 
-	public void setMsgType(String msgType) {
+	public void setMsgType(java.lang.String msgType) {
 		set("msg_type", msgType);
 	}
-
-	public String getMsgType() {
-		return get("msg_type");
+	
+	public java.lang.String getMsgType() {
+		return getStr("msg_type");
 	}
 
-	public void setPerposeId(String perposeId) {
+	public void setPerposeId(java.lang.String perposeId) {
 		set("perpose_id", perposeId);
 	}
-
-	public String getPerposeId() {
-		return get("perpose_id");
+	
+	public java.lang.String getPerposeId() {
+		return getStr("perpose_id");
 	}
 
-	public void setRelation1(String relation1) {
+	public void setRelation1(java.lang.String relation1) {
 		set("relation1", relation1);
 	}
-
-	public String getRelation1() {
-		return get("relation1");
+	
+	public java.lang.String getRelation1() {
+		return getStr("relation1");
 	}
 
-	public void setRelation2(String relation2) {
+	public void setRelation2(java.lang.String relation2) {
 		set("relation2", relation2);
 	}
-
-	public String getRelation2() {
-		return get("relation2");
+	
+	public java.lang.String getRelation2() {
+		return getStr("relation2");
 	}
 
-	public void setEventSn(String eventSn) {
+	public void setEventSn(java.lang.String eventSn) {
 		set("event_sn", eventSn);
 	}
-
-	public String getEventSn() {
-		return get("event_sn");
+	
+	public java.lang.String getEventSn() {
+		return getStr("event_sn");
 	}
 
-	public void setCallSn(String callSn) {
+	public void setCallSn(java.lang.String callSn) {
 		set("call_sn", callSn);
 	}
-
-	public String getCallSn() {
-		return get("call_sn");
+	
+	public java.lang.String getCallSn() {
+		return getStr("call_sn");
 	}
 
-	public void setCallSnChild(String callSnChild) {
+	public void setCallSnChild(java.lang.String callSnChild) {
 		set("call_sn_child", callSnChild);
 	}
-
-	public String getCallSnChild() {
-		return get("call_sn_child");
+	
+	public java.lang.String getCallSnChild() {
+		return getStr("call_sn_child");
 	}
 
 	public void setEventTime(java.util.Date eventTime) {
 		set("event_time", eventTime);
 	}
-
+	
 	public java.util.Date getEventTime() {
 		return get("event_time");
 	}
 
-	public void setPerposeType(String perposeType) {
+	public void setPerposeType(java.lang.String perposeType) {
 		set("perpose_type", perposeType);
 	}
-
-	public String getPerposeType() {
-		return get("perpose_type");
+	
+	public java.lang.String getPerposeType() {
+		return getStr("perpose_type");
 	}
 
-	public void setLicX3Addr(String licX3Addr) {
+	public void setLicX3Addr(java.lang.String licX3Addr) {
 		set("lic_x3_addr", licX3Addr);
 	}
-
-	public String getLicX3Addr() {
-		return get("lic_x3_addr");
+	
+	public java.lang.String getLicX3Addr() {
+		return getStr("lic_x3_addr");
 	}
 
-	public void setMsgSn(String msgSn) {
+	public void setMsgSn(java.lang.String msgSn) {
 		set("msg_sn", msgSn);
 	}
-
-	public String getMsgSn() {
-		return get("msg_sn");
+	
+	public java.lang.String getMsgSn() {
+		return getStr("msg_sn");
 	}
 
-	public void setOppositeAddr(String oppositeAddr) {
+	public void setOppositeAddr(java.lang.String oppositeAddr) {
 		set("opposite_addr", oppositeAddr);
 	}
-
-	public String getOppositeAddr() {
-		return get("opposite_addr");
+	
+	public java.lang.String getOppositeAddr() {
+		return getStr("opposite_addr");
 	}
 
-	public void setOperationResult(String operationResult) {
+	public void setOperationResult(java.lang.String operationResult) {
 		set("operation_result", operationResult);
 	}
-
-	public String getOperationResult() {
-		return get("operation_result");
+	
+	public java.lang.String getOperationResult() {
+		return getStr("operation_result");
 	}
 
-	public void setFileName(String fileName) {
+	public void setFileName(java.lang.String fileName) {
 		set("file_name", fileName);
 	}
-
-	public String getFileName() {
-		return get("file_name");
+	
+	public java.lang.String getFileName() {
+		return getStr("file_name");
 	}
 
-	public void setMemo(String memo) {
+	public void setMemo(java.lang.String memo) {
 		set("memo", memo);
 	}
-
-	public String getMemo() {
-		return get("memo");
+	
+	public java.lang.String getMemo() {
+		return getStr("memo");
 	}
 
 	public void setMsgArriveTime(java.util.Date msgArriveTime) {
 		set("msg_arrive_time", msgArriveTime);
 	}
-
+	
 	public java.util.Date getMsgArriveTime() {
 		return get("msg_arrive_time");
+	}
+
+	public void setCccId(java.lang.String cccId) {
+		set("cccId", cccId);
+	}
+	
+	public java.lang.String getCccId() {
+		return getStr("cccId");
+	}
+
+	public void setIcid(java.lang.String icid) {
+		set("icid", icid);
+	}
+	
+	public java.lang.String getIcid() {
+		return getStr("icid");
 	}
 
 }

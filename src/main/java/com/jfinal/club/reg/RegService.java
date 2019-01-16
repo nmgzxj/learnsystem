@@ -24,7 +24,6 @@ import com.jfinal.club.common.kit.EmailKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.club.common.model.Account;
 import com.jfinal.club.common.model.AuthCode;
-import com.jfinal.club.my.message.MessageService;
 import java.util.Date;
 
 /**
@@ -163,7 +162,7 @@ public class RegService {
                     "<br/><br/>JFinal 社区是一个专注于极速开发的分享、交流平台，" +
                     "社区将提供高品质、专业化的极速开发项目、以及项目的分享与反馈，极大提升开发效率与代码质量。" +
                     "<br/><br/>我们倡议：所有会员使用真实头像！";
-            MessageService.me.sendSystemMessage(1, accountId, sysMsg);
+//            MessageService.me.sendSystemMessage(1, accountId, sysMsg);
         } catch (Exception e) {
             LogKit.error("发送激活欢迎系统消息异常：" + e.getMessage(), e);
 		}

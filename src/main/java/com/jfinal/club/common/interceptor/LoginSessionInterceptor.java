@@ -21,7 +21,6 @@ import com.jfinal.club.common.kit.IpKit;
 import com.jfinal.club.common.model.Account;
 import com.jfinal.club.common.model.Remind;
 import com.jfinal.club.login.LoginService;
-import com.jfinal.club.my.newsfeed.RemindService;
 
 /**
  * 从 cookie 中获取 sessionId，如果获取到则根据该值使用 LoginService
@@ -55,12 +54,12 @@ public class LoginSessionInterceptor implements Interceptor {
 
         if (loginAccount != null) {
             // remind 对象用于生成提醒 tips
-            Remind remind = RemindService.me.getRemind(loginAccount.getId());
-            if (remind != null) {
-                if (remind.getReferMe() > 0 || remind.getMessage() > 0 || remind.getFans() > 0) {
-                    c.setAttr(remindKey, remind);
-                }
-            }
+//            Remind remind = RemindService.me.getRemind(loginAccount.getId());
+//            if (remind != null) {
+//                if (remind.getReferMe() > 0 || remind.getMessage() > 0 || remind.getFans() > 0) {
+//                    c.setAttr(remindKey, remind);
+//                }
+//            }
         }
 	}
 }

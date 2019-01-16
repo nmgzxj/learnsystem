@@ -9,68 +9,68 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseAnswer<M extends BaseAnswer<M>> extends Model<M> implements IBean {
 
-	public void setId(Long id) {
+	public void setId(java.lang.Long id) {
 		set("id", id);
 	}
-
-	public Long getId() {
-		return get("id");
+	
+	public java.lang.Long getId() {
+		return getLong("id");
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(java.lang.String userId) {
 		set("user_id", userId);
 	}
-
-	public String getUserId() {
-		return get("user_id");
+	
+	public java.lang.String getUserId() {
+		return getStr("user_id");
 	}
 
-	public void setExamId(Integer examId) {
+	public void setExamId(java.lang.Integer examId) {
 		set("exam_id", examId);
 	}
-
-	public Integer getExamId() {
-		return get("exam_id");
+	
+	public java.lang.Integer getExamId() {
+		return getInt("exam_id");
 	}
 
-	public void setQuestionId(Long questionId) {
+	public void setQuestionId(java.lang.Integer questionId) {
 		set("question_id", questionId);
 	}
-
-	public Long getQuestionId() {
-		return get("question_id");
+	
+	public java.lang.Integer getQuestionId() {
+		return getInt("question_id");
 	}
 
-	public void setAnswer(String answer) {
+	public void setAnswer(java.lang.String answer) {
 		set("answer", answer);
 	}
-
-	public String getAnswer() {
-		return get("answer");
+	
+	public java.lang.String getAnswer() {
+		return getStr("answer");
 	}
 
-	public void setOfficialId(String officialId) {
+	public void setOfficialId(java.lang.String officialId) {
 		set("official_id", officialId);
 	}
-
-	public String getOfficialId() {
-		return get("official_id");
+	
+	public java.lang.String getOfficialId() {
+		return getStr("official_id");
 	}
 
-	public void setUserScore(Float userScore) {
+	public void setUserScore(java.lang.Float userScore) {
 		set("user_score", userScore);
 	}
-
-	public Float getUserScore() {
-		return get("user_score");
+	
+	public java.lang.Float getUserScore() {
+		return getFloat("user_score");
 	}
 
-	public void setAnswerNo(String answerNo) {
+	public void setAnswerNo(java.lang.String answerNo) {
 		set("answer_no", answerNo);
 	}
-
-	public String getAnswerNo() {
-		return get("answer_no");
+	
+	public java.lang.String getAnswerNo() {
+		return getStr("answer_no");
 	}
 
 }

@@ -9,42 +9,42 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseExamUser<M extends BaseExamUser<M>> extends Model<M> implements IBean {
 
-	public void setId(Long id) {
+	public void setId(java.lang.Long id) {
 		set("id", id);
 	}
-
-	public Long getId() {
-		return get("id");
+	
+	public java.lang.Long getId() {
+		return getLong("id");
 	}
 
-	public void setExamId(Long long1) {
-		set("exam_id", long1);
+	public void setExamId(java.lang.Integer examId) {
+		set("exam_id", examId);
+	}
+	
+	public java.lang.Integer getExamId() {
+		return getInt("exam_id");
 	}
 
-	public Integer getExamId() {
-		return get("exam_id");
+	public void setUserId(java.lang.Integer userId) {
+		set("user_id", userId);
+	}
+	
+	public java.lang.Integer getUserId() {
+		return getInt("user_id");
 	}
 
-	public void setUserId(String user) {
-		set("user_id", user);
-	}
-
-	public Integer getUserId() {
-		return get("user_id");
-	}
-
-	public void setCreator(String creator) {
+	public void setCreator(java.lang.String creator) {
 		set("creator", creator);
 	}
-
-	public String getCreator() {
-		return get("creator");
+	
+	public java.lang.String getCreator() {
+		return getStr("creator");
 	}
 
 	public void setCreateTime(java.util.Date createTime) {
 		set("create_time", createTime);
 	}
-
+	
 	public java.util.Date getCreateTime() {
 		return get("create_time");
 	}

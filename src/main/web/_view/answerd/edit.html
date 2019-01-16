@@ -18,8 +18,8 @@
              <!--已做答的数量和考题总数-->
              当前第<span class="questioned">#(page.toInt()+1)</span>题/共<span class="question_sum">#(question_size)</span>题
              &nbsp;&nbsp;
-                  判卷人：<input type="text" readonly name="officialId" style="color: #000" value="#(answer.official_name)">
-                  本题得分：<input type="text" name="userScore" style="color: #000"  value="#(answer.userScore??)">
+                  判卷人：<input type="text" readonly name="officialId" style="color: #000" value="#(answer.official_name)" aria-readonly="true">
+                  本题得分：<input type="text" name="userScore" style="color: #000"  value="#(answer.userScore??)" readonly>
          </div>
                                                     
          <div style="width: 100%;height:80%;display: inline-block;border: 1px solid #CCC;border-bottom:1px dashed #CCC;background:#FFF;">
@@ -47,7 +47,7 @@
                      #if(question.questionType=='bigtext')
                          <li  class="question_info_text" style="border: 0px;background-color: #ffffff;" onclick='clickTrim(this)'>
                          <strong>我的答案：</strong>
-                              <textarea name="item"  class="form-control" rows="15" cols="300" style="overflow-y:scroll">#(answer_str)</textarea>
+                              <textarea name="item"  class="form-control" rows="15" cols="300" style="overflow-y:scroll" readonly>#(answer_str)</textarea>
                          </li>
                      #elseif(question.questionType=='flow')
                              <!-- 列出流程信息 -->

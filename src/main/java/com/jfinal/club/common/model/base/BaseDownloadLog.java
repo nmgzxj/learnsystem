@@ -9,35 +9,35 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseDownloadLog<M extends BaseDownloadLog<M>> extends Model<M> implements IBean {
 
-	public void setId(Integer id) {
+	public void setId(java.lang.Integer id) {
 		set("id", id);
 	}
 	
-	public Integer getId() {
+	public java.lang.Integer getId() {
 		return getInt("id");
 	}
 
-	public void setAccountId(Integer accountId) {
+	public void setAccountId(java.lang.Integer accountId) {
 		set("accountId", accountId);
 	}
 	
-	public Integer getAccountId() {
+	public java.lang.Integer getAccountId() {
 		return getInt("accountId");
 	}
 
-	public void setIp(String ip) {
+	public void setIp(java.lang.String ip) {
 		set("ip", ip);
 	}
 	
-	public String getIp() {
+	public java.lang.String getIp() {
 		return getStr("ip");
 	}
 
-	public void setFileName(String fileName) {
+	public void setFileName(java.lang.String fileName) {
 		set("fileName", fileName);
 	}
 	
-	public String getFileName() {
+	public java.lang.String getFileName() {
 		return getStr("fileName");
 	}
 

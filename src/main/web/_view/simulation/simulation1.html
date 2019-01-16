@@ -76,7 +76,17 @@ search = function(){
                                 </div>
 
                                 <div class="mt_bottom" id="opType">
-
+                                    <span>操作类型:</span>
+                                    <select name="operType" style="width: 168px;" >
+                                        <option value=""></option>
+                                        <option value="a1">连接建立请求</option>
+                                        <option value="a2">连接释放通知</option>
+                                        <option value="a3">BKMB设定请求</option>
+                                        <option value="a4">BKMB撤销请求</option>
+                                        <option value="a5">BKMB列示</option>
+                                        <option value="a6">MB信息查询</option>
+                                        <option value="a7">网元时间查询</option>
+                                    </select>
                                 </div>
 
                                 <div class="mt_bottom">
@@ -164,6 +174,8 @@ search = function(){
                 </div>
 
 <script type="text/javascript"  >
+
+
 function data_delete(){
 	if(confirm('确定要删除这些数据吗？')) 
     var jqxhr = $.ajax( "/admin/system/datax1_delete?table=tx1msg")
@@ -256,6 +268,8 @@ function change_unit(sel){
         case 32:
             netType = 'WWW';
             break;
+        default:
+            netType = '4G';
     }
 
     if(netType=='WWW'){
@@ -332,7 +346,6 @@ function change_unit(sel){
             '                                        <option value="a5">BKMB列示</option>\n' +
             '                                        <option value="a6">MB信息查询</option>\n' +
             '                                        <option value="a7">网元时间查询</option>\n' +
-            '                                        \n' +
             '                                        <option value="a8">BK目标参数修改</option>\n' +
             '                                        <option value="a9">BK目标参数查询</option>\n' +
             '                                        <option value="a10">BK目标位置定位查询</option>\n' +
@@ -381,6 +394,7 @@ function change_unit(sel){
             '                                        <option value="a7">网元时间查询</option>\n' +
             '                                    </select>';
     }
+
 
 }
 

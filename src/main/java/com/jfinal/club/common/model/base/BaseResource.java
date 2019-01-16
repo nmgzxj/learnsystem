@@ -9,44 +9,44 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseResource<M extends BaseResource<M>> extends Model<M> implements IBean {
 
-	public void setID(String ID) {
+	public void setID(java.lang.String ID) {
 		set("ID", ID);
 	}
-
-	public String getID() {
-		return get("ID");
+	
+	public java.lang.String getID() {
+		return getStr("ID");
 	}
 
 	public void setSeq(java.math.BigDecimal seq) {
 		set("seq", seq);
 	}
-
+	
 	public java.math.BigDecimal getSeq() {
 		return get("seq");
 	}
 
-	public void setText(String text) {
+	public void setText(java.lang.String text) {
 		set("text", text);
 	}
-
-	public String getText() {
-		return get("text");
+	
+	public java.lang.String getText() {
+		return getStr("text");
 	}
 
-	public void setUrl(String url) {
+	public void setUrl(java.lang.String url) {
 		set("url", url);
 	}
-
-	public String getUrl() {
-		return get("url");
+	
+	public java.lang.String getUrl() {
+		return getStr("url");
 	}
 
-	public void setPid(String pid) {
+	public void setPid(java.lang.String pid) {
 		set("pid", pid);
 	}
-
-	public String getPid() {
-		return get("pid");
+	
+	public java.lang.String getPid() {
+		return getStr("pid");
 	}
 
 }

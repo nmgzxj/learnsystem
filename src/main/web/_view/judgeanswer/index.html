@@ -18,21 +18,25 @@
                                 <thead>
                                 <tr>
 
-                                        <th>试卷</th>
-                                        <th>得分</th>
-                                        <th>判卷人</th>
-                                        <th>判卷时间</th>
-                                        <th>操作</th>
+                                    <th>试卷</th>
+                                    <th>考卷总分</th>
+                                    <th>考生得分</th>
+                                    <th>百分比</th>
+                                    <th>判卷人</th>
+                                    <th>判卷时间</th>
+                                    <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 #for(exam:judgeAnswerPage.getList())
                                 <tr class="gradeX">
-                                        <td>#(exam.exam_name)</td>
-                                        <td>#number(exam.user_percent,"#.##%")</td>
-                                        <td>#(exam.official_name)</td>
-                                        <td>#(exam.judge_time)</td>
-                                        <td>
+                                    <td>#(exam.exam_name)</td>
+                                    <td> #(exam.exam_score) </td>
+                                    <td>#(exam.user_score)</td>
+                                    <td>#number(exam.user_percent,"#.##%")</td>
+                                    <td>#(exam.official_name)</td>
+                                    <td>#(exam.judge_time)</td>
+                                    <td>
                                         #if(exam.user_percent==null)
                                                 <div class="tpl-table-black-operation">
                                                         <a href="/admin/judgeAnswer/edit?page=0&examId=#(exam.exam_id)&answer_no=#(exam.answer_no)" class="editor">
@@ -46,7 +50,7 @@
                                                         </a>
                                                 </div>
                                         #end
-                                        </td>
+                                    </td>
                                 </tr>
                                 #end
                                 <!-- more data -->

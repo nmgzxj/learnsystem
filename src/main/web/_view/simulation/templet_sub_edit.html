@@ -3,152 +3,158 @@
 #define main()
 <link rel="stylesheet" href="/assets/css/index.css">
 <script type="text/javascript">
-sendMsg = function(){
-	var form = document.getElementById("form1");
-	form.action = '/admin/unit/x1MsgAdd';
-	form.submit();
-}
+    sendMsg = function () {
+        var form = document.getElementById("form1");
+        form.action = '/admin/unit/x1MsgAdd';
+        form.submit();
+    }
 
-search = function(){
-	var form = document.getElementById("form1");
-	form.action = "/admin/unit/simulation1";
-	form.handle.value = "search";
-	form.submit();
-}
+    search = function () {
+        var form = document.getElementById("form1");
+        form.action = "/admin/unit/simulation1";
+        form.handle.value = "search";
+        form.submit();
+    }
 
 </script>
 
 <div class="jfa-header-box" id="jfa-header-box">
-	<div class="jfa-crumbs" id="jfa-crumbs">
-		#(seoTitle)
-	</div>
-	<div class="jfa-search-box"></div>
-	#include("/_view/_admin/common/_header_right.html")
+    <div class="jfa-crumbs" id="jfa-crumbs">
+        #(seoTitle)
+    </div>
+    <div class="jfa-search-box"></div>
+    #include("/_view/_admin/common/_header_right.html")
 </div>
 
 ### 内容区域
 <div class="jfa-content-box" id="jfa-content-box">
-	<div class="jfa-content" id="jfa-content">
+    <div class="jfa-content" id="jfa-content">
 
-                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
-                    <div class="widget_heigh am-cf">
-                    		<div class="port_title">信息触发</div>
-                    		<div class="tabl_wrapper" style="margin-top: 20px">
-                    			
- <form id="templet_form" name="templet_form" method="post" action="#(sub==null?'/admin/templet/templet_sub_add_save':'/admin/templet/templet_sub_edit_save')">
-<input type="hidden" name="handle" value="">
-<input type="hidden" name="templetId" value="#(sub.templetId??==null?templetId:sub.templetId)">
-<input type="hidden" name="subTempletId" value="#(sub.id??)">
-<table width="100%">
-	<tbody>
-		<tr>
-			<td><font color=red>*</font>网元 :</td>
-			<td>
-			<select id="unitId" name="unitId" style="width:150px">
-			<option value="#(sub.unitId?? )" checked>#(sub.unitView?? )</option>
-			#for(u:unitList)
-				<option value="#(u.id??)">#(u.unitDesc??)</option>
-			#end
-			</select>
-			</td>
-			<td><font color=red>*</font>端口:</td>
-			<td>
-			<select id="port" name="port" style="width:150px">
-				<option checked>#(sub.port??)</option>
-				<option>x1</option>
-				<option>x2</option>
-				<option>x3</option>
-			</select>
-			</td>
-		</tr>
-		<tr>
-			<td>方向:</td>
-			<td>
-			<select id="direction" name="direction" style="width:150px">
-					<option checked>#(sub.direction?? )</option>
-					<option>Lic to Unit</option>
-					<option>Unit to Lic</option>
-			</select>
-			</td>
-			<td><font color=red>*</font>消息类型:</td>
-			<td>
-			<select id="msgType" name="msgType" style="width:150px">
-					<option value="#(sub.msgType ??)">#(sub.msgTypeView ??)</option>
-			#for(u:msgTypeList)
-				<option value="#(u.resourceId)">#(u.resourceName??)</option>
-			#end
-			</select>
-			</td>			
-		<tr>
-		<td>目标标识</td>
-		<td><input type="text" id="perposeId" name="perposeId" value="#(sub.perposeId ??)"></td>
-		<td>操作结果</td>
-		<td><input type="text" id="operationResult" name="operationResult" value="#(sub.operationResult ??)"></td>
-		</tr>
-		<tr>
-		<td>消息到达时间</td>
-		<td><input type="text" id="msgArriveTime" name="msgArriveTime" value="#(sub.msgArriveTime??==null?'2018-01-01 00:00:00.0':sub.msgArriveTime )"></td>
-		<td>Ne X2地址</td>
-		<td><input type="text" id="neX2Addr" name="neX2Addr" value="#(sub.neX2Addr ??)"></td>
-		</tr>
-		<tr>
-		<td>目标类型</td>
-		<td><input type="text" id="perposeType" name="perposeType" value="#(sub.perposeType ??)"></td>
-		<td>事件序列号</td>
-		<td><input type="text" id="eventSn" name="eventSn" value="#(sub.eventSn ??)"></td>
-		</tr>
-		<tr>
-		<td>关联标识1</td>
-		<td><input type="text" id="relation1" name="relation1" value="#(sub.relation1 ??)"></td>
-		<td>关联标识2</td>
-		<td><input type="text" id="relation2" name="relation2" value="#(sub.relation2 ??)"></td>
-		</tr>
-		<tr>
-		<td>呼叫序列号</td>
-		<td><input type="text" id="callSn" name="callSn" value="#(sub.callSn ??)"></td>
-		<td>呼叫子序列号</td>
-		<td><input type="text" id="callSnChild" name="callSnChild" value="#(sub.callSnChild ??)"></td>
-		</tr>
-		<tr>
-		<td>事件时间</td>
-		<td><input type="text" id="eventTime" name="eventTime" value="#(sub.eventTime??==null?'2018-01-01 00:00:00.0':sub.eventTime )"></td>
-		<td>LIC X3地址</td>
-		<td><input type="text" id="licX3Addr" name="licX3Addr" value="#(sub.licX3Addr?? )"></td>
-		</tr>
-		<tr>
-		<td>对端地址</td>
-		<td><input type="text" id="oppositeAddr" name="oppositeAddr" value="#(sub.oppositeAddr?? )"></td>
-		<td>文件名称</td>
-		<td><input type="text" id="fileName" name="fileName" value="#(sub.fileName?? )"></td>
-		</tr>
-<!-- 		<tr>
-		<td>序号</td>
-		<td><input type="text" id="taxis" name="taxis" value="#(sub.taxis?? )"></td>
-		<td></td>
-		<td></td>
-		</tr> -->
-	</tbody>
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget_heigh am-cf">
+                <div class="port_title">信息触发</div>
+                <div class="tabl_wrapper" style="margin-top: 20px">
 
-</table>
-<div>消息:</div>
-<div  class="question_info_text" style="border: 0px;background-color: #ffffff;" onclick='clickTrim(this)'>
-<textarea rows="5" cols="120" name="msg">#(sub.msg??)</textarea>
-</div> 
-<div class="pages-btn" style="text-align: center">
-    <a class="btn btn-info" onclick="window.open('/admin/templet/templet_edit?templetId=#(sub.templetId??==null?templetId:sub.templetId)','_self')" >返回</a>
-    <button class="btn btn-success" onclick='return check_form()'>保存</button>
+                    <form id="templet_form" name="templet_form" method="post" action="#(sub==null?'/admin/templet/templet_sub_add_save':'/admin/templet/templet_sub_edit_save')">
+                        <input type="hidden" name="handle" value="">
+                        <input type="hidden" name="templetId" value="#(sub.templetId??==null?templetId:sub.templetId)">
+                        <input type="hidden" name="subTempletId" value="#(sub.id??)">
+                        <table width="100%">
+                            <tbody>
+                            <tr>
+                                <td><font color=red>*</font>网元 :</td>
+                                <td>
+                                    <select id="unitId" name="unitId" style="width:150px">
+                                        <option value="#(sub.unitId?? )" checked>#(sub.unitView?? )</option>
+                                        #for(u:unitList)
+                                        <option value="#(u.id??)">#(u.unitDesc??)</option>
+                                        #end
+                                    </select>
+                                </td>
+                                <td><font color=red>*</font>端口:</td>
+                                <td>
+                                    <select id="port" name="port" style="width:150px">
+                                        <option checked>#(sub.port??)</option>
+                                        <option>x1</option>
+                                        <option>x2</option>
+                                        <option>x3</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>方向:</td>
+                                <td>
+                                    <select id="direction" name="direction" style="width:150px">
+                                        <option checked>#(sub.direction?? )</option>
+                                        <option>Lic to Unit</option>
+                                        <option>Unit to Lic</option>
+                                    </select>
+                                </td>
+                                <td><font color=red>*</font>消息类型:</td>
+                                <td>
+                                    <select id="msgType" name="msgType" style="width:150px">
+                                        <option value="#(sub.msgType ??)">#(sub.msgTypeView ??)</option>
+                                        #for(u:msgTypeList)
+                                        <option value="#(u.resourceId)">#(u.resourceName??)</option>
+                                        #end
+                                    </select>
+                                </td>
+                            <tr>
+                                <td>目标标识</td>
+                                <td><input type="text" id="perposeId" name="perposeId" value="#(sub.perposeId ??)"></td>
+                                <td>操作结果</td>
+                                <td><input type="text" id="operationResult" name="operationResult" value="#(sub.operationResult ??)"></td>
+                            </tr>
+                            <tr>
+                                <td>消息到达时间</td>
+                                <td><input type="text" id="msgArriveTime" name="msgArriveTime" value="#(sub.msgArriveTime??==null?'2018-01-01 00:00:00.0':sub.msgArriveTime )"></td>
+                                <td>Ne X2地址</td>
+                                <td><input type="text" id="neX2Addr" name="neX2Addr" value="#(sub.neX2Addr ??)"></td>
+                            </tr>
+                            <tr>
+                                <td>目标类型</td>
+                                <td><input type="text" id="perposeType" name="perposeType" value="#(sub.perposeType ??)"></td>
+                                <td>事件序列号</td>
+                                <td><input type="text" id="eventSn" name="eventSn" value="#(sub.eventSn ??)"></td>
+                            </tr>
+                            <tr>
+                                <td>关联标识1</td>
+                                <td><input type="text" id="relation1" name="relation1" value="#(sub.relation1 ??)"></td>
+                                <td>关联标识2</td>
+                                <td><input type="text" id="relation2" name="relation2" value="#(sub.relation2 ??)"></td>
+                            </tr>
+                            <tr>
+                                <td>CCC-ID</td>
+                                <td><input type="text" id="cccId" name="cccId" value="#(sub.cccId ??)"></td>
+                                <td>ICID-Value</td>
+                                <td><input type="text" id="icid" name="icid" value="#(sub.icid ??)"></td>
+                            </tr>
+                            <tr>
+                                <td>呼叫序列号</td>
+                                <td><input type="text" id="callSn" name="callSn" value="#(sub.callSn ??)"></td>
+                                <td>呼叫子序列号</td>
+                                <td><input type="text" id="callSnChild" name="callSnChild" value="#(sub.callSnChild ??)"></td>
+                            </tr>
+                            <tr>
+                                <td>事件时间</td>
+                                <td><input type="text" id="eventTime" name="eventTime" value="#(sub.eventTime??==null?'2018-01-01 00:00:00.0':sub.eventTime )"></td>
+                                <td>LIC X3地址</td>
+                                <td><input type="text" id="licX3Addr" name="licX3Addr" value="#(sub.licX3Addr?? )"></td>
+                            </tr>
+                            <tr>
+                                <td>对端地址</td>
+                                <td><input type="text" id="oppositeAddr" name="oppositeAddr" value="#(sub.oppositeAddr?? )"></td>
+                                <td>文件名称</td>
+                                <td><input type="text" id="fileName" name="fileName" value="#(sub.fileName?? )"></td>
+                            </tr>
+                            <!-- 		<tr>
+                                    <td>序号</td>
+                                    <td><input type="text" id="taxis" name="taxis" value="#(sub.taxis?? )"></td>
+                                    <td></td>
+                                    <td></td>
+                                    </tr> -->
+                            </tbody>
+
+                        </table>
+                        <div>消息:</div>
+                        <div class="question_info_text" style="border: 0px;background-color: #ffffff;" onclick='clickTrim(this)'>
+                            <textarea rows="5" cols="120" name="msg">#(sub.msg??)</textarea>
+                        </div>
+                        <div class="pages-btn" style="text-align: center">
+                            <a class="btn btn-info" onclick="window.open('/admin/templet/templet_edit?templetId=#(sub.templetId??==null?templetId:sub.templetId)','_self')">返回</a>
+                            <button class="btn btn-success" onclick='return check_form()'>保存</button>
+                        </div>
+                    </form>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
 </div>
- </form>                   			
-                    			</dl>
-                    		</div>
-                    		</div>
-    </div>
-
-
-    </div>
-
-    </div>
-    </div>
+</div>
 </div>
 
 
@@ -159,32 +165,33 @@ search = function(){
 <script src="../assets/js/app.js"></script>
 <!--<script src="./assets/js/bootstrap.js"></script>-->
 <script src="../assets/js/Questions.js"></script>
-<%--<script src="../assets/js/index.js"></script>--%>
+<%--
+<script src="../assets/js/index.js"></script>--%>
 <script type="text/javascript">
-$(document).ready(function(){
+    $(document).ready(function () {
 
-	$('#all').click(function(){
-		 $("[name=id]:checkbox").prop('checked',this.checked);
-	})
-});
+        $('#all').click(function () {
+            $("[name=id]:checkbox").prop('checked', this.checked);
+        })
+    });
 </script>
 
 <script type="text/javascript">
-	function check_form(){
- 		if($('#unitId').val()==''){
-			alert("请选择网元。")
-			return false;
-		}
-		if($("#msgType").val()==''){
-			alert("请选择消息类型。")
-			return false;
-		}
-		if($("port").val()==''){
-			alert("请选择端口。")
-		}
-		return true;
-		//$("#templet_form").submit();
-	}
+    function check_form() {
+        if ($('#unitId').val() == '') {
+            alert("请选择网元。")
+            return false;
+        }
+        if ($("#msgType").val() == '') {
+            alert("请选择消息类型。")
+            return false;
+        }
+        if ($("port").val() == '') {
+            alert("请选择端口。")
+        }
+        return true;
+        //$("#templet_form").submit();
+    }
 </script>
 </body>
 

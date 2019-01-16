@@ -9,108 +9,108 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseBaseFlowMsg<M extends BaseBaseFlowMsg<M>> extends Model<M> implements IBean {
 
-	public void setId(Long id) {
+	public void setId(java.lang.Long id) {
 		set("id", id);
 	}
-
-	public Long getId() {
-		return get("id");
+	
+	public java.lang.Long getId() {
+		return getLong("id");
 	}
 
-	public void setFlowId(Integer flowId) {
+	public void setFlowId(java.lang.Integer flowId) {
 		set("flow_id", flowId);
 	}
-
-	public Integer getFlowId() {
-		return get("flow_id");
+	
+	public java.lang.Integer getFlowId() {
+		return getInt("flow_id");
 	}
 
-	public void setPort(String port) {
+	public void setPort(java.lang.String port) {
 		set("port", port);
 	}
-
-	public String getPort() {
-		return get("port");
+	
+	public java.lang.String getPort() {
+		return getStr("port");
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(java.lang.String title) {
 		set("title", title);
 	}
-
-	public String getTitle() {
-		return get("title");
+	
+	public java.lang.String getTitle() {
+		return getStr("title");
 	}
 
-	public void setMsg(String msg) {
+	public void setMsg(java.lang.String msg) {
 		set("msg", msg);
 	}
-
-	public String getMsg() {
-		return get("msg");
+	
+	public java.lang.String getMsg() {
+		return getStr("msg");
 	}
 
-	public void setTaxis(Integer taxis) {
+	public void setTaxis(java.lang.Integer taxis) {
 		set("taxis", taxis);
 	}
-
-	public Integer getTaxis() {
-		return get("taxis");
+	
+	public java.lang.Integer getTaxis() {
+		return getInt("taxis");
 	}
 
-	public void setCreator(String creator) {
+	public void setCreator(java.lang.String creator) {
 		set("creator", creator);
 	}
-
-	public String getCreator() {
-		return get("creator");
+	
+	public java.lang.String getCreator() {
+		return getStr("creator");
 	}
 
 	public void setCreateTime(java.util.Date createTime) {
 		set("create_time", createTime);
 	}
-
+	
 	public java.util.Date getCreateTime() {
 		return get("create_time");
 	}
 
-	public void setModifyBy(String modifyBy) {
+	public void setModifyBy(java.lang.String modifyBy) {
 		set("modify_by", modifyBy);
 	}
-
-	public String getModifyBy() {
-		return get("modify_by");
+	
+	public java.lang.String getModifyBy() {
+		return getStr("modify_by");
 	}
 
 	public void setModifyTime(java.util.Date modifyTime) {
 		set("modify_time", modifyTime);
 	}
-
+	
 	public java.util.Date getModifyTime() {
 		return get("modify_time");
 	}
 
-	public void setUnitId(String unitId) {
+	public void setUnitId(java.lang.String unitId) {
 		set("unit_id", unitId);
 	}
-
-	public String getUnitId() {
-		return get("unit_id");
+	
+	public java.lang.String getUnitId() {
+		return getStr("unit_id");
 	}
 
-	public void setDirection(String direction) {
+	public void setDirection(java.lang.String direction) {
 		set("direction", direction);
 	}
-
-	public String getDirection() {
-		return get("direction");
+	
+	public java.lang.String getDirection() {
+		return getStr("direction");
 	}
 
-	public void setMsgType(String msgType) {
+	public void setMsgType(java.lang.String msgType) {
 		set("msg_type", msgType);
 	}
-
-	public String getMsgType() {
-		return get("msg_type");
+	
+	public java.lang.String getMsgType() {
+		return getStr("msg_type");
 	}
 
 }

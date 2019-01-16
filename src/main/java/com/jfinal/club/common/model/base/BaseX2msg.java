@@ -9,140 +9,140 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseX2msg<M extends BaseX2msg<M>> extends Model<M> implements IBean {
 
-	public void setId(Long id) {
+	public void setId(java.lang.Long id) {
 		set("id", id);
 	}
-
-	public Long getId() {
-		return get("id");
+	
+	public java.lang.Long getId() {
+		return getLong("id");
 	}
 
-	public void setUnit(String unit) {
+	public void setUnit(java.lang.String unit) {
 		set("unit", unit);
 	}
-
-	public String getUnit() {
-		return get("unit");
+	
+	public java.lang.String getUnit() {
+		return getStr("unit");
 	}
 
-	public void setNeX2Addr(String neX2Addr) {
+	public void setNeX2Addr(java.lang.String neX2Addr) {
 		set("ne_x2_addr", neX2Addr);
 	}
-
-	public String getNeX2Addr() {
-		return get("ne_x2_addr");
+	
+	public java.lang.String getNeX2Addr() {
+		return getStr("ne_x2_addr");
 	}
 
-	public void setMsgType(String msgType) {
+	public void setMsgType(java.lang.String msgType) {
 		set("msg_type", msgType);
 	}
-
-	public String getMsgType() {
-		return get("msg_type");
+	
+	public java.lang.String getMsgType() {
+		return getStr("msg_type");
 	}
 
-	public void setPerposeId(String perposeId) {
+	public void setPerposeId(java.lang.String perposeId) {
 		set("perpose_id", perposeId);
 	}
-
-	public String getPerposeId() {
-		return get("perpose_id");
+	
+	public java.lang.String getPerposeId() {
+		return getStr("perpose_id");
 	}
 
-	public void setRelation1(String relation1) {
+	public void setRelation1(java.lang.String relation1) {
 		set("relation1", relation1);
 	}
-
-	public String getRelation1() {
-		return get("relation1");
+	
+	public java.lang.String getRelation1() {
+		return getStr("relation1");
 	}
 
-	public void setRelation2(String relation2) {
+	public void setRelation2(java.lang.String relation2) {
 		set("relation2", relation2);
 	}
-
-	public String getRelation2() {
-		return get("relation2");
+	
+	public java.lang.String getRelation2() {
+		return getStr("relation2");
 	}
 
-	public void setEventSn(String eventSn) {
+	public void setEventSn(java.lang.String eventSn) {
 		set("event_sn", eventSn);
 	}
-
-	public String getEventSn() {
-		return get("event_sn");
+	
+	public java.lang.String getEventSn() {
+		return getStr("event_sn");
 	}
 
-	public void setCallSn(String callSn) {
+	public void setCallSn(java.lang.String callSn) {
 		set("call_sn", callSn);
 	}
-
-	public String getCallSn() {
-		return get("call_sn");
+	
+	public java.lang.String getCallSn() {
+		return getStr("call_sn");
 	}
 
-	public void setCallSnChild(String callSnChild) {
+	public void setCallSnChild(java.lang.String callSnChild) {
 		set("call_sn_child", callSnChild);
 	}
-
-	public String getCallSnChild() {
-		return get("call_sn_child");
+	
+	public java.lang.String getCallSnChild() {
+		return getStr("call_sn_child");
 	}
 
 	public void setEventTime(java.util.Date eventTime) {
 		set("event_time", eventTime);
 	}
-
+	
 	public java.util.Date getEventTime() {
 		return get("event_time");
 	}
 
-	public void setCreator(String creator) {
+	public void setCreator(java.lang.String creator) {
 		set("creator", creator);
 	}
-
-	public String getCreator() {
-		return get("creator");
+	
+	public java.lang.String getCreator() {
+		return getStr("creator");
 	}
 
 	public void setCreateTime(java.util.Date createTime) {
 		set("create_time", createTime);
 	}
-
+	
 	public java.util.Date getCreateTime() {
 		return get("create_time");
 	}
 
-	public void setModifyBy(String modifyBy) {
+	public void setModifyBy(java.lang.String modifyBy) {
 		set("modify_by", modifyBy);
 	}
-
-	public String getModifyBy() {
-		return get("modify_by");
+	
+	public java.lang.String getModifyBy() {
+		return getStr("modify_by");
 	}
 
 	public void setModifyTime(java.util.Date modifyTime) {
 		set("modify_time", modifyTime);
 	}
-
+	
 	public java.util.Date getModifyTime() {
 		return get("modify_time");
 	}
 
-	public void setPerposeType(String perposeType) {
+	public void setPerposeType(java.lang.String perposeType) {
 		set("perpose_type", perposeType);
 	}
-
-	public String getPerposeType() {
-		return get("perpose_type");
+	
+	public java.lang.String getPerposeType() {
+		return getStr("perpose_type");
 	}
 
-	public void setMemo(String memo) {
+	public void setMemo(java.lang.String memo) {
 		set("memo", memo);
 	}
-
-	public String getMemo() {
-		return get("memo");
+	
+	public java.lang.String getMemo() {
+		return getStr("memo");
 	}
 
 }
