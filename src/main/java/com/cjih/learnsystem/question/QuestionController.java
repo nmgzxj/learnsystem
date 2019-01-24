@@ -16,6 +16,7 @@ import com.cjih.learnsystem.common.util.Encrypt;
 import com.jfinal.aop.Before;
 import com.jfinal.club.common.controller.BaseController;
 import com.jfinal.club.common.model.BaseFlow;
+import com.jfinal.club.common.model.MsgTemplet;
 import com.jfinal.club.common.model.Question;
 import com.jfinal.club.common.model.QuestionFlow;
 import com.jfinal.kit.PathKit;
@@ -198,8 +199,8 @@ public class QuestionController extends BaseController{
 		}
 		Integer pageSize = PropKit.getInt("pageSize");
 		String selectSql = "select *";
-		String fromSql = " from tbase_flow ";
-		Page<BaseFlow> flows = BaseFlow.dao.paginate(page,pageSize,selectSql, fromSql);
+		String fromSql = " from tmsg_templet ";
+		Page<MsgTemplet> flows = MsgTemplet.dao.paginate(page,pageSize,selectSql, fromSql);
 		setAttr("flowList", flows.getList());
 	    keepPara();
 	    setAttr("p", getPara("p"));
@@ -216,7 +217,7 @@ public class QuestionController extends BaseController{
 		qf.update();
 		setAttr("questionFlow", QuestionFlow.dao.findById(getPara("flowMsgId")));
 		setAttr("p", getPara("p"));
-		renderText("消息编辑完成，请刷新父页面。");
+		renderText("消息编辑完成，请关闭本页面。");
 	}
 	
 	public void flowmsg_delete() {
@@ -235,10 +236,10 @@ public class QuestionController extends BaseController{
 		if(StrKit.isBlank(flowId)) {
 			flowId = getPara("flowId");
 		}
-		BaseFlow bf = BaseFlow.dao.findById(flowId);
+		MsgTemplet bf = MsgTemplet.dao.findById(flowId);
 		setAttr("baseFlow", bf);
 		
-		String sql = "select * from tbase_flow_msg where flow_id ="
+		String sql = "select * from tmsg_templet_sub where templet_id ="
 		+ flowId + " order by taxis";
 		List<Record> flowMsgs = Db.find(sql);
 		setAttr("questionId", getPara("questionId"));
@@ -257,8 +258,8 @@ public class QuestionController extends BaseController{
 		  	}
 		  	else {
 	    	  	for(int i=0; i<ids.length; i++) {
-	    	  		Db.update("insert into tquestion_flow (question_id,relationId,title,msg,port,taxis,creator,create_time) "
-	    	  				+ "select '"+questionId+"','"+relationId+"',title,msg,port,'"+i+"','"+getLoginAccountId()+"',now() from tbase_flow_msg where id = "+ids[i]);
+	    	  		Db.update("insert into tquestion_flow (question_id,relationId,unit_id,title,msg,port,taxis,creator,create_time) "
+	    	  				+ "select '"+questionId+"','"+relationId+"',unit_id,(select resource_name from tresource_info where resource_id=tmsg_templet_sub.msg_type and type_id='PUB007'),msg,port,'"+i+"','"+getLoginAccountId()+"',now() from tmsg_templet_sub where id = "+ids[i]);
 	    	  	}
 	    	  	renderText("添加完毕，请关闭当前窗口，刷新父窗口。");
 		  	}

@@ -63,10 +63,13 @@ search = function(){
 																	<td>#(sub.taxis)&nbsp;
 																	</td>
 																	<td>
+																		#permission("/admin/templet/templet_edit")
 																	<div class="tpl-table-black-operation">
 																	<a href='/admin/templet/sort_up?templetId=#(templet.id)&subTempletId=#(sub.id )'>上移</a>&nbsp;
 																	<a href='/admin/templet/sort_down?templetId=#(templet.id)&subTempletId=#(sub.id )'>下移</a>
-																	</div></td>
+																	</div>
+																		#end
+																	</td>
 																	<td>#(sub.msgTypeView )</td>
 																	<td>#(sub.port )</td>
 																	<td>#(sub.unitView )</td>
@@ -74,15 +77,20 @@ search = function(){
 																	
 																	<td>
 																		<div class="tpl-table-black-operation">
+																			#permission("/admin/templet/templet_edit")
 																			<a
 																				href="/admin/templet/templet_sub_edit?subTempletId=#(sub.id )"
 																				class="editor"> <i class="am-icon-pencil"></i>
 																				编辑
-																			</a> <a onclick="return confirm('确定要删除吗？')" 
+																			</a>
+																			#end
+																			#permission("/admin/templet/templet_edit")
+																			<a onclick="return confirm('确定要删除吗？')"
 																				href="/admin/templet/templet_sub_edit_delete?templetId=#(templet.id)&subTempletId=#(sub.id )"
 																				class="tpl-table-black-operation-del"> <i
 																				class="am-icon-trash"></i> 删除
 																			</a>
+																			#end
 																		</div>
 																	</td>
 																</tr>
@@ -91,7 +99,9 @@ search = function(){
 															<!-- more data -->
 														</tbody>
 													</table>
+								#permission("/admin/templet/templet_edit")
 												<a class="btn btn-info" href="/admin/templet/templet_sub_add?templetId=#(templet.id?? )">新建消息</a>
+								#end
 								</dl>
 							</div>
 						</div>

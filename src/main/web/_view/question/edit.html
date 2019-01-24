@@ -67,16 +67,26 @@
 				<label>参考答案</label><textarea  name="question.questionAnswer" class="form-control">#(question.questionAnswer)</textarea>
 			</div>
 			#elseif(question.questionType=='flow' )
+	<table>
+	<tr><td>序号</td><td>网元</td><td>端口</td><td>消息</td><td>操作</td></tr>
 			#for(flowMsg:flows)
 			<div class="form-group margin-bottom-20">
-				#(1+for.index).#(flowMsg.title)
-				<input type="button" value="编辑" onclick="window.open('/admin/question/flowmsg_edit?flowMsgId=#(flowMsg.id)','_blank');">
-				<input type="button" value="删除" onclick="flowmsg_del('#(flowMsg.id)')">
-				<a data-delete data-title="#escape(flowMsg.title)"
-					 data-action="/admin/question/flowmsg_delete?flowMsgId=#(flowMsg.id);location.reload();" href="">
-												<i class="fa fa-trash" title="删除">删除</i></a>
+				<tr>
+					<td>#(1+for.index)</td>
+					<td>#(flowMsg.unitName)</td>
+					<td>#(flowMsg.port)</td>
+					<td>#(flowMsg.title)</td>
+					<td>
+						<a onclick="window.open('/admin/question/flowmsg_edit?flowMsgId=#(flowMsg.id)','_blank');"><i class="fa fa-edit" title="编辑">编辑</i></a>
+						<a data-delete data-title="#escape(flowMsg.title)"
+						   data-action="/admin/question/flowmsg_delete?flowMsgId=#(flowMsg.id);location.reload();" href="">
+						<i class="fa fa-trash" title="删除">删除</i></a>
+					</td>
+				</tr>
+
 			</div>
 			#end
+	</table>
 			<div class="form-group margin-bottom-20">
 				<input type="button" name="itemsubmit" value="添加流程" onclick="document.getElementById('myArticleForm').submit();window.open('/admin/question/flow_list_choice?questionId=#(question.id)','_blank');">
 			</div>
@@ -160,24 +170,24 @@
 			document.getElementById("del_item").value = v;
 			document.getElementById("myArticleForm").submit();
 		}
-		function flowmsg_del(v){
-			document.getElementById("myArticleForm").action='/admin/question/flowmsg_delete';
-			document.getElementById("del_msg_id").value=v;
-			document.getElementById("myArticleForm").submit();
-			$.ajax({
-				dataType: "json"
-				, beforeSubmit: function(formData, jqForm, options) {}
-				, success: function(ret) {
-					if (ret.state == "ok") {
-						location.href = "/admin/question/edit?id=#(question.id)";
-					} else {
-						showFailMsg(ret.msg);
-					}
-				}
-				, error: function(ret) {alert(ret.statusText);}
-				, complete: function(ret) {} 	      // 无论是 success 还是 error，最终都会被回调
-			});
-		}
+		// function flowmsg_del(v){
+		// 	document.getElementById("myArticleForm").action='/admin/question/flowmsg_delete';
+		// 	document.getElementById("del_msg_id").value=v;
+		// 	document.getElementById("myArticleForm").submit();
+		// 	$.ajax({
+		// 		dataType: "json"
+		// 		, beforeSubmit: function(formData, jqForm, options) {}
+		// 		, success: function(ret) {
+		// 			if (ret.state == "ok") {
+		// 				location.href = "/admin/question/edit?id=#(question.id)";
+		// 			} else {
+		// 				showFailMsg(ret.msg);
+		// 			}
+		// 		}
+		// 		, error: function(ret) {alert(ret.statusText);}
+		// 		, complete: function(ret) {} 	      // 无论是 success 还是 error，最终都会被回调
+		// 	});
+		// }
 	</script>
 
 #end

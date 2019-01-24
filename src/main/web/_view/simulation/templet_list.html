@@ -33,7 +33,7 @@ search = function(){
 
                 <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
                     <div class="widget_heigh am-cf">
-                        <div class="port_title">消息触发</div>
+                        <div class="port_title">流程管理</div>
 
                         <div class="tabl_wrapper ">
 
@@ -49,8 +49,8 @@ search = function(){
                                 <table class="table table-bordered table-hover margin-bottom-10">
                                     <thead>
                                     <tr>
-                                        <th>模板号</th>
-                                        <th>模板名称</th>
+                                        <th>流程号</th>
+                                        <th>流程名称</th>
                                         <th>描述</th>
                                         <th>编辑</th>
                                     </tr>
@@ -66,7 +66,8 @@ search = function(){
                                                 <a href1="/admin/templet/templet_run?templetId=#(templet.id )" href="#" onclick="javascript:sendMsg(#(templet.id ))" class="editor">
                                                     <i class="am-icon-pencil"></i> 触发
                                                 </a>
-                                               #role('考官')
+                                               ###role('考官')
+                                                #permission("/admin/templet/templet_edit")
                                                 <a href="/admin/templet/templet_edit?templetId=#(templet.id )" class="editor">
                                                     <i class="am-icon-pencil"></i> 编辑
                                                 </a>
@@ -82,7 +83,9 @@ search = function(){
                                     <!-- more data -->
                                     </tbody>
                                 </table>
+                                #permission("/admin/templet/templet_edit")
                                  <a class="btn btn-info" href="/admin/templet/templet_add">新建模板</a>
+                                #end
                     #@adminPaginate(templetPage.pageNumber, templetPage.totalPage, "/admin/templet/templet_list?p=")
                                 </div>
                                

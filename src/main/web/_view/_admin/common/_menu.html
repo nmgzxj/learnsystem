@@ -15,7 +15,8 @@
     <li><a href="/admin/basemsg">基础消息</a></li>
 #end
 #permission("/admin/baseflow")
-    <li><a href="/admin/baseflow">流程管理 </a></li>
+    <li><a href="/admin/templet/templet_list">流程管理 </a></li>
+    <!--/admin/baseflow-->
 #end
 #permission("/admin/question")
     <li><a href="/admin/question">考题管理</a></li>
@@ -48,7 +49,7 @@
     模拟上机
     <i class="right-icon fa fa-angle-up fa-lg"></i>
 </a>
-<ul class="jfa-sub-menu" style="" display:none;>
+<ul class="jfa-sub-menu" style="">
 #permission("/admin/unit/simulationunit")
     <li><a href="/admin/unit/simulationunit">网元配置</a></li>
 #end

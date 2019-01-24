@@ -21,6 +21,14 @@ public abstract class BaseQuestionFlow<M extends BaseQuestionFlow<M>> extends Mo
 		set("question_id", questionId);
 	}
 	
+	public java.lang.String getUnitId() {
+		return getStr("unit_id");
+	}
+
+	public void setUnitId(java.lang.String unitId) {
+		set("unit_id", unitId);
+	}
+
 	public java.lang.Integer getQuestionId() {
 		return getInt("question_id");
 	}
