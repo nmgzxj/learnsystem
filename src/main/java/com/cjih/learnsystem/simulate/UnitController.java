@@ -45,18 +45,26 @@ public class UnitController extends BaseController {
 		renderText(""+Db.queryStr("select unit_type from tunit where id = '"+getPara("unitId")+"' "));
 	}
 
-	public void simulationmsg() {
+	public void simulation2() {
 		String unit = getPara("unit");
 		String msgType = getPara("msgType");
 		String x2sql = "select * from tx2msg where 1=1 ";
 		x2sql = getSearchSql(x2sql);
 		setAttr("x2MsgList", X2msg.dao.find(x2sql));
 
+		setAttr("unitList", Unit.dao.find("select * from tunit where unit_status = '1'"));
+		render("simulation2.html");
+	}
+
+	public void simulation3() {
+		String unit = getPara("unit");
+		String msgType = getPara("msgType");
+
 		String x3sql = "select * from tx3msg where 1=1 ";
 		x3sql = getSearchSql(x3sql);
 		setAttr("x3MsgList", X3msg.dao.find(x3sql));
 		setAttr("unitList", Unit.dao.find("select * from tunit where unit_status = '1'"));
-		render("simulationmsg.html");
+		render("simulation3.html");
 	}
 
 	public void simulation1() {
@@ -78,8 +86,7 @@ public class UnitController extends BaseController {
 				sqlExceptSelect += " and unit = '" + unit + "'";
 			}
 			if (msgType != null && !msgType.equals("")) {
-				sqlExceptSelect += " and msg_type = (select resource_name from tresource_info where resource_id = '"
-						+ msgType + "')";
+				sqlExceptSelect += " and msg_type like '%" + msgType + "%' ";
 			}
 		}
 		sqlExceptSelect += " order by id";
@@ -161,6 +168,7 @@ public class UnitController extends BaseController {
         msg.setTp(getPara("tp"));
         msg.setAppBizType(getPara("appBizType"));
         msg.setLnsAdd(getPara("lnsAdd"));
+		msg.setSn2(MsgTempletController.x1sn2++);
     }
 
 	/*
@@ -291,16 +299,25 @@ public class UnitController extends BaseController {
 			msg.setOperationResult("[资源不足]");
 		} else {
 			Number num = new Number();
+			num.setMsisdn("1111111");
+			num.setImei("11111111");
+			num.setImsi("11111111");
+			num.setIp("111.111.111.111");
+			num.setIpPort("1111");
+			num.setIpTime("1111");
+			num.setIpPort("111.111.111.111:1111");
+			num.setIpAddressField("111.111.111.111");
+			num.setNai("1111");
+			num.setPhoneNumber("1111111");
+			num.setSip("111@111.com");
+			num.setTel("111111");
 			num.setNumberFormat(getPara("numberFormat"));
 			if ("msisdn".equals(num.getNumberFormat())) {
 				num.setMsisdn(getPara("number"));
-				num.setImei("11111111");
-				num.setImsi("11111111");
                 memo = getHssMemo(u, msg, memo);
-            } else if ("imei".equals(num.getNumberFormat())) {
+            }
+			else if ("imei".equals(num.getNumberFormat())) {
 				num.setImei(getPara("number"));
-				num.setMsisdn("11111111");
-				num.setImsi("11111111");
 				/*
 				 * IMEI号低于15的，报参数错误。
 				 */
@@ -309,13 +326,45 @@ public class UnitController extends BaseController {
 				} else {
                     memo = getHssMemo(u, msg, memo);
                 }
-			} else if ("imsi".equals(num.getNumberFormat())) {
+			}
+			else if ("imsi".equals(num.getNumberFormat())) {
 				num.setImsi(getPara("number"));
-				num.setMsisdn("11111111");
-				num.setImei("11111111");
+				memo += "操作结果(M).......[成功]<00>\\n" + "命令失败原因(C)...[Invalid]\\n";
+			}
+			else if ("IP".equals(num.getNumberFormat())) {
+				num.setIp(getPara("number"));
+				memo += "操作结果(M).......[成功]<00>\\n" + "命令失败原因(C)...[Invalid]\\n";
+			}
+			else if ("IP_time".equals(num.getNumberFormat())) {
+				num.setIpTime(getPara("number"));
+				memo += "操作结果(M).......[成功]<00>\\n" + "命令失败原因(C)...[Invalid]\\n";
+			}
+			else if ("IP_PORT".equals(num.getNumberFormat())) {
+				num.setIpPort(getPara("number"));
+				memo += "操作结果(M).......[成功]<00>\\n" + "命令失败原因(C)...[Invalid]\\n";
+			}
+			else if ("Ip_address_field".equals(num.getNumberFormat())) {
+				num.setIpAddressField(getPara("number"));
+				memo += "操作结果(M).......[成功]<00>\\n" + "命令失败原因(C)...[Invalid]\\n";
+			}
+			else if ("NAI".equals(num.getNumberFormat())) {
+				num.setNai(getPara("number"));
+				memo += "操作结果(M).......[成功]<00>\\n" + "命令失败原因(C)...[Invalid]\\n";
+			}
+			else if ("Phone_number".equals(num.getNumberFormat())) {
+				num.setPhoneNumber(getPara("number"));
+				memo += "操作结果(M).......[成功]<00>\\n" + "命令失败原因(C)...[Invalid]\\n";
+			}
+			else if ("SIP".equals(num.getNumberFormat())) {
+				num.setSip(getPara("number"));
+				memo += "操作结果(M).......[成功]<00>\\n" + "命令失败原因(C)...[Invalid]\\n";
+			}
+			else if ("TEL".equals(num.getNumberFormat())) {
+				num.setTel(getPara("number"));
 				memo += "操作结果(M).......[成功]<00>\\n" + "命令失败原因(C)...[Invalid]\\n";
 			}
 
+	//		IP、IP_time、IP-PORT、Ip_address_field、NAI、Phone_number、SIP、TEL
 			num.setCreator(""+getLoginAccountId());
 			num.setCreateTime(new Date());
 			num.setUnit(unit);
@@ -458,8 +507,9 @@ public class UnitController extends BaseController {
 		X1msg msg = new X1msg();
 		setMsg(msg);
 		msg.setMsgType("MB信息查询请求");
-		msg.setMemo("协议版本号........[1]<01>\\n" + "消息类型..........[YHXX查询请求]\\n" + "MB类型(M).......["
-				+ getPara("numberFormat") + "]<" + BCD.getTargetType(getPara("numberFormat")) + ">\\n"
+		msg.setMemo("协议版本号........[1]<01>\\n"
+				+ "消息类型..........[YHXX查询请求]\\n"
+				+ "MB类型(M).......[" + getPara("numberFormat") + "]<" + BCD.getTargetType(getPara("numberFormat")) + ">\\n"
 				+ "MB标识(M).......[" + getPara("number") + "]<" + BCD.str2rBcdstr(getPara("number")) + ">\\n");
 		msg.setMemo(Encrypt.encode(msg.getMemo()));
 		msg.save();
@@ -497,8 +547,9 @@ public class UnitController extends BaseController {
 					+ "  taiList[C]........[个数9 类型0 1046 0 4524 5548]<08 01 64 f0 11 ac 15 ac fb>\\n"
 					+ "  ecgi[C].........[460 11 181265970]<64 f0 11 0a cd e6 32 >\\n");
 		} else if ("HSS".equals(getPara("unitType"))) {
-			msg.setMemo("协议版本号........[1]<01>\\n" + "消息类型..........[YHXX查询响应]\\n" + "MB类型(M).......["
-					+ getPara("numberFormat") + "]<" + BCD.getTargetType(getPara("numberFormat")) + ">\\n"
+			msg.setMemo("协议版本号........[1]<01>\\n"
+					+ "消息类型..........[YHXX查询响应]\\n"
+					+ "MB类型(M).......[" + getPara("numberFormat") + "]<" + BCD.getTargetType(getPara("numberFormat")) + ">\\n"
 					+ "MB标识(M).......[" + getPara("number") + "]<" + BCD.str2rBcdstr(getPara("number")) + ">\\n"
 					+ "操作结果(M).......[成功]<00>\\n" + "命令失败原因(C)...[Invalid]\\n"
 					+ "MSISDN(C).........[8613900000215]<68 31 09 00 00 12 f5>\\n"
@@ -575,24 +626,24 @@ public class UnitController extends BaseController {
         X1msg msg = new X1msg();
         setMsg(msg);
         msg.setMsgType("BK目标参数查询请求");
-        msg.setMemo("[ 12:02:20 ] [ 消息内容 (IMS_PLX_X1 ==> NE) ][ NEID = CCAS11 ]:\n" +
-                "协议版本号........[2]<02>\n" +
-                "消息类型..........[被控目标参数查询请求]\n" +
-                "目标标识(M).......[sip:+8618787484294@bjcmnas1aeb.cmn.chinamobile.com]<73 69 70 3a 2b 38 36 31 38 37 38 37 34 38 34 32 39 34 40 62 6a 63 6d 6e 61 73 31 61 65 62 2e 63 6d 6e 2e 63 68 69 6e 61 6d 6f 62 69 6c 65 2e 63 6f 6d>\n" +
-                "\n");
+        msg.setMemo("[ 12:02:20 ] [ 消息内容 (IMS_PLX_X1 ==> NE) ][ NEID = CCAS11 ]:\\n" +
+                "协议版本号........[2]<02>\\n" +
+                "消息类型..........[被控目标参数查询请求]\\n" +
+                "目标标识(M).......[sip:+8618787484294@bjcmnas1aeb.cmn.chinamobile.com]<73 69 70 3a 2b 38 36 31 38 37 38 37 34 38 34 32 39 34 40 62 6a 63 6d 6e 61 73 31 61 65 62 2e 63 6d 6e 2e 63 68 69 6e 61 6d 6f 62 69 6c 65 2e 63 6f 6d>\\n" +
+                "\\n");
         msg.setMemo(Encrypt.encode(msg.getMemo()));
         msg.save();
         msg = new X1msg();
         setMsg(msg);
         msg.setMsgType("BK目标参数查询响应");
-        msg.setMemo("协议版本号........[2]<02>\n" +
-                "消息类型..........[BKMB参数查询响应]\n" +
-                "目标标识(M).......[sip:+8618787484294@bjcmnas1aeb.cmn.chinamobile.com]<73 69 70 3a 2b 38 36 31 38 37 38 37 34 38 34 32 39 34 40 62 6a 63 6d 6e 61 73 31 61 65 62 2e 63 6d 6e 2e 63 68 69 6e 61 6d 6f 62 69 6c 65 2e 63 6f 6d>\n" +
-                "操作结果(M).......[成功]<00>\n" +
-                "失败原因(C).......[Invalid]\n" +
-                "X2地址(C).........\n" +
-                "  Port:[8112]<1f b0>\n" +
-                "  IP:[10.189.185.25]<0a bd b9 19>\n");
+        msg.setMemo("协议版本号........[2]<02>\\n" +
+                "消息类型..........[BKMB参数查询响应]\\n" +
+                "目标标识(M).......[sip:+8618787484294@bjcmnas1aeb.cmn.chinamobile.com]<73 69 70 3a 2b 38 36 31 38 37 38 37 34 38 34 32 39 34 40 62 6a 63 6d 6e 61 73 31 61 65 62 2e 63 6d 6e 2e 63 68 69 6e 61 6d 6f 62 69 6c 65 2e 63 6f 6d>\\n" +
+                "操作结果(M).......[成功]<00>\\n" +
+                "失败原因(C).......[Invalid]\\n" +
+                "X2地址(C).........\\n" +
+                "  Port:[8112]<1f b0>\\n" +
+                "  IP:[10.189.185.25]<0a bd b9 19>\\n");
         msg.setMemo(Encrypt.encode(msg.getMemo()));
         msg.save();
     }
@@ -713,6 +764,70 @@ public class UnitController extends BaseController {
         msg.save();
     }
 
+	/**
+	 * YHXX信息查询
+	 */
+	private void a14() {
+		Unit u = setUnitStatus("1");
+		X1msg msg = new X1msg();
+		setMsg(msg);
+		msg.setMsgType("YHXX查询请求");
+		msg.setMemo("协议版本号........[1]<01>\\n"
+				+ "消息类型..........[YHXX查询请求]\\n"
+				+ "MB类型(M).......[" + getPara("numberFormat") + "]<" + BCD.getTargetType(getPara("numberFormat")) + ">\\n"
+				+ "MB标识(M).......[" + getPara("number") + "]<" + BCD.str2rBcdstr(getPara("number")) + ">\\n");
+		msg.setMemo(Encrypt.encode(msg.getMemo()));
+		msg.save();
+		msg = new X1msg();
+		setMsg(msg);
+		msg.setMsgType("YHXX查询响应");
+		if ("P-GW".equals(getPara("unitType")) || "S-GW".equals(getPara("unitType"))) {
+			msg.setMemo("协议版本号........[1]<01>\\n"
+					+ "消息类型..........[YHXX查询响应]\\n"
+					+ "MB类型(M).......["
+					+ getPara("numberFormat") + "]<" + BCD.getTargetType(getPara("numberFormat")) + ">	\\n"
+					+ "MB标识(M).......[" + getPara("number") + "]<" + BCD.str2rBcdstr(getPara("number")) + ">\\n"
+					+ "操作结果(M).......[成功]<00>\\n" + "命令失败原因(C)...[Invalid]\\n"
+					+ "MSISDN(C).........[8619911111140]<68 91 19 11 11 41 f0>\\n"
+					+ "IMSI(C)...........[460301111111140]<64 30 10 11 11 11 41 f0>\\n"
+					+ "IMEI(C)...........[865163023472080]<68 15 36 20 43 27 80 f0>\\n"
+					+ "用户状态(C).......[(ecm_Connected)]<00>\\n" + "位置更新时间(C)...[" + BCD.getCurrentTime() + "]<"
+					+ BCD.getTimerBcd(BCD.getCurrentTime()) + ">\\n" + "附着时间(C).......[Invalid]\\n" + "最新位置(C): \\n"
+					+ " gummeid[C]......[Invalid]\\n" + "  lai[C]..........[Invalid]\\n"
+					+ "  lastVisitedTAI[C]........[MCC460 MNC30 TAC20007]<64 f0 03 4e 27 >\\n"
+					+ "  taiList[C]......[Invalid]\\n"
+					+ "  ecgi[C].........[460 30 4294902530]<64 f0 03 ff ff 03 02 >\\n");
+		} else if ("MME".equals(getPara("unitType"))) {
+			msg.setMemo("协议版本号........[1]<01>\\n" + "消息类型..........[YHXX查询响应]\\n" + "MB类型(M).......["
+					+ getPara("numberFormat") + "]<" + BCD.getTargetType(getPara("numberFormat")) + ">\\n"
+					+ "MB标识(M).......[" + getPara("number") + "]<" + BCD.str2rBcdstr(getPara("number")) + ">\\n"
+					+ "操作结果(M).......[成功]<00>\\n" + "命令失败原因(C)...[Invalid]\\n"
+					+ "MSISDN(C).........[8615331548297]<68 51 33 51 84 92 f7>\\n"
+					+ "IMSI(C)...........[460110560968538]<64 10 01 65 90 86 35 f8>\\n"
+					+ "IMEI(C)...........[862969020031400]<68 92 96 20 00 13 04 f0>\\n"
+					+ "用户状态(C).......[ (ecm_Idle)]<01>\\n" + "位置更新时间(C)...[Invalid]\\n" + "附着时间(C).......["
+					+ BCD.getCurrentTime() + "]<" + BCD.getTimerBcd(BCD.getCurrentTime()) + ">\\n" + "最新位置(C): \\n"
+					+ "  gummeid(C)......[460 11 21248 2]<64 f0 11 53 00 02>\\n" + "  lai[C]..........[Invalid]\\n"
+					+ "  lastVisitedTAI[C]........[MCC460 MNC11 TAC44053]<64 f0 11 ac 15 >\\n"
+					+ "  taiList[C]........[个数9 类型0 1046 0 4524 5548]<08 01 64 f0 11 ac 15 ac fb>\\n"
+					+ "  ecgi[C].........[460 11 181265970]<64 f0 11 0a cd e6 32 >\\n");
+		} else if ("HSS".equals(getPara("unitType"))) {
+			msg.setMemo("协议版本号........[1]<01>\\n"
+					+ "消息类型..........[YHXX查询响应]\\n"
+					+ "MB类型(M).......[" + getPara("numberFormat") + "]<" + BCD.getTargetType(getPara("numberFormat")) + ">\\n"
+					+ "MB标识(M).......[" + getPara("number") + "]<" + BCD.str2rBcdstr(getPara("number")) + ">\\n"
+					+ "操作结果(M).......[成功]<00>\\n" + "命令失败原因(C)...[Invalid]\\n"
+					+ "MSISDN(C).........[8613900000215]<68 31 09 00 00 12 f5>\\n"
+					+ "IMSI(C)...........[454060000000215]<54 04 06 00 00 00 12 f5>\\n"
+					+ "IMEI(C)...........[354427068745260]<53 44 72 60 78 54 62 f0>\\n" + "用户状态(C).......[Invalid]\\n"
+					+ "位置更新时间(C)...[Invalid]\\n" + "附着时间(C).......[Invalid]\\n" + "最新位置(C): \\n"
+					+ "  gummeid(C)......[3776 37 28269 109]<73 67 73 6e 6d 6d>\\n" + "  lai[C]..........[Invalid]\\n"
+					+ "  lastVisitedTAI[C].........[Invalid]\\n" + "  taiList[C]......[Invalid]\\n"
+					+ "  ecgi[C]........[Invalid]\\n");
+		}
+		msg.setMemo(Encrypt.encode(msg.getMemo()));
+		msg.save();
+	}
 
 	/**
 	 * 新增网元
@@ -872,5 +987,20 @@ public class UnitController extends BaseController {
 
 	public void unitmsg_list() {
 		renderJsp("/simulation/unitmsg_list.jsp");
+	}
+
+	public void x1_delete() {
+		Db.update("delete from tx1msg");
+		simulation1();
+	}
+
+	public void x2_delete() {
+		Db.update("delete from tx2msg");
+		simulation2();
+	}
+
+	public void x3_delete() {
+		Db.update("delete from tx3msg");
+		simulation3();
 	}
 }

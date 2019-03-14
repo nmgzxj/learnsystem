@@ -14,6 +14,7 @@
 
 package com.jfinal.club._admin.common;
 
+import com.cjih.learnsystem.simulate.UserdbController;
 import com.jfinal.club._admin.auth.AdminAuthInterceptor;
 import com.jfinal.club._admin.permission.PermissionAdminController;
 import com.jfinal.club._admin.role.RoleAdminController;
@@ -31,6 +32,7 @@ import com.cjih.learnsystem.savedAnswer.SavedAnswerController;
 import com.cjih.learnsystem.simulate.MsgTempletController;
 import com.cjih.learnsystem.simulate.UnitController;
 import com.jfinal.club._admin.account.AccountAdminController;
+import com.jfinal.club.common.model.NumberUser;
 import com.jfinal.config.Routes;
 
 /**
@@ -62,6 +64,7 @@ public class AdminRoutes extends Routes {
 		
 		//考试系统
 		add("/admin/unit",UnitController.class,"/simulation");
+		add("/admin/userdb", UserdbController.class, "/simulation");
 		add("/admin/exam",ExamController.class,"/exam");
 		add("/admin/question",QuestionController.class,"/question");
 		add("/admin/answer",AnswerController.class,"/answer");

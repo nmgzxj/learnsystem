@@ -145,8 +145,8 @@ public class LearnSystemConfig extends JFinalConfig {
 		me.addDirective("permission", PermissionDirective.class);
 		me.addDirective("perm", PermissionDirective.class);		// 配置一个别名指令
 
-	    	me.addSharedFunction("/_view/common/__layout.html");
-	    	me.addSharedFunction("/_view/common/_paginate.html");
+		me.addSharedFunction("/_view/common/__layout.html");
+		me.addSharedFunction("/_view/common/_paginate.html");
 
 	    me.addSharedFunction("/_view/_admin/common/__admin_layout.html");
 		me.addSharedFunction("/_view/_admin/common/_admin_paginate.html");
@@ -220,6 +220,7 @@ public class LearnSystemConfig extends JFinalConfig {
 		arp.addMapping("tx1msg", "id", X1msg.class);
 		arp.addMapping("tx2msg", "id", X2msg.class);
 		arp.addMapping("tx3msg", "id", X3msg.class);
+
 	    _MappingKit.mapping(arp);
 	    // 强制指定复合主键的次序，避免不同的开发环境生成在 _MappingKit 中的复合主键次序不相同
 	    arp.setPrimaryKey("document", "mainMenu,subMenu");

@@ -1,0 +1,230 @@
+#set(seoTitle="用户信息")
+#@adminLayout()
+#define main()
+<link rel="stylesheet" href="/assets/css/index.css">
+<script type="text/javascript">
+sendMsg = function(){
+	var form = document.getElementById("form1");
+	form.action = '/admin/userdb/save';
+	form.submit();
+}
+
+search = function(){
+	var form = document.getElementById("form1");
+	form.action = "/admin/userdb";
+	form.handle.value = "search";
+	form.submit();
+}
+
+</script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        label{
+            margin: 0;
+            padding: 0;
+        }
+
+        li{
+           list-style: none;
+        }
+
+        .fr{
+           float: right;
+        }
+
+        .fl{
+            float: left;
+        }
+    </style>
+
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+
+
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                    <div class="widget_heigh am-cf">
+                        <div class="port_title">用户信息</div>
+
+                        <div class="tabl_wrapper">
+                         <div class="select_wrapper am-fl"  style="float: left">
+                            <form action="/admin/userdb/save" id="form1" method="post">
+                                <input type="hidden" name="userdb.id" id="id" value="#(unit.id??)">
+                                <div><h5 style="text-align: center">用户库</h5></div>
+                                <div class="form-group">
+                                    <span class="label label-default">用户名</span>
+                                    <input name="userdb.userName" id="userName" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <span  class="label label-default">MSISDN</span>
+                                    <input name="userdb.msisdn" id="msisdn" type="text" class="form-control" value="">
+                                </div>
+
+                                <div class="form-group">
+                                    <span  class="label label-default">IMSI</span>
+                                    <input name="userdb.imsi" id="imsi" type="text"  class="form-control" value="">
+                                </div>
+
+                                <div class="form-group">
+                                    <span  class="label label-default">IMEI</span>
+                                    <input name="userdb.imei" id="imei" type="text" value="" class="form-control" >
+                                </div>
+
+                                <div class="form-group">
+                                    <span  class="label label-default">IP</span>
+                                    <input name="userdb.ip" id="ip" type="text" value="" class="form-control" >
+                                </div>
+
+                                <!--52106lte123-->
+
+
+
+                                <div class="form-group">
+                                    <span  class="label label-default">IP_TIME</span>
+                                    <input name="userdb.ipTime" id="ipTime" type="text" value="" class="form-control" >
+                                </div>
+
+                                <div class="form-group">
+                                    <span  class="label label-default">IP_PORT</span>
+                                    <input name="userdb.ipPort" id="ipPort" type="text" value="" class="form-control" >
+                                </div>
+
+                                <div class="form-group">
+                                    <span  class="label label-default">IP_ADDRESS_FIELD</span>
+                                    <input class="form-control"  name="userdb.ipAddressField" id="ipAddressField" type="text" value="">
+                                </div>
+
+                                <div class="form-group">
+                                    <span  class="label label-default">NAI</span>
+                                    <input name="userdb.nai" id="nai" type="text" value="" class="form-control" >
+                                </div>
+
+                                <div class="form-group">
+                                    <span  class="label label-default">phone number</span>
+                                    <input name="userdb.phoneNumber" id="phoneNumber" type="text" value="" class="form-control" >
+                                </div>
+
+                                <div class="form-group">
+                                    <span  class="label label-default">SIP</span>
+                                    <input name="userdb.sip" id="sip" type="text" value="" class="form-control" >
+                                </div>
+
+                                <div class="form-group">
+                                    <span  class="label label-default">TEL</span>
+                                    <input name="userdb.tel" id="tel" type="text" value="" class="form-control" >
+                                </div>
+
+                                <div class="form-group">
+                                    <ul class="add_btn_wrapper">
+                                        <li class="btn_select_thre fl"><input class="btn btn-info btn-sm" type="submit" name="submit_btn"></li>
+                                        <li class="btn_select_thre fl"><input class="btn btn-info btn-sm" type="reset" name="reset_btn"></li>
+                                    </ul>
+                                </div>
+
+                            </form>
+                            </div>
+                            <div class="table_box">
+                                <table class="table table-bordered table-hover margin-bottom-10">
+                                    <thead>
+                                    <tr>
+                                        <th>用户名</th>
+                                        <th>msisdn</th>
+                                        <th>imsi</th>
+                                        <th>imei</th>
+                                        <th>ip</th>
+                                        <th>ip_time</th>
+                                        <th>ip_port</th>
+                                        <th>ip_address_field</th>
+                                        <th>nai</th>
+                                        <th>phone_number</th>
+                                        <th>sip</th>
+                                        <th>tel</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    #for(u:userdbList)
+                                        <tr class="gradeX" >
+                                            <td>#(u.userName)</td>
+                                            <td>#(u.msisdn)</td>
+                                            <td>#(u.imsi)</td>
+                                            <td>#(u.imei)</td>
+                                            <td>#(u.ip)</td>
+                                            <td>#(u.ip_time)</td>
+                                            <td>#(u.ip_port)</td>
+                                            <td>#(u.ip_address_field)</td>
+                                            <td>#(u.nai)</td>
+                                            <td>#(u.phone_number)</td>
+                                            <td>#(u.sip)</td>
+                                            <td>#(u.tel)</td>
+                                             <td>
+                                            <a href="javascript:;" onclick="javascript:unit_change('#(u.id)','#(u.userName)','#(u.msisdn)','#(u.imsi)','#(u.imei)','#(u.ip)','#(u.ip_time)',
+                                                '#(u.ip_port)','#(u.ipAddressField)','#(u.nai)','#(u.phoneNumber)','#(u.sip)','#(u.tel)')" class="tpl-table-black-operation-del">
+                                                                <i class="am-icon-pencil"></i> 修改
+                                                            </a>
+                                                            <a href="javascript:;" onclick="func_del('#(u.id)')" class="tpl-table-black-operation-del">
+                                                                <i class="am-icon-trash"></i> 删除
+                                                            </a>
+                                            </td>
+                                        </tr>
+                                    #end
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+<script>
+
+    function func_del(id){
+    		if(confirm("确定要删除该用户信息吗？")){
+    			window.open("/admin/userdb/delete?id="+id, '_self');
+    		}
+    }
+   
+    function unit_change(id,userName,msisdn,imsi,imei,ip,ipTime,ipPort,ipAddressField,nai,phoneNumber,sip,tel){
+	    $("#id")[0].value = id;
+	    $("#userName")[0].value = userName;
+	    $("#msisdn")[0].value = msisdn;
+	    $("#imsi")[0].value = imsi;
+	    $("#imei")[0].value = imei;
+	    $("#ip")[0].value = ip;
+	    $("#ipTime")[0].value = ipTime;
+	    $("#ipPort")[0].value = ipPort;
+	    $("#ipAddressField")[0].value = ipAddressField;
+	    $("#nai")[0].value = nai;
+	    $("#phoneNumber")[0].value = phoneNumber;
+	    $("#sip")[0].value = sip;
+	    $("#tel")[0].value = tel;
+	    $("#form1")[0].action = '/admin/userdb/update';
+	}
+
+
+</script>
+</body>
+
+</html>
+#end

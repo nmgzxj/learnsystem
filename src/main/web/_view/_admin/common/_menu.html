@@ -53,6 +53,9 @@
 #permission("/admin/unit/simulationunit")
     <li><a href="/admin/unit/simulationunit">网元配置</a></li>
 #end
+    #permission("/admin/unit/simulationunit")
+    <li><a href="/admin/userdb">用户库</a></li>
+    #end
 #permission("/admin/unit/unitinfo")
     <li><a href="/admin/unit/unitinfo">LIC配置</a></li>
 #end
@@ -62,9 +65,12 @@
 #permission("/admin/templet/templet_list")
     <li><a href="/admin/templet/templet_list">消息触发</a></li>
 #end
-#permission("/admin/unit/simulationmsg")
-    <li><a href="/admin/unit/simulationmsg">X2/X3运行界面</a></li>
+#permission("/admin/unit/simulation2")
+    <li><a href="/admin/unit/simulation2">X2运行界面</a></li>
 #end
+    #permission("/admin/unit/simulation3")
+    <li><a href="/admin/unit/simulation3">X3运行界面</a></li>
+    #end
 </ul>
 #end
 

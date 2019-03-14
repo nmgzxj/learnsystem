@@ -17,12 +17,13 @@ public class MsgTempletSub extends BaseMsgTempletSub<MsgTempletSub> {
 	}
 	
 	public String getUnitView(){
-		return Db.queryStr("select unit_desc from tunit where id = '"+get("unit_id")+"'");//.dao.getfind("select * from trole where id in (select role_id from tuser_trole where user_id = '"+get("id")+"')");
+		return ResourceInfoController.getResourceName("PUB001", (String)get("unit_id"));//Db.queryStr("select unit_desc from tunit where id = '"+get("unit_id")+"'");//.dao.getfind("select * from trole where id in (select role_id from tuser_trole where user_id = '"+get("id")+"')");
 	
 	}
 	
 	public String getMsgTypeView(){
-		return ResourceInfoController.getResourceName("PUB007", (String)get("msg_type"));//.dao.getfind("select * from trole where id in (select role_id from tuser_trole where user_id = '"+get("id")+"')");
+		return Db.queryStr("select title from tbase_msg where id ='"+get("msg_type")+"'");
+		//return ResourceInfoController.getResourceName("PUB007", (String)get("msg_type"));//.dao.getfind("select * from trole where id in (select role_id from tuser_trole where user_id = '"+get("id")+"')");
 	
 	}
 }

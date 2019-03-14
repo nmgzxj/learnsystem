@@ -145,4 +145,20 @@ public abstract class BaseX2msg<M extends BaseX2msg<M>> extends Model<M> impleme
 		return getStr("memo");
 	}
 
+	public void setSn1(java.lang.Integer sn1) {
+		set("sn1", sn1);
+	}
+	
+	public java.lang.Integer getSn1() {
+		return getInt("sn1");
+	}
+
+	public void setSn2(java.lang.Integer sn2) {
+		set("sn2", sn2);
+	}
+	
+	public java.lang.Integer getSn2() {
+		return getInt("sn2");
+	}
+
 }

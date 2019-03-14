@@ -42,7 +42,7 @@ public class _Generator {
             "project_like", "share_like", "feedback_like",
             "share_reply_like", "feedback_reply_like",
             "like_message_log",
-            "account_role", "role_permission","role"
+            "account_role", "role_permission","role","trole"
 	};
 
 	/**

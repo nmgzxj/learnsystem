@@ -63,9 +63,11 @@ search = function(){
                                         <td>#(templet.description )</td>
                                         <td>
                                             <div class="tpl-table-black-operation">
+                                                #permission("/admin/templet/templet_run")
                                                 <a href1="/admin/templet/templet_run?templetId=#(templet.id )" href="#" onclick="javascript:sendMsg(#(templet.id ))" class="editor">
                                                     <i class="am-icon-pencil"></i> 触发
                                                 </a>
+                                                #end
                                                ###role('考官')
                                                 #permission("/admin/templet/templet_edit")
                                                 <a href="/admin/templet/templet_edit?templetId=#(templet.id )" class="editor">
@@ -103,9 +105,9 @@ search = function(){
 
 
 
-<script src="/assets/js/amazeui.min.js"></script>
-<script src="/assets/js/amazeui.datatables.min.js"></script>
-<script src="/assets/js/dataTables.responsive.min.js"></script>
+<script src="/assets/js/delete/amazeui.min.js"></script>
+<script src="/assets/js/delete/amazeui.datatables.min.js"></script>
+<script src="/assets/js/delete/dataTables.responsive.min.js"></script>
 <script src="/assets/js/app.js"></script>
 <!--<script src="./assets/js/bootstrap.js"></script>-->
 <script src="/assets/js/Questions.js"></script>

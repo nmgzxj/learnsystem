@@ -1,0 +1,187 @@
+#set(seoTitle="X2/3接口测试")
+#@adminLayout()
+#define main()
+<link rel="stylesheet" href="/assets/css/index.css">
+<script type="text/javascript">
+sendMsg = function(){
+	var form = document.getElementById("form1");
+	form.action = '/admin/unit/x1MsgAdd';
+	form.submit();
+}
+
+search = function(){
+	var form = document.getElementById("form1");
+	form.action = "/admin/unit/simulation1";
+	form.handle.value = "search";
+	form.submit();
+}
+
+</script>
+
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                    <div class="widget_heigh am-cf">
+                        <div class="port_title">X2/3接口测试</div>
+
+                        <div class="tabl_wrapper ">
+                            <div class="select_wrapper am-fl"  style="float: left">
+
+						<form action="/admin/unit/simulation3" method="post" name="form1" id="form1" style="float: left">
+						<input type="hidden" name="handle" value="">
+                                <div class="form-group">
+                                    <span>请选择网元:</span>
+                                    
+                                        <select name="unit" class="form-control">
+                                        	<option value=""></option>
+                                        	#for(u:unitList)
+                                            	<option value="#(u.id)">#(u.unitDesc)</option>
+                                        #end
+                                        		<option value="">ALL</option>
+                                        </select>
+                                    
+                                </div>
+
+                                <div class="form-group">
+                                    <span>消息类型:</span>
+                                    <div>
+                                        <input name="operType" list="msgTypeList" class="form-control">
+                                        <datalist id="msgTypeList">
+                                            <option value="连接建立请求"></option>
+                                            <option value="连接建立响应"></option>
+                                        </datalist>
+                                    </div>
+                                </div>
+
+
+                                <div>
+                                            <button class="btn btn-info btn-sm" onclick="search()">消息筛选</button>
+                                    <input class="btn btn-danger btn-sm" type="button" value="清空X3数据" onclick="javascript:data_delete();"></li>
+                                       <!--  <li class="btn_select am-fl">
+                                            <button onclick="search()">X3消息筛选</button>
+                                        </li> -->
+                                </div>
+                                </form>
+                                <br>
+
+                            </div>
+            
+                            <div class="table_box">
+<div  id="table_one">
+                                <table class="table table-bordered table-hover margin-bottom-10" >
+                                    <thead>
+                                    <tr>
+                                        <th>网元</th>
+                                        <th>LIC X3地址</th>
+                                        <th>消息类型</th>
+                                        <th>目标标识</th>
+                                        <th>目标类型</th>
+                                        <th>关联标识1</th>
+                                        <th>关联标识2</th>
+                                        <th>消息序列号</th>
+                                        <th>对端地址</th>
+                                        <th>操作结果</th>
+                                        <th>文件名称</th>
+                                        <th>事件时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    #for(x3:x3MsgList)
+                                        <tr>
+                                            <td>#(x3.unitIdView)</td>
+                                            <td>#(x3.licX3Addr)</td>
+                                            <td>#(x3.msgType)</td>
+                                            <td>#(x3.perposeId)</td>
+                                            <td>#(x3.perposeType)</td>
+                                            <td>#(x3.relation1)</td>
+                                            <td>#(x3.relation2)</td>
+                                            <td>#(x3.msgSn)</td>
+                                            <td>#(x3.oppositeAddr)</td>
+                                            <td>#(x3.operationResult)</td>
+                                            <td>#(x3.fileName)</td>
+                                            <td>#(x3.eventTime)</td>
+                                            <!-- 弹出显示 -->
+                            <div class="modal fade" id="myModal#(x3.id)" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>#((com.cjih.learnsystem.common.util.Encrypt::decode(x3.memo)).replaceAll("\n","<br>"))
+                                                        <br>
+                                                    </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <!-- 弹出显示 -->
+                                            <td><a href="#" data-toggle="modal" data-target="#myModal#(x3.id)">查看</a></td>
+                                        </tr>
+                                    #end
+                                    </tbody>
+                                </table>
+                     </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+<script>
+sendMsg = function(addMsg){
+	var form = document.getElementById('form1');
+	if(form.unit.value==''){
+		alert('请选择网元。')
+		return false;
+	}
+	form.action='/unit/'+addMsg;
+	form.submit();
+}
+
+
+search = function(){
+	var form = document.getElementById("form1");
+//	form.action = "/unit/simulation1";
+	form.handle.value = "search";
+	form.submit();
+}
+
+</script>
+<script type="text/javascript"  >
+function data_delete(){
+	if(confirm('确定要删除这些数据吗？'))
+        window.open("/admin/unit/x3_delete","_self");
+
+}
+
+</script>  
+</body>
+
+</html>
+#end

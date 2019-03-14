@@ -81,4 +81,68 @@ public abstract class BaseNumber<M extends BaseNumber<M>> extends Model<M> imple
 		return getStr("lic_id");
 	}
 
+	public void setIp(java.lang.String ip) {
+		set("ip", ip);
+	}
+	
+	public java.lang.String getIp() {
+		return getStr("ip");
+	}
+
+	public void setIpTime(java.lang.String ipTime) {
+		set("ip_time", ipTime);
+	}
+	
+	public java.lang.String getIpTime() {
+		return getStr("ip_time");
+	}
+
+	public void setIpPort(java.lang.String ipPort) {
+		set("ip_port", ipPort);
+	}
+	
+	public java.lang.String getIpPort() {
+		return getStr("ip_port");
+	}
+
+	public void setIpAddressField(java.lang.String ipAddressField) {
+		set("ip_address_field", ipAddressField);
+	}
+	
+	public java.lang.String getIpAddressField() {
+		return getStr("ip_address_field");
+	}
+
+	public void setNai(java.lang.String nai) {
+		set("nai", nai);
+	}
+	
+	public java.lang.String getNai() {
+		return getStr("nai");
+	}
+
+	public void setPhoneNumber(java.lang.String phoneNumber) {
+		set("phone_number", phoneNumber);
+	}
+	
+	public java.lang.String getPhoneNumber() {
+		return getStr("phone_number");
+	}
+
+	public void setSip(java.lang.String sip) {
+		set("sip", sip);
+	}
+	
+	public java.lang.String getSip() {
+		return getStr("sip");
+	}
+
+	public void setTel(java.lang.String tel) {
+		set("tel", tel);
+	}
+	
+	public java.lang.String getTel() {
+		return getStr("tel");
+	}
+
 }

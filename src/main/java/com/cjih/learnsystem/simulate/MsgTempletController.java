@@ -5,19 +5,17 @@ import java.util.List;
 
 import com.cjih.learnsystem.common.util.Encrypt;
 import com.jfinal.club.common.controller.BaseController;
-import com.jfinal.club.common.model.MsgTemplet;
-import com.jfinal.club.common.model.MsgTempletSub;
-import com.jfinal.club.common.model.ResourceInfo;
-import com.jfinal.club.common.model.Unit;
-import com.jfinal.club.common.model.X1msg;
-import com.jfinal.club.common.model.X2msg;
-import com.jfinal.club.common.model.X3msg;
+import com.jfinal.club.common.model.*;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 
 public class MsgTempletController extends BaseController {
+
+	public static int sn1 = 1;
+	public static int x1sn2 = 1;
+	public static int event1 = 1;
 
 	public void templet_list() {
 		Integer page = getParaToInt("p");
@@ -52,13 +50,15 @@ public class MsgTempletController extends BaseController {
 	}
 
 	public void templet_add(){
+
 		render("templet_add.html");
 	}
 
 	public void templet_sub_add(){
 		setAttr("templetId",getPara("templetId"));
-		setAttr("unitList", Unit.dao.find("select * from tunit where unit_status = '1'"));
-		setAttr("msgTypeList", ResourceInfo.dao.find("select * from tresource_info where type_id='PUB007'"));
+		setAttr("unitList", Unit.dao.find("select * from tresource_info where type_id='PUB001'"));
+		//"select * from tunit where unit_status = '1'")
+		setAttr("msgTypeList", BaseMsg.dao.find("select * from tbase_msg "));
 		render("templet_sub_edit.html");
 	}
 
@@ -68,8 +68,9 @@ public class MsgTempletController extends BaseController {
 		MsgTempletSub mts =  MsgTempletSub.dao.findById(subTempletId);
 		mts.setMsg(Encrypt.decode(mts.getMsg()));
 		setAttr("sub",mts);
-		setAttr("unitList", Unit.dao.find("select * from tunit where unit_status = '1'"));
-		setAttr("msgTypeList", ResourceInfo.dao.find("select * from tresource_info where type_id='PUB007'"));
+		setAttr("unitList", Unit.dao.find("select * from tresource_info where type_id='PUB001'"));
+		//"select * from tunit where unit_status = '1'")
+		setAttr("msgTypeList", BaseMsg.dao.find("select * from tbase_msg "));
 		render("templet_sub_edit.html");
 	}
 
@@ -192,6 +193,8 @@ public class MsgTempletController extends BaseController {
 
 	public void templet_run() {
 		List<MsgTempletSub> mtsList = MsgTempletSub.dao.find("select * from tmsg_templet_sub where templet_id = "+getParaToLong("templetId")+ " order by taxis");
+		int x2sn2=1,x3sn2=1;
+		sn1++;
 		for(MsgTempletSub mts:mtsList) {
 			if("x1".equals(mts.getPort())) {
 				X1msg msg = new X1msg();
@@ -203,6 +206,8 @@ public class MsgTempletController extends BaseController {
 				msg.setCreator(Integer.toString(getLoginAccountId()));
 				msg.setCreateTime(new Date());
 				msg.setMemo(mts.getMsg());
+				msg.setSn1(sn1);
+				msg.setSn2(x1sn2++);
 				msg.save();
 			}
 			else if("x2".equals(mts.getPort())){
@@ -214,13 +219,15 @@ public class MsgTempletController extends BaseController {
 				msg.setPerposeType(mts.getPerposeType());
 				msg.setRelation1(mts.getRelation1());
 				msg.setRelation2(mts.getRelation2());
-				msg.setEventSn(mts.getEventSn());
+				msg.setEventSn(""+event1++);//mts.getEventSn());
 				msg.setCallSn(mts.getCallSn());
 				msg.setCallSnChild(mts.getCallSnChild());
 				msg.setEventTime(mts.getEventTime());
 				msg.setCreator(Integer.toString(getLoginAccountId()));
 				msg.setCreateTime(new Date());
 				msg.setMemo(mts.getMsg());
+				msg.setSn1(sn1);
+				msg.setSn2(x2sn2++);
 				msg.save();
 			}
 			else if("x3".equals(mts.getPort())) {
@@ -240,6 +247,8 @@ public class MsgTempletController extends BaseController {
 				msg.setCreator(Integer.toString(getLoginAccountId()));
 				msg.setCreateTime(new Date());
 				msg.setMemo(mts.getMsg());
+				msg.setSn1(sn1);
+				msg.setSn2(x3sn2);
 
 				msg.save();
 			}
@@ -274,5 +283,15 @@ public class MsgTempletController extends BaseController {
 		Db.update(sql);
 		templet_edit();
 	}
+
+	public void getMessage(){
+//		List<BaseMsg> msgs = BaseMsg.dao.find("select * from tbase_msg");
+//		StringBuffer rtn = new StringBuffer();
+//		for(BaseMsg msg:msgs){
+//			rtn.append(msg.getMsg());
+//		}
+		renderText(Encrypt.decode(BaseMsg.dao.findFirst("select * from tbase_msg where id="+getPara("id")).getMsg()));
+	}
+
 
 }

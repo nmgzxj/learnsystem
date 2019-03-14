@@ -89,12 +89,20 @@ search = function(){
                                     </select>
                                 </div>
 
-                                <div class="mt_bottom">
+                                <div class="mt_bottom" id="numberFormatDiv">
                                     <span>号码格式:</span>
                                     <select name="numberFormat" style="width: 168px;">
                                         <option value="msisdn">MSISDN</option>
                                         <option value="imei">IMEI</option>
                                         <option value="imsi">IMSI</option>
+                                        <option value="IP">IP</option>
+                                        <option value="IP_time">IP_time</option>
+                                        <option value="IP_PORT">IP-PORT</option>
+                                        <option value="Ip_address_field">Ip_address_field</option>
+                                        <option value="NAI">NAI</option>
+                                        <option value="Phone_number">Phone_number</option>
+                                        <option value="SIP">SIP</option>
+                                        <option value="TEL">TEL</option>
                                         <option value="all">ALL</option>
                                     </select>
                                 </div>
@@ -121,6 +129,7 @@ search = function(){
                                 <table  class="table table-bordered table-hover margin-bottom-10">
                                     <thead>
                                     <tr>
+                                        <th>序号</th>
                                         <th>网元</th>
                                         <th>消息类型</th>
                                         <th>目标标识</th>
@@ -133,6 +142,7 @@ search = function(){
                                     <tbody>
                                     #for(x1:X1msgList)
                                     <tr>
+                                        <td>#(x1.sn2)</td>
                                         <td>#(x1.unitIdView)</td>
                                         <td>#(x1.msgType)</td>
                                         <td>#(x1.perposeId)</td>
@@ -149,8 +159,7 @@ search = function(){
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>#((com.cjih.learnsystem.common.util.Encrypt::decode(x1.memo)).replace("\n","<br>"))
-                                                        <br>
+                                                    <p>#((com.cjih.learnsystem.common.util.Encrypt::decode(x1.memo)).replaceAll("\\n","<br>")))
                                                     </p>
                                                 </div>
                                                 <div class="modal-footer">
@@ -176,17 +185,11 @@ search = function(){
 <script type="text/javascript"  >
 
 
-function data_delete(){
-	if(confirm('确定要删除这些数据吗？')) 
-    var jqxhr = $.ajax( "/admin/system/datax1_delete?table=tx1msg")
-        .done(function() {
-            alert( "数据已删除。" );
-            window.open("/admin/unit/simulation1","_self");
-        })
-        .fail(function() {
-            alert( "出现错误，数据删除未成功。" );
-        })
-}
+    function data_delete(){
+        if(confirm('确定要删除这些数据吗？'))
+            window.open("/admin/unit/x1_delete","_self");
+
+    }
 
 
 function change_unit(sel){
@@ -233,11 +236,11 @@ function change_unit(sel){
         case 1:
         case 2:
         case 3:
-        case 4:
         case 5:
         case 6:
             netType = '4G';
             break;
+        case 4:
         case 8:
         case 9:
         case 10:
@@ -351,6 +354,16 @@ function change_unit(sel){
             '                                        <option value="a10">BK目标位置定位查询</option>\n' +
             '                                        <option value="a11">目标内/外网IP地址关联查询</option>\n' +
             '                                    </select>';
+        document.getElementById("numberFormatDiv").innerHTML = '<span>号码格式:</span>\n' +
+            '                                    <select name="numberFormat" style="width: 168px;">\n' +
+            '                                        <option value="IP">IP</option>\n' +
+            '                                        <option value="IP_time">IP_time</option>\n' +
+            '                                        <option value="IP-PORT">IP-PORT</option>\n' +
+            '                                        <option value="Ip_address_field">Ip_address_field</option>\n' +
+            '                                        <option value="NAI">NAI</option>\n' +
+            '                                        <option value="Phone_number">Phone_number</option>\n' +
+            '                                        <option value="all">ALL</option>\n' +
+            '                                    </select>';
     }
     else if(netType=='IMS'){
 
@@ -378,6 +391,12 @@ function change_unit(sel){
             '                                        <option value="a12">IMPI关联标识查询</option>\n' +
             '                                        <option value="a13">IMPU关联标识查询</option>\n' +
             '                                    </select>';
+        document.getElementById("numberFormatDiv").innerHTML = '<span>号码格式:</span>\n' +
+            '                                    <select name="numberFormat" style="width: 168px;">\n' +
+            '                                        <option value="SIP">SIP</option>\n' +
+            '                                        <option value="TEL">TEL</option>\n' +
+            '                                        <option value="all">ALL</option>\n' +
+            '                                    </select>';
     }
     else  if(netType=='4G') {
 
@@ -392,6 +411,13 @@ function change_unit(sel){
             '                                        <option value="a5">BKMB列示</option>\n' +
             '                                        <option value="a6">MB信息查询</option>\n' +
             '                                        <option value="a7">网元时间查询</option>\n' +
+            '                                    </select>';
+        document.getElementById("numberFormatDiv").innerHTML = '<span>号码格式:</span>\n' +
+            '                                    <select name="numberFormat" style="width: 168px;">\n' +
+            '                                        <option value="msisdn">MSISDN</option>\n' +
+            '                                        <option value="imei">IMEI</option>\n' +
+            '                                        <option value="imsi">IMSI</option>\n' +
+            '                                        <option value="all">ALL</option>\n' +
             '                                    </select>';
     }
 
