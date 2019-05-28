@@ -18,8 +18,6 @@ public class _MappingKit {
 	public static void mapping(ActiveRecordPlugin arp) {
 		arp.addMapping("account", "id", Account.class);
 		arp.addMapping("auth_code", "id", AuthCode.class);
-		// Composite Primary Key order: mainMenu,subMenu
-		arp.addMapping("document", "mainMenu,subMenu", Document.class);
 		arp.addMapping("download", "id", Download.class);
 		arp.addMapping("download_log", "id", DownloadLog.class);
 		arp.addMapping("favorite", "id", Favorite.class);
@@ -37,8 +35,6 @@ public class _MappingKit {
 		arp.addMapping("tanswer", "id", Answer.class);
 		arp.addMapping("tanswer_log", "id", AnswerLog.class);
 		arp.addMapping("task_list", "id", AskList.class);
-		arp.addMapping("tbase_flow", "id", BaseFlow.class);
-		arp.addMapping("tbase_flow_msg", "id", BaseFlowMsg.class);
 		arp.addMapping("tbase_msg", "id", BaseMsg.class);
 		arp.addMapping("tbug", "id", Bug.class);
 		arp.addMapping("texam", "id", Exam.class);
@@ -49,6 +45,7 @@ public class _MappingKit {
 		arp.addMapping("tmsg_templet_sub", "id", MsgTempletSub.class);
 		arp.addMapping("tnumber", "id", Number.class);
 		arp.addMapping("tnumber_user", "id", NumberUser.class);
+		arp.addMapping("tnumber_user_sub", "id", NumberUserSub.class);
 		arp.addMapping("tonline", "id", Online.class);
 		arp.addMapping("tquestion", "id", Question.class);
 		arp.addMapping("tquestion_copy1", "id", QuestionCopy1.class);

@@ -71,6 +71,9 @@ public class BCD {
 	}
 	
 	public static String str2rBcdstr(String str) {
+		if(str==null){
+			return "";
+		}
 		byte[] b = str2rBcd(str);
 		String rtn = "";
 		String tmp = "";

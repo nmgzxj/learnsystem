@@ -6,6 +6,7 @@ package com.cjih.learnsystem.exam;
 import com.jfinal.club.common.model.Exam;
 import com.jfinal.club.common.model.ExamQuestion;
 import com.jfinal.club.common.model.Question;
+import com.jfinal.core.Controller;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
@@ -25,12 +26,25 @@ public class ExamService {
 		return dao.paginate(pageNum, PropKit.getInt("pageSize"), "select *", "from texam order by id desc");
 	}
 
-	public Page<Question> paginate_question(int pageNum, String searchKW) {
+	public Page<Question> paginate_question(int pageNum, Controller c) {
+		String searchKW = c.getPara("searchKW");
+		String netType4G = c.getPara("netType4G");
+		String netTypeWww = c.getPara("netTypeWww");
+		String netTypeIms = c.getPara("netTypeIms");
 		String from_sql = "from tquestion where isPassed='1' ";
 		if(StrKit.notBlank(searchKW)) {
 			pageNum = 1;
 			from_sql += " and (keywords like '%"+searchKW+"%' or questionTitle like '%"+searchKW+"%' or questionId like '%"+searchKW+"%' ) ";
-		} 
+		}
+		if(StrKit.notBlank(netType4G)){
+			from_sql += " and netType like '%"+netType4G+"%' ";
+		}
+		if(StrKit.notBlank(netTypeWww)){
+			from_sql += " and netType like '%"+netTypeWww+"%' ";
+		}
+		if(StrKit.notBlank(netTypeIms)){
+			from_sql += " and netType like '%"+netTypeIms+"%' ";
+		}
 //		from_sql += " order by id desc";
 		return Question.dao.paginate(pageNum, PropKit.getInt("pageSize"), "select *", from_sql);
 	}

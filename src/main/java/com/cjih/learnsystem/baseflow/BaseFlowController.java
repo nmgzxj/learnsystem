@@ -209,7 +209,10 @@ public class BaseFlowController extends BaseController{
 	    render("flow_msg_edit_readonly.html");
 	}
 
-
+	public void deleteIds() {
+		srv.deleteIds(getParaValuesToInt("id"));
+		redirect("/admin/baseflow");
+	}
 }
 
 

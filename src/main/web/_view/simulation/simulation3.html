@@ -44,8 +44,8 @@ search = function(){
                                     
                                         <select name="unit" class="form-control">
                                         	<option value=""></option>
-                                        	#for(u:unitList)
-                                            	<option value="#(u.id)">#(u.unitDesc)</option>
+                                        	#for(u:unitTypeList)
+                                            <option value="#(u.resourceId??)" >#(u.resourceName??)</option>
                                         #end
                                         		<option value="">ALL</option>
                                         </select>
@@ -82,7 +82,7 @@ search = function(){
                                     <thead>
                                     <tr>
                                         <th>网元</th>
-                                        <th>LIC X3地址</th>
+                                        <!--<th>LIC X3地址</th>-->
                                         <th>消息类型</th>
                                         <th>目标标识</th>
                                         <th>目标类型</th>
@@ -100,8 +100,8 @@ search = function(){
                                     <tbody>
                                     #for(x3:x3MsgList)
                                         <tr>
-                                            <td>#(x3.unitIdView)</td>
-                                            <td>#(x3.licX3Addr)</td>
+                                            <td>#(x3.unitIdView)#(x3.unitRole)</td>
+                                            <!--<td>#(x3.licX3Addr)</td>-->
                                             <td>#(x3.msgType)</td>
                                             <td>#(x3.perposeId)</td>
                                             <td>#(x3.perposeType)</td>

@@ -225,4 +225,12 @@ public abstract class BaseMsgTempletSub<M extends BaseMsgTempletSub<M>> extends 
 		return getStr("icid");
 	}
 
+	public void setUnitRole(java.lang.String unitRole) {
+		set("unit_role", unitRole);
+	}
+	
+	public java.lang.String getUnitRole() {
+		return getStr("unit_role");
+	}
+
 }

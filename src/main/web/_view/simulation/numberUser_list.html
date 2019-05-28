@@ -1,0 +1,177 @@
+#set(seoTitle="用户信息")
+#@adminLayout()
+#define main()
+<link rel="stylesheet" href="/assets/css/index.css">
+<script type="text/javascript">
+sendMsg = function(){
+	var form = document.getElementById("form1");
+	form.action = '/admin/userdb/save';
+	form.submit();
+}
+
+search = function(){
+	var form = document.getElementById("form1");
+	form.action = "/admin/userdb";
+	form.handle.value = "search";
+	form.submit();
+}
+
+</script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        label{
+            margin: 0;
+            padding: 0;
+        }
+
+        li{
+           list-style: none;
+        }
+
+        .fr{
+           float: right;
+        }
+
+        .fl{
+            float: left;
+        }
+    </style>
+
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+
+        <!--查询层  -->
+        <div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
+            <form action="" method="post" name="thisform">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            用户名:<input type="text" name="numberUser.userName" class="form-control" value="#(numberUser.userName??)"><br>
+                            MSISDN:<input type="text" name="numberUser.msisdn" class="form-control" value="#(numberUser.msisdn??)"><br>
+                            IMSI：<input type="text" name="numberUser.imsi" class="form-control" value="#(numberUser.imsi??)"><br>
+                            IMEI：<input type="text" name="numberUser.imei" class="form-control" value="#(numberUser.imei??)"><br>
+                            IP：<input type="text" name="numberUser.ip" class="form-control" value="#(numberUser.ip??)"><br>
+                            IP-TIME:<input type="text" name="numberUser.ipTime" class="form-control" value="#(numberUser.ipTime??)"><br>
+                            IP-PORT:<input type="text" name="numberUser.ipPort" class="form-control" value="#(numberUser.ipPort??)"><br>
+                            IP_ADDRESS_FIELD:<input type="text" name="numberUser.ipAddressField" class="form-control" value="#(numberUser.ipAddressField??)"><br>
+                            NAI:<input type="text" name="numberUser.nai" class="form-control" value="#(numberUser.nai??)"><br>
+                            phone number:<input type="text" name="numberUser.phoneNumber" class="form-control" value="#(numberUser.phoneNumber??)"><br>
+                            IMPI:<input type="text" name="numberUser.impi" class="form-control" value="#(numberUser.impi??)"><br>
+                            TEL:<input type="text" name="numberUser.tel" class="form-control" value="#(numberUser.tel??)"><br>
+                            SIP:<input type="text" name="numberUser.sip" class="form-control" value="#(numberUser.sip??)"><br>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="submit" class="btn btn-primary" >确定</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                    <div class="widget_heigh am-cf">
+                        <div class="port_title">用户信息</div>
+
+                        <div style="margin-top: 50px;width:auto;">
+                            <div class="jfa-toolbar">
+                                <a class="btn btn-primary btn-sm" href="/admin/numberUser/add">
+                                    <i class="fa fa-plus"></i>
+                                    创建
+                                </a>
+                                <a href="#" class="btn btn-info btn-sm"  data-toggle="modal" data-target="#searchModal">
+                                    <i class="fa fa-search"></i>
+                                    查询
+                                </a>
+                            </div>
+                            <div >
+                                <table class="table table-bordered table-hover margin-bottom-10">
+                                    <thead>
+                                    <tr>
+                                        <th>用户名</th>
+                                        <th>msisdn</th>
+                                        <th>imsi</th>
+                                        <th>imei</th>
+                                        <th>ip</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    #for(u:numberUserPage.getList())
+                                        <tr class="gradeX" >
+                                            <td>#(u.userName)</td>
+                                            <td>#(u.msisdn)</td>
+                                            <td>#(u.imsi)</td>
+                                            <td>#(u.imei)</td>
+                                            <td>#(u.ip)</td>
+                                             <td>
+                                            <button class="btn btn-info" onclick="window.open('/admin/numberUser/edit?id=#(u.id)','_self');" >
+                                                <i class="fa fa-pencil">修改</i>
+                                            </button>
+                                            <button class="btn btn-danger" onclick="func_del('#(u.id)')">
+                                                <i class="fa fa-trash">删除</i>
+                                            </button>
+                                            </td>
+                                        </tr>
+                                    #end
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        #set(append="&numberUser.userName="+numberUser.userName??)
+                        #set(append=append+"&numberUser.msisdn="+numberUser.msisdn??)
+                        #set(append=append+"&numberUser.imsi="+numberUser.imsi??)
+                        #set(append=append+"&numberUser.imei="+numberUser.imei??)
+                        #set(append=append+"&numberUser.ip="+numberUser.ip??)
+                        #set(append=append+"&numberUser.ipTime="+numberUser.ipTime??)
+                        #set(append=append+"&numberUser.ipPort="+numberUser.ipPort??)
+                        #set(append=append+"&numberUser.ipAddressField="+numberUser.ipAddressField??)
+                        #set(append=append+"&numberUser.nai="+numberUser.nai??)
+                        #set(append=append+"&numberUser.phoneNumber="+numberUser.phoneNumber??)
+                        #set(append=append+"&numberUser.impi="+numberUser.impi??)
+                        #set(append=append+"&numberUser.tel="+numberUser.tel??)
+                        #set(append=append+"&numberUser.sip="+numberUser.sip??)
+                        #@adminPaginate(numberUserPage.pageNumber, numberUserPage.totalPage, "/admin/numberUser?p=")
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+<script>
+
+    function func_del(id){
+    		if(confirm("确定要删除该用户信息吗？")){
+    			window.open("/admin/numberUser/delete?id="+id, '_self');
+    		}
+    }
+
+
+</script>
+</body>
+
+</html>
+#end

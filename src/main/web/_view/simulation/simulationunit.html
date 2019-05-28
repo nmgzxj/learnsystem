@@ -180,8 +180,12 @@ search = function(){
     function unit_change(id,unit_type,unitTypeView,unit_id,x1_ip,x1_port,unit_desc,lic_id,lic_ip,x2_port,x3_port,ext_x3_ip,ext_x3_port,x1_kt,x1_sqn,x1_pwd,x2_kt,x2_sqn,x2_pwd){
 	    $("#id")[0].value = id;
 	    $("#unitId")[0].value = unit_id;
-	    $("#unitType")[0].selectedIndex = unit_type;
-	    $("#unitType")[0].text = unitTypeView;
+        //$("#unitType")[0].text = unitTypeView;
+        $("#unitType").val(unit_type);
+        $("#unitType").find("option[text="+unitTypeView+"]").attr("selected",true);
+	     //$("#unitType")[0].selectedIndex = unit_type;
+	    //  alert("unitType="+unit_type);
+        // alert("unitTypeView="+unitTypeView);
 	    $("#x1Ip")[0].value = x1_ip;
 	    $("#x1Port")[0].value = x1_port;
 	    $("#unitDesc")[0].value = unit_desc;
@@ -197,7 +201,7 @@ search = function(){
 	    $("#x2Kt")[0].value = x2_kt;
 	    $("#x2Sqn")[0].value = x2_sqn;
 	    $("#x2Pwd")[0].value = x2_pwd;
-	    $("#form1")[0].action = '/unit/update_save';
+	    $("#form1")[0].action = '/admin/unit/update_save';
 	}
 
 	function getIndex(unit_type) {

@@ -17,6 +17,9 @@ public class BaseMsgController extends BaseController{
 	
 	public void index() {
 		list();
+		setAttr("title", getPara("title")==null?"":getPara("title"));
+		setAttr("msg", getPara("msg")==null?"":getPara("msg"));
+		setAttr("port", getPara("port")==null?"":getPara("port"));
 		render("index.html");
 	}
 
@@ -73,6 +76,11 @@ public class BaseMsgController extends BaseController{
 	public void delete() {
 		Ret ret = srv.delete(getParaToInt("id"));
 		renderJson(ret);
+	}
+
+	public void deleteIds() {
+		srv.deleteIds(getParaValuesToInt("id"));
+		redirect("/admin/basemsg");
 	}
 
 	public void add() {

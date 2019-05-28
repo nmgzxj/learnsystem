@@ -105,7 +105,7 @@
 }
 .jfa-menu-box a {
 	text-decoration: none;
-	color: #ffffffb3;
+	color: #ffffff;
 	// letter-spacing: 1px;
 	font-weight: 200;
 }
@@ -121,7 +121,7 @@
 	font-size: 15px;
 	line-height: 40px;
 	padding-left: 18px;
-	color: #ffffffb3;
+	color: #ffffff;
 	cursor: pointer;
 }
 .jfa-main-menu .left-icon {
@@ -143,7 +143,7 @@
 .jfa-sub-menu a {
 	display: block;
 	padding-left: 50px;
-	color: #ffffffb3;
+	color: #ffffff;
 	line-height: 40px;
 	font-size: 14px;
 	cursor: pointer;

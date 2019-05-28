@@ -40,12 +40,12 @@
                         <form action="/admin/unit/simulation2" method="post" name="form1" id="form1" style="float: left">
                             <input type="hidden" name="handle" value="">
                             <div class="form-group">
-                                <span>请选择网元:</span>
+                                <span>请选择网元类型:</span>
 
                                 <select name="unit" class="form-control">
                                     <option value=""></option>
-                                    #for(u:unitList)
-                                    <option value="#(u.id)">#(u.unitDesc)</option>
+                                    #for(u:unitTypeList)
+                                    <option value="#(u.resourceId??)" >#(u.resourceName??)</option>
                                     #end
                                     <option value="">ALL</option>
                                 </select>
@@ -83,7 +83,7 @@
                                 <thead>
                                 <tr>
                                     <th>网元</th>
-                                    <th>Ne X2地址</th>
+                                    <!--<th>Ne X2地址</th>-->
                                     <th>消息类型</th>
                                     <th>目标标识</th>
                                     <th>目标类型</th>
@@ -100,8 +100,8 @@
                                 <tbody>
                                 #for(x2:x2MsgList)
                                 <tr>
-                                    <td>#(x2.unitIdView)</td>
-                                    <td>#(x2.neX2Addr)</td>
+                                    <td>#(x2.unitIdView)#(x2.unitRole)</td>
+                                    <!--<td>#(x2.neX2Addr)</td>-->
                                     <td>#(x2.msgType)</td>
                                     <td>#(x2.perposeId)</td>
                                     <td>#(x2.perposeType)</td>

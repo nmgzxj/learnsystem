@@ -1,4 +1,4 @@
-#set(seoTitle="消息触发")
+#set(seoTitle="X2X3流程")
 #@adminLayout()
 #define main()
 <link rel="stylesheet" href="/assets/css/index.css">
@@ -41,15 +41,28 @@ search = function(){
                             <div style="margin-top: 10px">
 
                                 <div class="" style="margin-bottom: 10px">
-                                    <input type="text" class="">
+                                    <form action="" method="post">
+                                    <input type="text" name="title" class="input_hei">
                                      <span class="">
-                                            <button class="am-btn am-btn-primary am-btn-xs" type="button">搜索</button>
+                                            <button class="am-btn am-btn-primary am-btn-xs" type="submit">搜索</button>
                                     </span>
+                                    </form>
                                 </div>
+                                <form action="/admin/templet/deleteIds" method="post" name="thisform" id="thisform">
+                                    #permission("/admin/templet/templet_edit")
+                                        <a class="btn btn-info" href="/admin/templet/templet_add">新建模板</a>
+                                    #end
+                                    #permission("/admin/templet/templet_edit")
+                                        <a href="#" class="btn btn-danger btn-sm" onclick="if(confirm('确定要删除这些记录吗？')) $('#thisform').submit()">
+                                            <i class="fa fa-recycle"></i>
+                                            批量删除
+                                        </a>
+                                    #end
                                 <table class="table table-bordered table-hover margin-bottom-10">
                                     <thead>
                                     <tr>
-                                        <th>流程号</th>
+                                        <th>选择<input type="checkbox" name="all" id="all" value="" onclick="chkAllItems(this.checked,'id');"/> </th>
+                                        <!--<th>流程号</th>-->
                                         <th>流程名称</th>
                                         <th>描述</th>
                                         <th>编辑</th>
@@ -58,7 +71,8 @@ search = function(){
                                     <tbody>
                                    #for(templet:templetPage.getList())
                                     <tr class="gradeX">
-                                        <td>#(templet.id)</td>
+                                        <td style="width: 80px;"><input type="checkbox" name="id"  value="#(templet.id)" onclick="chkSingleItem('all','id');"></td>
+                                        <!--<td>#(templet.id)</td>-->
                                         <td>#(templet.templetName )</td>
                                         <td>#(templet.description )</td>
                                         <td>
@@ -85,8 +99,9 @@ search = function(){
                                     <!-- more data -->
                                     </tbody>
                                 </table>
-                                #permission("/admin/templet/templet_edit")
-                                 <a class="btn btn-info" href="/admin/templet/templet_add">新建模板</a>
+                                </form>
+                                #if(title)
+                                #set(append="&title="+title)
                                 #end
                     #@adminPaginate(templetPage.pageNumber, templetPage.totalPage, "/admin/templet/templet_list?p=")
                                 </div>
@@ -105,9 +120,6 @@ search = function(){
 
 
 
-<script src="/assets/js/delete/amazeui.min.js"></script>
-<script src="/assets/js/delete/amazeui.datatables.min.js"></script>
-<script src="/assets/js/delete/dataTables.responsive.min.js"></script>
 <script src="/assets/js/app.js"></script>
 <!--<script src="./assets/js/bootstrap.js"></script>-->
 <script src="/assets/js/Questions.js"></script>
@@ -124,6 +136,30 @@ function sendMsg(v){
 		}
 	});
 }
+
+</script>
+<script type="text/javascript">
+
+    //选择和清除所有的删除复选框
+    function chkAllItems(flag,subItem){
+        var _items=document.getElementsByName(subItem);//取得所有子选项的数组 
+        for(var i=0;i<_items.length;i++){
+            _items[i].checked=flag;//将所有子选项checkbox的状态和全选checkbox状态设置成一致，即要么同时选中，要么同时取消。
+        }
+    }
+
+    function chkSingleItem(allItem,subItem){
+        var flag=true;//设置默认的全选标识状态为true
+        var _items=document.getElementsByName(subItem);
+        for(var i=0;i<_items.length;i++){
+            if(!_items[i].checked) {
+                flag=false;//如果子选项中有一个未选中，则设置全选标识状态为false
+                break;
+            }
+        }
+        document.getElementById(allItem).checked=flag;//重新设置全选状态。
+    }
+
 
 </script>
 </body>

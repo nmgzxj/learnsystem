@@ -145,4 +145,108 @@ public abstract class BaseNumber<M extends BaseNumber<M>> extends Model<M> imple
 		return getStr("tel");
 	}
 
+	public void setX2ip(java.lang.String x2ip) {
+		set("x2ip", x2ip);
+	}
+	
+	public java.lang.String getX2ip() {
+		return getStr("x2ip");
+	}
+
+	public void setX2port(java.lang.String x2port) {
+		set("x2port", x2port);
+	}
+	
+	public java.lang.String getX2port() {
+		return getStr("x2port");
+	}
+
+	public void setX3ip(java.lang.String x3ip) {
+		set("x3ip", x3ip);
+	}
+	
+	public java.lang.String getX3ip() {
+		return getStr("x3ip");
+	}
+
+	public void setX3port(java.lang.String x3port) {
+		set("x3port", x3port);
+	}
+	
+	public java.lang.String getX3port() {
+		return getStr("x3port");
+	}
+
+	public void setMonType(java.lang.String monType) {
+		set("mon_type", monType);
+	}
+	
+	public java.lang.String getMonType() {
+		return getStr("mon_type");
+	}
+
+	public void setAddType(java.lang.String addType) {
+		set("add_type", addType);
+	}
+	
+	public java.lang.String getAddType() {
+		return getStr("add_type");
+	}
+
+	public void setAdd(java.lang.String add) {
+		set("add", add);
+	}
+	
+	public java.lang.String getAdd() {
+		return getStr("add");
+	}
+
+	public void setTp(java.lang.String tp) {
+		set("tp", tp);
+	}
+	
+	public java.lang.String getTp() {
+		return getStr("tp");
+	}
+
+	public void setAppBizType(java.lang.String appBizType) {
+		set("app_biz_type", appBizType);
+	}
+	
+	public java.lang.String getAppBizType() {
+		return getStr("app_biz_type");
+	}
+
+	public void setLnsAdd(java.lang.String lnsAdd) {
+		set("lns_add", lnsAdd);
+	}
+	
+	public java.lang.String getLnsAdd() {
+		return getStr("lns_add");
+	}
+
+	public void setSn1(java.lang.Integer sn1) {
+		set("sn1", sn1);
+	}
+	
+	public java.lang.Integer getSn1() {
+		return getInt("sn1");
+	}
+
+	public void setSn2(java.lang.Integer sn2) {
+		set("sn2", sn2);
+	}
+	
+	public java.lang.Integer getSn2() {
+		return getInt("sn2");
+	}
+
+	public void setImpi(java.lang.String impi) {
+		set("impi", impi);
+	}
+	
+	public java.lang.String getImpi() {
+		return getStr("impi");
+	}
+
 }

@@ -1,0 +1,51 @@
+#set(seoTitle="试卷预览")
+#@adminLayout()
+#define main()
+<div class="jfa-header-box" id="jfa-header-box">
+    <div class="jfa-crumbs" id="jfa-crumbs">
+        #(seoTitle)
+    </div>
+    <div class="jfa-search-box"></div>
+    #include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+    <div class="jfa-content" id="jfa-content">
+        <div class="jfa-toolbar">
+            <a class="btn btn-info btn-sm" href="javascript:history.go(-1);"><i class="fa fa-backward"></i>返回</a>
+        </div>
+
+
+
+        <table class="table table-bordered table-hover margin-bottom-10">
+            <thead>
+            <tr>
+                <th>考题号</th>
+                <th>类型</th>
+                <th>考题</th>
+                #if(exam.isReadonly == '0')
+                <th>选择<input type="checkbox"  id="all"/></th>
+                #end
+            </tr>
+            </thead>
+            <tbody>
+            #for(question:questionList)
+            <tr class="gradeX">
+                <td>#(question.id)</td>
+                <td>#(question.questionTypeView)</td>
+                <td class="am-text-left"><a href="" title="#((com.cjih.learnsystem.common.util.Encrypt::decode(question.questionTitle??)))" >#(question.questionId)</a></td>
+
+            </tr>
+            #end
+
+            <!-- more data -->
+            </tbody>
+        </table>
+    <div>
+
+
+
+</div><!-- END OF jfa-content -->
+</div><!-- END OF jfa-content-box -->
+#end

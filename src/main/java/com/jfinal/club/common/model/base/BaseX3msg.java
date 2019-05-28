@@ -25,6 +25,14 @@ public abstract class BaseX3msg<M extends BaseX3msg<M>> extends Model<M> impleme
 		return getStr("unit");
 	}
 
+	public void setUnitRole(java.lang.String unitRole) {
+		set("unit_role", unitRole);
+	}
+	
+	public java.lang.String getUnitRole() {
+		return getStr("unit_role");
+	}
+
 	public void setLicX3Addr(java.lang.String licX3Addr) {
 		set("lic_x3_addr", licX3Addr);
 	}

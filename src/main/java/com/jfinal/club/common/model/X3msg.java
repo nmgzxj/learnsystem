@@ -1,5 +1,6 @@
 package com.jfinal.club.common.model;
 
+import com.cjih.learnsystem.controller.ResourceInfoController;
 import com.jfinal.club.common.model.base.BaseX3msg;
 import com.jfinal.plugin.activerecord.Db;
 
@@ -11,6 +12,7 @@ public class X3msg extends BaseX3msg<X3msg> {
 	public static final X3msg dao = new X3msg().dao();
 	
 	public String getUnitIdView() {
-		return Db.queryStr("select unit_desc from tunit where id= '"+get("unit")+"'");
+//		return Db.queryStr("select unit_desc from tunit where id= '"+get("unit")+"'");
+		return ResourceInfoController.getResourceName("PUB001", (String)get("unit"));
 	}
 }

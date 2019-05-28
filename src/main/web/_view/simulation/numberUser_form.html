@@ -1,0 +1,141 @@
+<form action="#(action)" id="form1" method="post">
+    <input type="hidden" name="numberUser.id" id="id" value="#(numberUser.id??)">
+
+    <div class="form-group col-md-4">
+        <span class="label label-default">用户名</span>
+        <input name="numberUser.userName" id="userName" class="form-control" value="#(numberUser.userName??)">
+    </div>
+
+    <div class="form-group col-md-4">
+        <span  class="label label-default">MSISDN(4G)</span>
+        <input name="numberUser.msisdn" id="msisdn" type="text" class="form-control" value="#(numberUser.msisdn??)" placeholder="有效国际号码格式,如：+86...">
+    </div>
+
+    <div class="form-group col-md-4">
+        <span  class="label label-default">IMSI(4G)</span>
+        <input name="numberUser.imsi" id="imsi" type="text"  class="form-control" value="#(numberUser.imsi??)">
+    </div>
+
+    <div class="form-group col-md-4">
+        <span  class="label label-default">IMEI(4G)</span>
+        <input name="numberUser.imei" id="imei" type="text" value="#(numberUser.imei??)" class="form-control" >
+    </div>
+
+    <div class="form-group col-md-4">
+        <span  class="label label-default">IP(互联网)</span>
+        <input name="numberUser.ip" id="ip" type="text" value="#(numberUser.ip??)" class="form-control" >
+    </div>
+
+    <div class="form-group col-md-4">
+        <span  class="label label-default">IP_TIME(互联网)</span>
+        <input name="numberUser.ipTime" id="ipTime" type="text" value="#(numberUser.ipTime??)" class="form-control" >
+    </div>
+
+    <div class="form-group col-md-4">
+        <span  class="label label-default">IP_PORT(互联网)</span>
+        <input name="numberUser.ipPort" id="ipPort" type="text" value="#(numberUser.ipPort??)" class="form-control" >
+    </div>
+
+    <div class="form-group col-md-4">
+        <span  class="label label-default">IP_ADDRESS_FIELD(互联网)</span>
+        <input class="form-control"  name="numberUser.ipAddressField" id="ipAddressField" type="text" value="#(numberUser.ipAddressField??)">
+    </div>
+
+    <div class="form-group col-md-4">
+        <span  class="label label-default">NAI(互联网)</span>
+        <input name="numberUser.nai" id="nai" type="text" value="#(numberUser.nai??)" class="form-control" >
+    </div>
+
+    <div class="form-group col-md-4">
+        <span  class="label label-default">phone number(互联网)</span>
+        <input name="numberUser.phoneNumber" id="phoneNumber" type="text" value="#(numberUser.phoneNumber??)" class="form-control" >
+    </div>
+
+    <div class="form-group col-md-4">
+        <span  class="label label-default">IMPI(IMS)</span>
+        <input name="numberUser.impi" id="impi" type="text" value="#(numberUser.impi??)" class="form-control" >
+    </div>
+    <div class="clearfix"></div>
+    <ul class="add_btn_wrapper center-block">
+        <li class="btn_select_thre fl"><input class="btn btn-primary btn-sm" type="submit" name="submit_btn" value="保存"></li>
+        <li class="btn_select_thre fl"><input class="btn btn-info btn-sm" type="reset" name="reset_btn" value="重置"></li>
+        <li class="btn_select_thre fl"><input class="btn btn-info btn-sm" type="button" name="return_btn" value="返回" onclick="history.back();"></li>
+    </ul>
+
+
+</form>
+<div class="clearfix"></div>
+#if(numberUser.id??)
+<table class="table table-striped" id="numberUserSubTable">
+    <tr>
+        <th>IMPU类型</th>
+        <th>IMPU</th>
+        <th>操作</th>
+    </tr>
+
+    #for(x:numberUserSubList)
+    <tr>
+        <td>#(x.impuType)</td>
+        <td>#(x.impu)</td>
+        <td><button class="btn btn-danger btn-sm" onclick="javascript:deleteSub('#(x.id)');">删除</button> </td>
+    </tr>
+    #end
+</table>
+<form id="numberUserSubForm" action="/admin/numberUser/subSave" method="post">
+    <input type="hidden" name="numberUserSub.numberUserId" value="#(numberUser.id)">
+    <div class="form-group col-md-4">
+        <span  class="label label-default">IMPU类型</span>
+        <select name="numberUserSub.impuType" id="impuType" type="text"  class="form-control" >
+            <option>tel</option>
+            <option>sip</option>
+        </select>
+    </div>
+
+    <div class="form-group col-md-4">
+        <span  class="label label-default">IMPU</span>
+        <input name="numberUserSub.impu" id="impu" type="text" value="#(numberUserSub.impu??)" class="form-control"  placeholder="有效国际号码格式，如：tel:+86...或sip:...">
+    </div>
+    <div class="form-group col-md-4" style="margin-top: 5px;">
+    <ul class="add_btn_wrapper center-block">
+        <li class="btn_select_thre fl"><input class="btn btn-primary btn-sm" type="submit" name="submit_btn" value="保存"></li>
+        <li class="btn_select_thre fl"><input class="btn btn-info btn-sm" type="reset" name="reset_btn" value="重置"></li>
+    </ul>
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $("#numberUserSubForm").ajaxForm({
+            dataType: "json"
+            , beforeSubmit: function(formData, jqForm, options) {}
+            , success: function(ret) {
+                if (ret.state == "ok") {
+                    location.reload();
+                } else {
+                    showFailMsg(ret.msg);
+                }
+            }
+            , error: function(ret) {alert(ret.statusText);}
+            , complete: function(ret) {} 	      // 无论是 success 还是 error，最终都会被回调
+        });
+    });
+
+    function deleteSub(id) {
+        alert(id);
+        $.ajax({
+            async : true,
+            type : "get",
+            url: '/admin/numberUser/subDelete',
+            data:{"numberUserSub.id":id},
+            success : function(ret){
+                if (ret.state == "ok") {
+                    location.reload();
+                } else {
+                    showFailMsg(ret.msg);
+                }
+            }
+        });
+
+    }
+</script>
+#end

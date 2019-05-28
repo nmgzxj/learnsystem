@@ -45,13 +45,21 @@
 
 
                     <label class="col-md-2 control-label"><font color=red>*</font>网元：</label>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <select id="unitId" name="unitId" class="form-control">
                             <option value="#(sub.unitId?? )" checked>#(sub.unitView?? )</option>
                             #for(u:unitList)
                             <option value="#(u.resource_id??)">#(u.resource_name??)</option>
                             #end
                         </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select name="unitRole" id="unitRole" class="form-control">
+                            <option>主叫侧</option>
+                            <option>被叫侧</option>
+                        </select>
+                        <script>$("#unitRole").val('#(sub.unitRole)');</script>
+
                     </div>
                     <label class="col-md-2 control-label"><font color=red>*</font>端口：</label>
                     <div class="col-md-4">
@@ -73,7 +81,7 @@
 
                     <label class="col-md-2 control-label"><font color=red>*</font>消息类型:</label>
                     <div class="col-md-4">
-                        <select id="msgType" name="msgType" class="form-control selectpicker" data-live-search="true" onchange="fill_msg()">
+                        <select id="msgType" name="msgType" class="selectpicker form-control" data-live-search="true" onchange="fill_msg()">
                             <option value="#(sub.msgType ??)">#(sub.msgTypeView ??)</option>
                             #for(u:msgTypeList)
                             <option value="#(u.id)">#(u.title??)</option>
@@ -132,14 +140,17 @@
                     <div class="col-md-4"><input type="text" id="oppositeAddr" name="oppositeAddr" value="#(sub.oppositeAddr?? )" class="form-control"></div>
                     <label class="col-md-2 control-label">文件名称</label>
                     <div class="col-md-4"><input type="text" id="fileName" name="fileName" value="#(sub.fileName?? )" class="form-control"></div>
+                    <label class="col-md-2 control-label">序号</label>
+                    <div class="col-md-4"><input type="number" id="taxis" name="taxis" value="#(sub.taxis?? )" class="form-control"></div>
 
-
+                    <div style="clear:both;"></div>
                     <div>消息:</div>
                     <div class="question_info_text" class="form-control" onclick='clickTrim(this)'>
                         <textarea rows="5" cols="120" name="msg" id="msg">#(sub.msg??)</textarea>
                     </div>
                     <div class="pages-btn" style="text-align: center">
                         <a class="btn btn-info" onclick="window.open('/admin/templet/templet_edit?templetId=#(sub.templetId??==null?templetId:sub.templetId)','_self')">返回</a>
+                        <input class="btn btn-default" type="reset">
                         <button class="btn btn-success" onclick='return check_form()'>保存</button>
                     </div>
                 </form>

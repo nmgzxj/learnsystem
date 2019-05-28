@@ -1,6 +1,7 @@
 #set(seoTitle="考题编辑")
 #@adminLayout()
 #define main()
+<script src="/assets/js/jbolt-admin.js"></script>
 <div class="jfa-header-box" id="jfa-header-box">
 	<div class="jfa-crumbs" id="jfa-crumbs">
 		试题修改
@@ -22,16 +23,41 @@
 	<input type="hidden" id="del_item" name="del_item" value="">
 	
 			<div class="form-group margin-bottom-30">
-				<label><font color="#ff0000">*</font> 题名</label>
+				<label><span style="color: #ff0000">*</span> 题名</label>
 				<input type="text" name="question.questionId" required value="#(question.questionId)"  class="form-control" />
 
 			</div>
 			<div class="form-group margin-bottom-20">
-				<label><font color="#ff0000">*</font> 题目</label>
+				<label><span style="color: #ff0000">*</span> 题目</label>
 				<textarea
 						name="question.questionTitle" id="questionTitle"
 						 class="form-control">#(question.questionTitle)</textarea>
 			</div>
+			<div class="form-group"
+				 data-checkbox
+				 data-rule="checkbox"
+				 data-value="#(question.netType??)"
+				 data-name="question.netType"
+				 data-default="">
+				<label class="col-auto col-form-label" >网络类型：</label>
+				<div class="form-inline form-control">
+					<div class="checkbox checkbox-primary  checkbox-inline">
+						<input  id="c1" type="checkbox" name="question.netType"   value="1"/>
+						<label for="c1">4G</label>
+					</div>
+
+					<div class="checkbox checkbox-primary  checkbox-inline">
+						<input  id="c2" type="checkbox" name="question.netType"   value="2"/>
+						<label for="c2">IMS</label>
+					</div>
+
+					<div class="checkbox checkbox-primary  checkbox-inline">
+						<input  id="c3" type="checkbox" name="question.netType"   value="3"/>
+						<label for="c3">互联网</label>
+					</div>
+				</div>
+			</div>
+
 			#if(question.questionType=='radio' || question.questionType=='checkbox' )
 			#for(item:items)
 			<div class="form-group margin-bottom-20">
@@ -96,10 +122,11 @@
 			</div>
 			#end
 			
-				<input type="submit" value="确认提交" class="btn btn-primary btn-sm"/> 
-				<input type="button" value="返回" class="btn btn-primary btn-sm" onclick="window.open('/admin/question?searchKW=#(searchKW)&p=#(p)','_self');" />
-				<input type="button" value="基础消息参考" class="btn btn-primary btn-sm" onclick="window.open('/admin/basemsg/msg_list_readonly?id=#(question.id)','_blank');" />
-				<input type="button" value="基础流程参考" class="btn btn-primary btn-sm" onclick="window.open('/admin/baseflow/flow_list_readonly?id=#(question.id)','_blank');" />
+				<input type="submit" value="确认提交" class="btn btn-primary btn-sm"/>
+	<input type="reset" class="btn btn-default btn-sm">
+				<input type="button" value="返回" class="btn btn-info btn-sm" onclick="window.open('/admin/question?searchKW=#(searchKW)&p=#(p)','_self');" />
+				<input type="button" value="基础消息参考" class="btn btn-info btn-sm" onclick="window.open('/admin/basemsg/msg_list_readonly?id=#(question.id)','_blank');" />
+				<input type="button" value="基础流程参考" class="btn btn-info btn-sm" onclick="window.open('/admin/baseflow/flow_list_readonly?id=#(question.id)','_blank');" />
 			
 			<!-- more data -->
 
@@ -127,6 +154,9 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+        $("input:checkbox[value='#(question.netType4G)']").attr('checked','true');
+        $("input:checkbox[value='#(question.netTypeIms)']").attr('checked','true');
+        $("input:checkbox[value='#(question.netTypeWww)']").attr('checked','true');
 		$("#myArticleForm1").ajaxForm({
 			dataType: "json"
 			, beforeSubmit: function(formData, jqForm, options) {}
@@ -144,50 +174,15 @@
 </script>
 
 
-
-
-
 	<script type="text/javascript">
 		function item_add(){
-/* 			document.getElementById("questionItems").value += ";";
-			document.getElementById("questionItems").value += document.getElementById("item").value; */
 			document.getElementById("myArticleForm").submit();
 		}
 		function item_del(v){
-/* 			var items = document.getElementById("questionItems").value.split(";");
-			var newItems="";
-			for (var i=0;i<items.length;i++)
-			{ 
-				if(items[i] != v){
-					newItems += items[i];
-					if(i != items.length-1)
-					{
-						newItems += ";";
-					}
-				}
-			} 
-			document.getElementById("questionItems").value = newItems;*/
 			document.getElementById("del_item").value = v;
 			document.getElementById("myArticleForm").submit();
 		}
-		// function flowmsg_del(v){
-		// 	document.getElementById("myArticleForm").action='/admin/question/flowmsg_delete';
-		// 	document.getElementById("del_msg_id").value=v;
-		// 	document.getElementById("myArticleForm").submit();
-		// 	$.ajax({
-		// 		dataType: "json"
-		// 		, beforeSubmit: function(formData, jqForm, options) {}
-		// 		, success: function(ret) {
-		// 			if (ret.state == "ok") {
-		// 				location.href = "/admin/question/edit?id=#(question.id)";
-		// 			} else {
-		// 				showFailMsg(ret.msg);
-		// 			}
-		// 		}
-		// 		, error: function(ret) {alert(ret.statusText);}
-		// 		, complete: function(ret) {} 	      // 无论是 success 还是 error，最终都会被回调
-		// 	});
-		// }
-	</script>
 
+	</script>
+<script src="/assets/js/checkbox.js"></script>
 #end

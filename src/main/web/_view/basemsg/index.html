@@ -1,6 +1,7 @@
 #set(seoTitle="基础消息管理")
 #@adminLayout()
 #define main()
+
 <div class="jfa-header-box" id="jfa-header-box">
 	<div class="jfa-crumbs" id="jfa-crumbs">
 		#(seoTitle)
@@ -40,6 +41,7 @@
          </div>
          </form>
     </div>
+        <form action="/admin/basemsg/deleteIds" method="post" name="thisform" id="thisform">
 		<div class="jfa-toolbar">
 			<a class="btn btn-primary btn-sm" href="/admin/basemsg/add">
 				<i class="fa fa-plus"></i>
@@ -49,20 +51,26 @@
 				<i class="fa fa-search"></i>
 				查询
 			</a>
+            <a href="#" class="btn btn-danger btn-sm" onclick="if(confirm('确定要删除这些记录吗？')) $('#thisform').submit()">
+                <i class="fa fa-recycle"></i>
+                批量删除
+            </a>
 		</div>
 		<div class="jfa-table-box margin-top-30">
                         <table class="table table-bordered table-hover margin-bottom-10">
                                 <thead>
                                 <tr>
+                                    <th>选择<input type="checkbox" name="all" id="all" value="" onclick="chkAllItems(this.checked,'id');"/> </th>
+                                    <th>消息名</th>
+                                    <th>接口</th>
+                                    <th>操作</th>
 
-                                        <th>消息名</th>
-                                        <th>接口</th>
-                                        <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 #for(msg:basemsgPage.getList())
                                 <tr class="gradeX">
+                                    <td style="width: 80px;"><input type="checkbox" name="id"  value="#(msg.id)" onclick="chkSingleItem('all','id');"></td>
                                         <td>#(msg.title)</td>
                                         <td>#(msg.port)</td>
                                         <td>
@@ -82,10 +90,35 @@
                                 </tbody>
                         </table>
                         <div>
-								#@adminPaginate(basemsgPage.pageNumber, basemsgPage.totalPage, "/admin/basemsg?p=")
+                            #set(append = "&title="+title+"&msg="+msg+"&port="+port)
+                            #@adminPaginate(basemsgPage.pageNumber, basemsgPage.totalPage, "/admin/basemsg?p=")
 						</div>
 		</div>
+        </form>
 	</div><!-- END OF jfa-content -->
 </div><!-- END OF jfa-content-box -->
+<script type="text/javascript">
 
+    //选择和清除所有的删除复选框
+    function chkAllItems(flag,subItem){
+        var _items=document.getElementsByName(subItem);//取得所有子选项的数组 
+        for(var i=0;i<_items.length;i++){
+            _items[i].checked=flag;//将所有子选项checkbox的状态和全选checkbox状态设置成一致，即要么同时选中，要么同时取消。
+        }
+    }
+
+    function chkSingleItem(allItem,subItem){
+        var flag=true;//设置默认的全选标识状态为true
+        var _items=document.getElementsByName(subItem);
+        for(var i=0;i<_items.length;i++){
+            if(!_items[i].checked) {
+                flag=false;//如果子选项中有一个未选中，则设置全选标识状态为false
+                break;
+            }
+        }
+        document.getElementById(allItem).checked=flag;//重新设置全选状态。
+    }
+
+
+</script>
 #end

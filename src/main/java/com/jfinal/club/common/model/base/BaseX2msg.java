@@ -25,6 +25,14 @@ public abstract class BaseX2msg<M extends BaseX2msg<M>> extends Model<M> impleme
 		return getStr("unit");
 	}
 
+	public void setUnitRole(java.lang.String unitRole) {
+		set("unit_role", unitRole);
+	}
+	
+	public java.lang.String getUnitRole() {
+		return getStr("unit_role");
+	}
+
 	public void setNeX2Addr(java.lang.String neX2Addr) {
 		set("ne_x2_addr", neX2Addr);
 	}

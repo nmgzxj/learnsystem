@@ -12,7 +12,7 @@ public class MsgTempletSub extends BaseMsgTempletSub<MsgTempletSub> {
 	public static final MsgTempletSub dao = new MsgTempletSub().dao();
 	
 	public String getUnitTypeView(){
-		return ResourceInfoController.getResourceName("PUB001", (String)get("unit_type"));//.dao.getfind("select * from trole where id in (select role_id from tuser_trole where user_id = '"+get("id")+"')");
+		return ResourceInfoController.getResourceName("PUB001", (String)get("unit_type"));
 	
 	}
 	

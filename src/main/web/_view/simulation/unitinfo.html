@@ -113,9 +113,7 @@ search = function(){
 
 
 
-<script src="/assets/js/delete/amazeui.min.js"></script>
-<script src="/assets/js/delete/amazeui.datatables.min.js"></script>
-<script src="/assets/js/delete/dataTables.responsive.min.js"></script>
+
 <script src="/assets/js/app.js"></script>
 <!--<script src="./assets/js/bootstrap.js"></script>-->
 <script src="/assets/js/Questions.js"></script>
@@ -132,8 +130,10 @@ search = function(){
     function unit_change(id,unit_type,unitTypeView,unit_id,x1_ip,x1_port,unit_desc,lic_id,lic_ip,x2_port,x3_port,ext_x3_ip,ext_x3_port,x1_kt,x1_sqn,x1_pwd,x2_kt,x2_sqn,x2_pwd){
 	    $("#id")[0].value = id;
 	    $("#unitId")[0].value = unit_id;
-	    $("#unitType")[0].selectedIndex = unit_type;
-	    $("#unitType")[0].text = unitTypeView;
+	    // $("#unitType")[0].selectedIndex = unit_type;
+	    // $("#unitType")[0].text = unitTypeView;
+        $("#unitType").val(unit_type);
+        $("#unitType").find("option[text="+unitTypeView+"]").attr("selected",true);
 	    $("#x1Ip")[0].value = x1_ip;
 	    $("#x1Port")[0].value = x1_port;
 	    $("#unitDesc")[0].value = unit_desc;

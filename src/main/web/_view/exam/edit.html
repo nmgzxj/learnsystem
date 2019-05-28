@@ -24,8 +24,8 @@
 <div class="pages-btn" style="text-align: center">
     <a class="btn btn-primary btn-sm" onclick="window.open('/admin/exam','_self')" >返回</a>
     #if(exam.isReadonly =='0')
-    <button class="btn btn-success" onclick='#("exam_name_form").submit()'>修改试卷名称</button>
-    <button class="btn btn-success" onclick='#("exam_question_form").submit()'>修改试卷题目</button>
+    <button class="btn btn-success" onclick='$("#exam_name_form").submit()'>修改试卷名称</button>
+    <button class="btn btn-success" onclick='$("#exam_question_form").submit()'>修改试卷题目</button>
     #end
     </div>
     
@@ -36,6 +36,45 @@
          <span class="">
                 <button class="am-btn am-btn-primary am-btn-xs" type="submit">搜索</button>
         </span>
+    <div class="form-group">
+        <label class="col-auto col-form-label" >网络类型：</label>
+        <div class="form-inline form-control" >
+            <div class="checkbox checkbox-primary  checkbox-inline">
+                <div class="form-group"
+                     data-checkbox
+                     data-rule="checkbox"
+                     data-value="#(netType4G??)"
+                     data-name="netType4G"
+                     data-default="">
+                <input  id="c1" type="checkbox" name="netType4G"   value="1" onchange="$('#search_form').submit()"/>
+                <label for="c1">4G</label>
+                </div>
+            </div>
+            <div class="checkbox checkbox-primary  checkbox-inline">
+                <div class="form-group"
+                     data-checkbox
+                     data-rule="checkbox"
+                     data-value="#(netTypeIms??)"
+                     data-name="netTypeIms"
+                     data-default="">
+                <input  id="c2" type="checkbox" name="netTypeIms"   value="2" onchange="$('#search_form').submit()"/>
+                <label for="c2">IMS</label>
+                </div>
+            </div>
+            <div class="checkbox checkbox-primary  checkbox-inline">
+                <div class="form-group"
+                     data-checkbox
+                     data-rule="checkbox"
+                     data-value="#(netTypeWww??)"
+                     data-name="netTypeWww"
+                     data-default="">
+                <input  id="c3" type="checkbox" name="netTypeWww"   value="3" onchange="$('#search_form').submit()"/>
+                <label for="c3">互联网</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 </form>
             <form action="/admin/exam/update_question" name="exam_question_form" id="exam_question_form" method="post">
@@ -57,7 +96,7 @@
                 <tr class="gradeX">
                     <td>#(question.id)</td>
                     <td>#(question.questionTypeView)</td>
-                    <td class="am-text-left">#(question.questionId)</td>
+                    <td class="am-text-left"><a href="" title="#((com.cjih.learnsystem.common.util.Encrypt::decode(question.questionTitle??)))" >#(question.questionId)</a></td>
                     #if(exam.isReadonly == '0')
                     <td>
                         <div class="tpl-table-black-operation">
@@ -162,4 +201,5 @@ $(document).ready(function(){
 //        });
     }
 </script>
+    <script src="/assets/js/checkbox.js"></script>
 #end

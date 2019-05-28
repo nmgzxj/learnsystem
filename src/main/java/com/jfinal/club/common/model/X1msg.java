@@ -1,5 +1,6 @@
 package com.jfinal.club.common.model;
 
+import com.cjih.learnsystem.controller.ResourceInfoController;
 import com.jfinal.club.common.model.base.BaseX1msg;
 import com.jfinal.plugin.activerecord.Db;
 
@@ -12,5 +13,6 @@ public class X1msg extends BaseX1msg<X1msg> {
 
 	public String getUnitIdView() {
 		return Db.queryStr("select unit_desc from tunit where id= '"+get("unit")+"'");
+//		return ResourceInfoController.getResourceName("PUB001", (String)get("unit"));
 	}
 }

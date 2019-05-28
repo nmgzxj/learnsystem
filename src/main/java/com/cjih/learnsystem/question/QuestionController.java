@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import cn.jbolt.common.util.ArrayUtil;
 import com.cjih.learnsystem.common.util.DateKit;
 import com.cjih.learnsystem.common.util.Encrypt;
 import com.jfinal.aop.Before;
@@ -27,6 +28,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.upload.UploadFile;
+
 
 public class QuestionController extends BaseController{
 	
@@ -124,6 +126,11 @@ public class QuestionController extends BaseController{
 		question.setQuestionTitle(Encrypt.encode(question.getQuestionTitle()));
 		question.setQuestionItems(Encrypt.encode(question.getQuestionItems()));
 		question.setQuestionAnswer(Encrypt.encode(question.getQuestionAnswer()));
+		keepPara();
+		String[] netType=getParaValues("question.netType");
+		if(netType!=null&&netType.length>0){
+			question.setNetType(ArrayUtil.join(netType, ","));
+		}
 		srv.update(question);
 		//renderJson(ret);
 		edit();

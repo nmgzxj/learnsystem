@@ -9,10 +9,8 @@ import com.jfinal.club.common.model.Exam;
 import com.jfinal.club.common.model.ExamQuestion;
 import com.jfinal.club.common.model.ExamUser;
 import com.jfinal.club.common.model.Question;
-import com.jfinal.kit.LogKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.Ret;
-import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 
@@ -33,15 +31,8 @@ ExamService srv = ExamService.me;
 		setAttr("exam", srv.edit(getParaToInt("exam.id")));
 		
 	  Integer p = getParaToInt("p",1);
-	  String searchKW = getPara("searchKW");
-//	  Integer pageSize = PropKit.getInt("pageSize");
-//	  String selectSql = "select * ";
-//	  String fromSql = "from tquestion where isPassed='1' ";
-//	  if(!StrKit.isBlank(searchKW)) {
-//	  		fromSql += " and keywords||questionTitle||questionId like '%"+searchKW+"%'";
-//	  }
-//	  Page<Question> questionPage = Question.dao.paginate(p, pageSize, selectSql, fromSql);
-	  Page<Question> questionPage = srv.paginate_question(p, searchKW);
+
+	  Page<Question> questionPage = srv.paginate_question(p, this);
 	  setAttr("questionPage", questionPage);
 	  setAttr("p",p);
 
@@ -53,36 +44,6 @@ ExamService srv = ExamService.me;
 		render("edit.html");
 	}
 
-//  public void edit(){
-//  Long examId = getParaToLong("examId");
-//  Integer page = getParaToInt("page");
-//  String searchKW = getPara("searchKW");
-//  if(page==null||page<0) {
-//  		page =1;
-//  }
-//  Integer pageSize = PropKit.getInt("pageSize");
-//  Exam e = Exam.dao.findById(examId);
-//  String selectSql = "select * ";
-//  String fromSql = "from tquestion where isPassed='1' ";
-//  if(!StrKit.isBlank(searchKW)) {
-//  		fromSql += " and keywords||questionTitle||questionId like '%"+searchKW+"%'";
-//  }
-//  Page<Question> questions = Question.dao.paginate(page, pageSize, selectSql, fromSql);
-//  List<ExamQuestion> questionIds = ExamQuestion.dao.find("select question_id from texam_question where exam_id ="+examId);//questionService.getQuestionListByExam(e.getId());
-//  setAttr("exam",e);
-//  setAttr("isReadonly",Db.queryLong("select count(*) as tt from tsaved_answer where exam_id = "+examId));
-//  setAttr("id",examId);
-//  setAttr("exam_name", e.getExamName());
-//  setAttr("questionList", questions.getList());
-//  setAttr("questionIds", questionIds);
-//  keepPara();
-//  String rtn = PageUtil.getPageString("/exam/exam_edit?examId="+examId+"&page=", page, questions.getTotalPage());
-//  setAttr("pageString", rtn);
-////  renderJson();
-////  PageUtil.getPageString("/learn/exam_edit.jsp", page, currentPage, totalPage);
-//  render("edit.html");
-////  new Record().getColumnValues();
-//}
 
 	/**
 	 * 提交修改
@@ -214,7 +175,7 @@ public void update_question() {
 		Long ids[] = getParaValuesToLong("id");
 		String searchKW = getPara("searchKW");
 		//找到当前页中，属于当前试卷的试题，清除
-		Page<Question> questionPage = srv.paginate_question(getParaToInt("p"),searchKW);
+		Page<Question> questionPage = srv.paginate_question(getParaToInt("p"),this);
 		List<ExamQuestion> eqList = ExamQuestion.dao.find("select * from texam_question where exam_id = "+examId);
 		for(ExamQuestion eq:eqList) {
 			if(getParaToInt("exam.id") == eq.getExamId()) {
@@ -227,12 +188,7 @@ public void update_question() {
 			}
 			
 		}
-//		String sql = "delete from texam_question where exam_id = '"+examId+"' ";
-//		if(StrKit.notBlank(searchKW)) {
-//			sql += " and question_id in (select id from tquestion where keywords like '%"+searchKW+"%'"
-//					+ "or questionId like '%"+searchKW+"%' or questionTitle like '%"+searchKW+"%')";
-//		}
-//		Db.update(sql);
+
 		ExamQuestion eq = new ExamQuestion();
 		if(examId!=null&&ids!=null&&ids.length>0){
 	     	for(Long id:ids) {
@@ -247,6 +203,21 @@ public void update_question() {
 	 e.setScore(countScore(examId));
 	 e.update();
 	redirect("/admin/exam/edit?exam.id="+examId+"&p="+getPara("p"));
+}
+
+/**
+ * 预览试卷
+ */
+public void preview(){
+	setAttr("exam", srv.edit(getParaToInt("exam.id")));
+
+	List<Question> questionList = Question.dao.find("select * from tquestion where id in (select question_id from texam_question where exam_id ="+
+			getParaToInt("exam.id")+")");
+	setAttr("questionList", questionList);
+
+	setAttr("propKit",PropKit.getProp());
+	keepPara();
+	render("preview.html");
 }
 
 /**
@@ -305,125 +276,3 @@ public void copy() {
 }
 
 
-//package com.cjih.learnsystem.exam;
-//
-//
-//import com.cjih.learnsystem.common.util.PageUtil;
-//import com.jfinal.club.common.model.Exam;
-//import com.jfinal.club.common.model.ExamQuestion;
-//import com.jfinal.club.common.model.ExamUser;
-//import com.jfinal.club.common.model.Question;
-//import com.jfinal.kit.PropKit;
-//import com.jfinal.kit.StrKit;
-//import com.jfinal.plugin.activerecord.Db;
-//import com.jfinal.plugin.activerecord.Page;
-//import com.jfinal.plugin.activerecord.Record;
-//
-//import java.util.Date;
-//import java.util.List;
-//
-///**
-// * Created by ZhangXianjin on 2017/10/17.
-// */
-//
-//public class ExamController extends com.jfinal.core.Controller {
-//
-//
-//    public void index(){
-//        setAttr("examList",Exam.dao.find("select * from texam"));
-//        render("index.html");
-//    }
-//    
-//
-//    public void edit(){
-//        Long examId = getParaToLong("examId");
-//        Integer page = getParaToInt("page");
-//        String searchKW = getPara("searchKW");
-//        if(page==null||page<0) {
-//        		page =1;
-//        }
-//        Integer pageSize = PropKit.getInt("pageSize");
-//        Exam e = Exam.dao.findById(examId);
-//        String selectSql = "select * ";
-//        String fromSql = "from tquestion where isPassed='1' ";
-//        if(!StrKit.isBlank(searchKW)) {
-//        		fromSql += " and keywords||questionTitle||questionId like '%"+searchKW+"%'";
-//        }
-//        Page<Question> questions = Question.dao.paginate(page, pageSize, selectSql, fromSql);
-//        List<ExamQuestion> questionIds = ExamQuestion.dao.find("select question_id from texam_question where exam_id ="+examId);//questionService.getQuestionListByExam(e.getId());
-//        setAttr("exam",e);
-//        setAttr("isReadonly",Db.queryLong("select count(*) as tt from tsaved_answer where exam_id = "+examId));
-//        setAttr("id",examId);
-//        setAttr("exam_name", e.getExamName());
-//        setAttr("questionList", questions.getList());
-//        setAttr("questionIds", questionIds);
-//        keepPara();
-//        String rtn = PageUtil.getPageString("/exam/exam_edit?examId="+examId+"&page=", page, questions.getTotalPage());
-//	    setAttr("pageString", rtn);
-////        renderJson();
-////        PageUtil.getPageString("/learn/exam_edit.jsp", page, currentPage, totalPage);
-//        render("edit.html");
-////        new Record().getColumnValues();
-//    }
-//
-//    public void exam_delete(){
-//        String id = getPara("examId");
-//        Exam.dao.deleteById(id);
-//        Db.update("delete from texam_question where exam_id = '"+id+"'");
-//        index();
-//    }
-//
-//    public void add(){
-//        Long examId = getParaToLong("examId");
-//        Exam e = new Exam();
-////        e.setId(examId);
-//        e.setExamName("未命名试卷");
-//        e.setIsReadonly("0");
-//        e.save();//.insert(e);
-//        List<Question> questions = Question.dao.find("select * from tquestion");
-//        List<Record> questionIds = Db.find("select question_id from texam_question where exam_id ='"+examId+"'");//questionService.getQuestionListByExam(e.getId());
-////        setAttr("id", e.getId());
-//        setAttr("exam_name", e.getExamName());
-//        setAttr("questionList", questions);
-//        setAttr("questionIds", questionIds);
-////        renderJsp("/learn/exam_add.jsp");
-//        redirect("/exam/edit?examId="+e.getId());
-//    }
-//
-//    public void exam_update(){
-//        Exam e = Exam.dao.findById(getParaToLong("examId"));
-//        e.setExamName(getPara("exam_name"));
-//        e.update();//.updateByPrimaryKey(e);
-////        List<Question> questions = Question.dao.find("select * from tquestion");
-////        List<Record> questionIds = Db.find("select question_id from texam_question where exam_id ='"+e.getId()+"'");//questionService.getQuestionListByExam(e.getId());
-//        setAttr("id",e.getId());
-////        setAttr("exam", e);
-////        setAttr("exam_name", e.getExamName());
-////        setAttr("questionList", questions);
-////        setAttr("questionIds", questionIds);
-////        keepPara();
-//        edit();
-//        //renderJsp("/learn/exam_edit.jsp");
-//    }
-//
-//
-//  
-//    public void edit_save(){
-////        String id = getPara("id");
-//        Long examId = getParaToLong("examId");
-////        String questionId = getPara("questionId");
-//        String examName = getPara("examName");
-////        float score = getPara("score")==null?0:Float.parseFloat(getPara("score"));
-//        Exam e = new Exam();
-//        e.setId(examId);
-//        e.setExamName(examName);
-//        e.setScore(countScore(examId));
-//        e.update();
-//        setAttr("examList",Exam.dao.find("select * from texam"));
-//        renderJsp("/learn/exam_list.jsp");
-//    }
-//
-//
-//    
-//    
-//}

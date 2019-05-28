@@ -129,4 +129,12 @@ public abstract class BaseQuestion<M extends BaseQuestion<M>> extends Model<M> i
 		return getStr("relationId");
 	}
 
+	public void setNetType(java.lang.String netType) {
+		set("netType", netType);
+	}
+	
+	public java.lang.String getNetType() {
+		return getStr("netType");
+	}
+
 }

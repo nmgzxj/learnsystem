@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.cjih.learnsystem.common.util.BCD;
+import com.cjih.learnsystem.common.util.Encrypt;
 import com.jfinal.club.common.model.Unit;
 import com.jfinal.club.common.model.X1msg;
 import com.jfinal.core.Controller;
@@ -17,7 +18,7 @@ public class XCorn extends Controller implements Runnable{
 		/*
 		 * X1端口无消息自动断开
 		 */
-		String sql = "select * from tunit where x1_status = '1' and id not in (select DISTINCT unit from tx1msg where TIMESTAMPDIFF(SECOND,create_time,now())<" + PropKit.get("Tx1_nomsg")+")";
+		String sql = "select * from tunit where x1_status = '1' and id not in (select DISTINCT unit from tx1msg where TIMESTAMPDIFF(SECOND,create_time,now()) < " + PropKit.get("Tx1_nomsg")+")";
 		//Db.update("update tunit set x1_status = '0' where id in ("+sql+")");
 		List<Unit> units = Unit.dao.find(sql);
 		X1msg x1;
@@ -34,6 +35,7 @@ public class XCorn extends Controller implements Runnable{
 					"LIC标 识(M).......["+u.getLicId()+"]<"+BCD.str2HexStr(u.getLicId())+">\\n" + 
 					"网元标识(M).......["+u.getUnitId()+"]<"+BCD.str2HexStr(u.getUnitId())+">\\n" + 
 					"连接释放原因(M)...[Time out]<00 00 00 01 >\\n");
+			x1.setMemo(Encrypt.encode(x1.getMemo()));
 			x1.save();
 			u.setX1Status("0");//当前网元X1端口设置为未连接。
 			u.update();

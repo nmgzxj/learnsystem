@@ -1,0 +1,102 @@
+#set(seoTitle="用户信息")
+#@adminLayout()
+#define main()
+<link rel="stylesheet" href="/assets/css/index.css">
+<script type="text/javascript">
+sendMsg = function(){
+	var form = document.getElementById("form1");
+	form.action = '/admin/userdb/save';
+	form.submit();
+}
+
+search = function(){
+	var form = document.getElementById("form1");
+	form.action = "/admin/userdb";
+	form.handle.value = "search";
+	form.submit();
+}
+
+</script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+
+        li{
+           list-style: none;
+        }
+
+        .fr{
+           float: right;
+        }
+
+        .fl{
+            float: left;
+        }
+    </style>
+
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		#(seoTitle)
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+	<div class="jfa-content" id="jfa-content">
+
+
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                    <div class="widget_heigh am-cf">
+                        <div class="port_title" style="margin-bottom: 50px;">用户信息修改</div>
+
+                        <div class="tabl_wrapper">
+#include("numberUser_form.html", action="/admin/numberUser/update")
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+<script>
+
+    function func_del(id){
+    		if(confirm("确定要删除该用户信息吗？")){
+    			window.open("/admin/userdb/delete?id="+id, '_self');
+    		}
+    }
+   
+    function unit_change(id,userName,msisdn,imsi,imei,ip,ipTime,ipPort,ipAddressField,nai,phoneNumber,sip,tel){
+	    $("#id")[0].value = id;
+	    $("#userName")[0].value = userName;
+	    $("#msisdn")[0].value = msisdn;
+	    $("#imsi")[0].value = imsi;
+	    $("#imei")[0].value = imei;
+	    $("#ip")[0].value = ip;
+	    $("#ipTime")[0].value = ipTime;
+	    $("#ipPort")[0].value = ipPort;
+	    $("#ipAddressField")[0].value = ipAddressField;
+	    $("#nai")[0].value = nai;
+	    $("#phoneNumber")[0].value = phoneNumber;
+	    $("#sip")[0].value = sip;
+	    $("#tel")[0].value = tel;
+	    $("#form1")[0].action = '/admin/userdb/update';
+	}
+
+
+</script>
+</body>
+
+</html>
+#end

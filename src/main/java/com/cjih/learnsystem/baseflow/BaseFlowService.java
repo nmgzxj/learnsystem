@@ -3,9 +3,11 @@ package com.cjih.learnsystem.baseflow;
 
 
 
+import cn.jbolt.common.util.ArrayUtil;
 import com.jfinal.club.common.model.BaseFlow;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.Ret;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 
 /**
@@ -19,7 +21,7 @@ public class BaseFlowService {
 	private BaseFlow dao = new BaseFlow().dao();
 	
 	public Page<BaseFlow> paginate(int pageNum) {
-		return dao.paginate(pageNum, PropKit.getInt("pageSize"), "select *", "from tbase_flow order by id desc");
+		return dao.paginate(pageNum, PropKit.getInt("pageSize"), "select *", "from tbase_flow order by title desc");
 	}
 
 	public BaseFlow findById(int id) {
@@ -54,6 +56,11 @@ public class BaseFlowService {
 		else {
 			return Ret.ok("msg", "基础流程 删除失败");
 		}
+	}
+
+	public void deleteIds(Integer ids[]){
+		Db.delete("delete from tbase_flow_msg where flow_id in (0"+ ArrayUtil.join(ids,",")+"0)");
+		Db.delete("delete from tbase_flow where id in (0"+ ArrayUtil.join(ids,",")+"0)");
 	}
 
 }

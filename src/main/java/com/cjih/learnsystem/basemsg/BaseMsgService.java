@@ -3,9 +3,11 @@ package com.cjih.learnsystem.basemsg;
 
 
 
+import cn.jbolt.common.util.ArrayUtil;
 import com.jfinal.club.common.model.BaseMsg;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.Ret;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 
 /**
@@ -20,7 +22,7 @@ public class BaseMsgService {
 	
 	public Page<BaseMsg> paginate(int pageNum, String query) {
 		return dao.paginate(pageNum, PropKit.getInt("pageSize"), "select *", "from tbase_msg where 1=1 "
-	+query+"order by id desc");
+	+query+"order by title desc");
 	}
 
 	public BaseMsg findById(int baseMsgId) {
@@ -55,6 +57,10 @@ public class BaseMsgService {
 		else {
 			return Ret.ok("msg", "基础消息 删除失败");
 		}
+	}
+
+	public void deleteIds(Integer ids[]){
+		Db.delete("delete from tbase_msg where id in (0"+ArrayUtil.join(ids,",")+"0)");
 	}
 
 }
