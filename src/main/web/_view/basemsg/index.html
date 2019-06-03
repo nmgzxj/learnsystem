@@ -15,7 +15,8 @@
 	<div class="jfa-content" id="jfa-content">
 	<!--查询层  -->
 	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
-	<form action="/admin/basemsg" method="post" name="thisform">
+	<form action="/admin/basemsg" method="post" name="queryform" id="queryform">
+        <input type="hidden" name="isDelete" value="#(isDelete?? false)"/>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -35,13 +36,13 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="submit" class="btn btn-primary" >确定</button>
+                    <button type="submit" class="btn btn-primary" onclick="normalData()">确定</button>
                 </div>
             </div>
          </div>
          </form>
     </div>
-        <form action="/admin/basemsg/deleteIds" method="post" name="thisform" id="thisform">
+        <form action="/admin/basemsg/deleteIds" method="post" name="dataform" id="dataform">
 		<div class="jfa-toolbar">
 			<a class="btn btn-primary btn-sm" href="/admin/basemsg/add">
 				<i class="fa fa-plus"></i>
@@ -51,53 +52,74 @@
 				<i class="fa fa-search"></i>
 				查询
 			</a>
-            <a href="#" class="btn btn-danger btn-sm" onclick="if(confirm('确定要删除这些记录吗？')) $('#thisform').submit()">
-                <i class="fa fa-recycle"></i>
+            #if(isDelete?? && isDelete=='true')
+            <a href="#" class="btn btn-success btn-sm" onclick="batchRestore();">
+                <i class="fa fa-refresh"></i>
+                批量还原
+            </a>
+            <a href="#" onclick="normalData()" class="btn btn-#((isDelete?? && isDelete=='true')?'danger':'light') btn-sm">
+                <i class="fa fa-reorder"></i>
+                返回列表
+            </a>
+            #else
+            <a href="#" class="btn btn-danger btn-sm" onclick="batchDelete();">
+                <i class="fa fa-trash"></i>
                 批量删除
             </a>
+            <a href="#" onclick="trashData()" class="btn btn-#((isDelete?? && isDelete=='true')?'danger':'light') btn-sm">
+                <i class="fa fa-recycle"></i>
+                回收站(#(deleteCount??0))
+            </a>
+            #end
+
 		</div>
 		<div class="jfa-table-box margin-top-30">
-                        <table class="table table-bordered table-hover margin-bottom-10">
-                                <thead>
-                                <tr>
-                                    <th>选择<input type="checkbox" name="all" id="all" value="" onclick="chkAllItems(this.checked,'id');"/> </th>
-                                    <th>消息名</th>
-                                    <th>接口</th>
-                                    <th>操作</th>
+            <table class="table table-bordered table-hover margin-bottom-10">
+                    <thead>
+                    <tr>
+                        <th>选择<input type="checkbox" name="all" id="all" value="" onclick="chkAllItems(this.checked,'id');"/> </th>
+                        <th>消息名</th>
+                        <th>接口</th>
+                        <th>操作</th>
 
-                                </tr>
-                                </thead>
-                                <tbody>
-                                #for(msg:basemsgPage.getList())
-                                <tr class="gradeX">
-                                    <td style="width: 80px;"><input type="checkbox" name="id"  value="#(msg.id)" onclick="chkSingleItem('all','id');"></td>
-                                        <td>#(msg.title)</td>
-                                        <td>#(msg.port)</td>
-                                        <td>
-                                            <a href="/admin/basemsg/edit?id=#(msg.id)&p=#(p)" >
-                                                    <i class="fa fa-pencil" title="修改">修改</i>
-                                            </a>
-	                                                    
-					                        <a data-delete
-											   data-title="#escape(msg.title)"
-											   data-action="/admin/basemsg/delete?id=#(msg.id)" href="">
-												<i class="fa fa-trash" title="删除">删除</i>
-											</a>
-                                        </td>
-                                </tr>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    #for(msg:basemsgPage.getList())
+                    <tr class="gradeX">
+                        <td style="width: 80px;"><input type="checkbox" name="id"  value="#(msg.id)" onclick="chkSingleItem('all','id');"></td>
+                            <td>#(msg.title)</td>
+                            <td>#(msg.port)</td>
+                            <td>
+                                <a href="/admin/basemsg/edit?id=#(msg.id)&p=#(p)" >
+                                        <i class="fa fa-pencil" title="修改">修改</i>
+                                </a>
+                                #if(isDelete?? && isDelete=='true')
+                                <a onclick="restore('#(msg.id)');" >
+                                    <i class="fa fa-trash" title="还原">还原</i>
+                                </a>
+                                #else
+                                <a onclick="deleteId('#(msg.id)')" >
+                                    <i class="fa fa-trash" title="删除">删除</i>
+                                </a>
                                 #end
-                                <!-- more data -->
-                                </tbody>
-                        </table>
-                        <div>
-                            #set(append = "&title="+title+"&msg="+msg+"&port="+port)
-                            #@adminPaginate(basemsgPage.pageNumber, basemsgPage.totalPage, "/admin/basemsg?p=")
-						</div>
+                            </td>
+                    </tr>
+                    #end
+                    <!-- more data -->
+                    </tbody>
+            </table>
+            <div>
+                #set(append = "&title="+title+"&msg="+msg+"&port="+port)
+                #@adminPaginate(basemsgPage.pageNumber, basemsgPage.totalPage, "/admin/basemsg?p=")
+            </div>
 		</div>
         </form>
 	</div><!-- END OF jfa-content -->
 </div><!-- END OF jfa-content-box -->
 <script type="text/javascript">
+
+    var queryform=$("#queryform");
 
     //选择和清除所有的删除复选框
     function chkAllItems(flag,subItem){
@@ -119,6 +141,52 @@
         document.getElementById(allItem).checked=flag;//重新设置全选状态。
     }
 
+    /**
+     * 普通查询
+     */
+    function normalData(){
+        queryform.find("[name='isDelete']").val(false);
+        queryform.submit();
+    }
+    /**
+     * 查回收站
+     */
+    function trashData(){
+        queryform.find("[name='isDelete']").val(true);
+        queryform.submit();
+    }
+
+    function batchDelete() {
+        if(confirm('确定要删除这些记录吗(放入回收站)？')) {
+            $('#dataform').attr("action","/admin/basemsg/deleteIds");
+            $('#dataform').submit();
+        }
+
+    }
+
+    function batchRestore() {
+        if(confirm('确定要还原这些记录吗？')) {
+            $('#dataform').attr("action","/admin/basemsg/restoreIds");
+            $('#dataform').submit();
+        }
+
+    }
+
+    function restore(id) {
+        if(confirm('确定要还原此记录吗？')) {
+            $('#dataform').attr("action","/admin/basemsg/restore?id="+id);
+            $('#dataform').submit();
+        }
+
+    }
+
+    function deleteId(id) {
+        if(confirm('确定要删除此记录吗？')) {
+            $('#dataform').attr("action","/admin/basemsg/delete?id="+id);
+            $('#dataform').submit();
+        }
+
+    }
 
 </script>
 #end

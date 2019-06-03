@@ -36,6 +36,7 @@ public class _MappingKit {
 		arp.addMapping("tanswer_log", "id", AnswerLog.class);
 		arp.addMapping("task_list", "id", AskList.class);
 		arp.addMapping("tbase_msg", "id", BaseMsg.class);
+		arp.addMapping("tbase_msg_copy1", "id", BaseMsgCopy1.class);
 		arp.addMapping("tbug", "id", Bug.class);
 		arp.addMapping("texam", "id", Exam.class);
 		arp.addMapping("texam_question", "id", ExamQuestion.class);

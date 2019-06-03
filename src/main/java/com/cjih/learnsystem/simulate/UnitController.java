@@ -895,7 +895,7 @@ public class UnitController extends BaseController {
 							"[  Service Type = [呼叫等待(sCW)]<05 00 00 00>\\n" +
 							"  Service Type = [呼叫保持(sCH)]<08 00 00 00>\\n" +
 							"  Service Type = [呼叫恢复(sResum)]<09 00 00 00>\\n" +
-							"]\n" +
+							"]\\n" +
 							"    前转标识列表(C)......[Invalid]\\n" +
 							"HSS上报信息(C)\\n" +
 							"    用户状态(M)..........[Invalid]\\n" +

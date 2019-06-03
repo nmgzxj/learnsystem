@@ -233,4 +233,60 @@ public abstract class BaseMsgTempletSub<M extends BaseMsgTempletSub<M>> extends 
 		return getStr("unit_role");
 	}
 
+	public void setCreator(java.lang.Integer creator) {
+		set("creator", creator);
+	}
+	
+	public java.lang.Integer getCreator() {
+		return getInt("creator");
+	}
+
+	public void setCreateTime(java.util.Date createTime) {
+		set("create_time", createTime);
+	}
+	
+	public java.util.Date getCreateTime() {
+		return get("create_time");
+	}
+
+	public void setModifyBy(java.lang.Integer modifyBy) {
+		set("modify_by", modifyBy);
+	}
+	
+	public java.lang.Integer getModifyBy() {
+		return getInt("modify_by");
+	}
+
+	public void setModifyTime(java.util.Date modifyTime) {
+		set("modify_time", modifyTime);
+	}
+	
+	public java.util.Date getModifyTime() {
+		return get("modify_time");
+	}
+
+	public void setIsDelete(java.lang.Boolean isDelete) {
+		set("is_delete", isDelete);
+	}
+	
+	public java.lang.Boolean getIsDelete() {
+		return get("is_delete");
+	}
+
+	public void setDeleteBy(java.lang.Integer deleteBy) {
+		set("delete_by", deleteBy);
+	}
+	
+	public java.lang.Integer getDeleteBy() {
+		return getInt("delete_by");
+	}
+
+	public void setDeleteTime(java.util.Date deleteTime) {
+		set("delete_time", deleteTime);
+	}
+	
+	public java.util.Date getDeleteTime() {
+		return get("delete_time");
+	}
+
 }

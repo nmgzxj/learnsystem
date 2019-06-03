@@ -23,9 +23,10 @@ public class MsgTempletController extends BaseController {
 
 	public void templet_list() {
 
-		setAttr("templetPage",srv.paginate(getParaToInt("p",1), getPara("title")));
+		setAttr("templetPage",srv.paginate(getParaToInt("p",1), getPara("title"), getParaToBoolean("isDelete", false)));
 		keepPara();
 //		setAttr("title", getPara("title")==null?"":getPara("title"));
+		setAttr("deleteCount", srv.getDeleteCount());
 		render("templet_list.html");
 	}
 
@@ -33,19 +34,21 @@ public class MsgTempletController extends BaseController {
 		Integer templetId = getParaToInt("templetId");
 		MsgTemplet e = MsgTemplet.dao.findById(templetId);
 		setAttr("templet",e);
-
-		List<MsgTempletSub> subTemplets = MsgTempletSub.dao.find("select * from tmsg_templet_sub where templet_id ="+templetId +" order by taxis");//questionService.getQuestionListByExam(e.getId());
+		keepPara();
+		setAttr("deleteCount", Db.queryInt("select count(*) from tmsg_templet_sub where templet_id ="+templetId+" and is_delete=true"));
+		List<MsgTempletSub> subTemplets = MsgTempletSub.dao.find("select * from tmsg_templet_sub where templet_id ="+templetId
+				+" and is_delete="+getParaToBoolean("isDelete",false)+" order by taxis");//questionService.getQuestionListByExam(e.getId());
 		setAttr("subTemplets", subTemplets);
 		render("templet_edit.html");
 
 	}
 
-	public void templet_delete(){
-		Long id = getParaToLong("templetId");
-		Db.update("delete from tmsg_templet_sub where templet_id = '"+id+"'");
-		MsgTemplet.dao.deleteById(id);
-		templet_list();
-	}
+//	public void templet_delete(){
+//		Long id = getParaToLong("templetId");
+//		Db.update("delete from tmsg_templet_sub where templet_id = '"+id+"'");
+//		MsgTemplet.dao.deleteById(id);
+//		templet_list();
+//	}
 
 	public void templet_add(){
 
@@ -172,7 +175,7 @@ public class MsgTempletController extends BaseController {
 		e.setCallSn(getParaToInt("callSn"));
 		e.setCallSnChild(getParaToInt("callSnChild"));
 		e.setCreateTime(new Date());
-		e.setCreator(""+getLoginAccountId());
+		e.setCreator(getLoginAccountId());
 		e.setEcgi(getPara("ecgi"));
 		e.setEventSn(getPara("eventSn"));
 		e.setGummeid(getPara("gummeid"));
@@ -182,7 +185,7 @@ public class MsgTempletController extends BaseController {
 		e.setLai(getPara("lai"));
 		e.setLastVisitedTai("lastVisitedTai");
 		e.setLicId(getPara("licId"));
-		e.setModifyBy(""+getLoginAccountId());
+		e.setModifyBy(getLoginAccountId());
 		e.setModifyTime(new Date());
 		e.setMsisdn(getPara("msisdn"));
 		e.setOldMmeSgsn(getPara("oldMmeSgsn"));
@@ -342,16 +345,50 @@ public class MsgTempletController extends BaseController {
 //		return rtn;
 //	}
 
-	public void deleteIds() {
-		Db.delete("delete from tmsg_templet_sub where templet_id in (0"+ ArrayUtil.join(getParaValues("id"),",")+"0)");
-		Db.delete("delete from tmsg_templet where id in (0"+ ArrayUtil.join(getParaValues("id"),",")+"0)");
+
+	public void deleteMsgIds() {
+//		Db.delete("delete from tmsg_templet_sub where id in (0"+ ArrayUtil.join(getParaValues("id"),",")+"0)");
+		srv.deleteMsgIds(getParaValuesToInt("id"), getLoginAccountId());
+		redirect("/admin/templet/templet_edit?templetId="+getPara("templetId"));
+	}
+
+	public void restoreMsgIds() {
+		srv.restoreMsgIds(getParaValuesToInt("id"));
+		redirect("/admin/templet/templet_edit?templetId="+getPara("templetId"));
+	}
+
+	public void deleteMsg() {
+		Ret ret = srv.deleteMsg(getParaToInt("id"), getLoginAccountId());
+		//renderJson(ret);
+		redirect("/admin/templet/templet_edit?templetId="+getPara("templetId"));
+	}
+
+	public void restoreMsg(){
+		Ret ret = srv.restoreMsg(getParaToInt("id"));
+		redirect("/admin/templet/templet_edit?templetId="+getPara("templetId"));
+	}
+
+	public void delete() {
+		Ret ret = srv.delete(getParaToInt("id"), getLoginAccountId());
+		//renderJson(ret);
 		redirect("/admin/templet/templet_list");
 	}
 
-	public void deleteMsgIds() {
-		Db.delete("delete from tmsg_templet_sub where id in (0"+ ArrayUtil.join(getParaValues("id"),",")+"0)");
-		redirect("/admin/templet/templet_edit?templetId="+getPara("templetId"));
+	public void restore(){
+		Ret ret = srv.restore(getParaToInt("id"));
+		redirect("/admin/templet/templet_list");
 	}
+
+	public void deleteIds() {
+		srv.deleteIds(getParaValuesToInt("id"), getLoginAccountId());
+		redirect("/admin/templet/templet_list");
+	}
+
+	public void restoreIds() {
+		srv.restoreIds(getParaValuesToInt("id"));
+		redirect("/admin/templet/templet_list");
+	}
+
 
 	public void batch_up() {
 		batch_move(true);

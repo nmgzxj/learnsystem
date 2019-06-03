@@ -20,6 +20,7 @@ public class BaseMsgController extends BaseController{
 		setAttr("title", getPara("title")==null?"":getPara("title"));
 		setAttr("msg", getPara("msg")==null?"":getPara("msg"));
 		setAttr("port", getPara("port")==null?"":getPara("port"));
+		setAttr("deleteCount", srv.getDeleteCount());
 		render("index.html");
 	}
 
@@ -34,6 +35,7 @@ public class BaseMsgController extends BaseController{
 		if(StrKit.notBlank(getPara("port"))) {
 			query += " and port = '"+getPara("port")+"'";
 		}
+		query += " and is_delete = "+getParaToBoolean("isDelete",false);
 		Page<BaseMsg> basemsgPage = srv.paginate(getParaToInt("p", 1), query);
 		setAttr("basemsgPage", basemsgPage);
 		keepPara();
@@ -57,7 +59,7 @@ public class BaseMsgController extends BaseController{
 	public void update() {
 		BaseMsg baseMsg = getBean(BaseMsg.class);
 		baseMsg.setMsg(Encrypt.encode(baseMsg.getMsg()));
-		baseMsg.setModifyBy(Integer.toString(getLoginAccountId()));
+		baseMsg.setModifyBy(getLoginAccountId());
 		baseMsg.setModifyTime(new Date());
 		Ret ret = srv.update(baseMsg);
 		renderJson(ret);
@@ -67,19 +69,30 @@ public class BaseMsgController extends BaseController{
 	public void save() {
 		BaseMsg bm = getBean(BaseMsg.class);
 		bm.setMsg(Encrypt.encode(bm.getMsg()));
-		bm.setCreator(Integer.toString(getLoginAccountId()));
+		bm.setCreator(getLoginAccountId());
 		bm.setCreateTime(new Date());
 		Ret ret = srv.save(bm);
 		renderJson(ret);
 	}
 
 	public void delete() {
-		Ret ret = srv.delete(getParaToInt("id"));
-		renderJson(ret);
+		Ret ret = srv.delete(getParaToInt("id"), getLoginAccountId());
+		//renderJson(ret);
+		redirect("/admin/basemsg");
+	}
+
+	public void restore(){
+		Ret ret = srv.restore(getParaToInt("id"));
+		redirect("/admin/basemsg");
 	}
 
 	public void deleteIds() {
-		srv.deleteIds(getParaValuesToInt("id"));
+		srv.deleteIds(getParaValuesToInt("id"), getLoginAccountId());
+		redirect("/admin/basemsg");
+	}
+
+	public void restoreIds() {
+		srv.restoreIds(getParaValuesToInt("id"));
 		redirect("/admin/basemsg");
 	}
 

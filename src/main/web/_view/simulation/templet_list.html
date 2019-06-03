@@ -3,18 +3,18 @@
 #define main()
 <link rel="stylesheet" href="/assets/css/index.css">
 <script type="text/javascript">
-sendMsg = function(){
-	var form = document.getElementById("form1");
-	form.action = '/admin/unit/x1MsgAdd';
-	form.submit();
-}
-
-search = function(){
-	var form = document.getElementById("form1");
-	form.action = "/admin/unit/simulation1";
-	form.handle.value = "search";
-	form.submit();
-}
+// sendMsg = function(){
+// 	var form = document.getElementById("form1");
+// 	form.action = '/admin/unit/x1MsgAdd';
+// 	form.submit();
+// }
+//
+// search = function(){
+// 	var form = document.getElementById("form1");
+// 	form.action = "/admin/unit/simulation1";
+// 	form.handle.value = "search";
+// 	form.submit();
+// }
 
 </script>
 
@@ -41,22 +41,39 @@ search = function(){
                             <div style="margin-top: 10px">
 
                                 <div class="" style="margin-bottom: 10px">
-                                    <form action="" method="post">
-                                    <input type="text" name="title" class="input_hei">
+                                    <form action="/admin/templet/templet_list" method="post" id="queryform">
+                                        <input type="hidden" name="isDelete" value="#(isDelete?? false)"/>
+                                    <input type="text" name="title" class="input_height">
                                      <span class="">
                                             <button class="am-btn am-btn-primary am-btn-xs" type="submit">搜索</button>
                                     </span>
                                     </form>
                                 </div>
-                                <form action="/admin/templet/deleteIds" method="post" name="thisform" id="thisform">
+                                <form action="/admin/templet/deleteIds" method="post" name="dataform" id="dataform">
                                     #permission("/admin/templet/templet_edit")
                                         <a class="btn btn-info" href="/admin/templet/templet_add">新建模板</a>
                                     #end
                                     #permission("/admin/templet/templet_edit")
-                                        <a href="#" class="btn btn-danger btn-sm" onclick="if(confirm('确定要删除这些记录吗？')) $('#thisform').submit()">
-                                            <i class="fa fa-recycle"></i>
+                                        #if(isDelete?? && isDelete=='true')
+                                        <a href="#" class="btn btn-success btn-sm" onclick="batchRestore();">
+                                            <i class="fa fa-refresh"></i>
+                                            批量还原
+                                        </a>
+                                        <a href="#" onclick="normalData()" class="btn btn-#((isDelete?? && isDelete=='true')?'danger':'light') btn-sm">
+                                            <i class="fa fa-reorder"></i>
+                                            返回列表
+                                        </a>
+                                        #else
+                                        <a href="#" class="btn btn-danger btn-sm" onclick="batchDelete();">
+                                            <i class="fa fa-trash"></i>
                                             批量删除
                                         </a>
+                                    <a href="#" onclick="trashData()" class="btn btn-#((isDelete?? && isDelete=='true')?'danger':'light') btn-sm">
+                                        <i class="fa fa-recycle"></i>
+                                        回收站(#(deleteCount??0))
+                                    </a>
+                                        #end
+
                                     #end
                                 <table class="table table-bordered table-hover margin-bottom-10">
                                     <thead>
@@ -87,9 +104,15 @@ search = function(){
                                                 <a href="/admin/templet/templet_edit?templetId=#(templet.id )" class="editor">
                                                     <i class="am-icon-pencil"></i> 编辑
                                                 </a>
-                                                <a onclick="return confirm('确定要删除吗？');" href="/admin/templet/templet_delete?templetId=#(templet.id )" class="tpl-table-black-operation-del">
-                                                    <i class="am-icon-trash"></i> 删除
+                                                #if(isDelete?? && isDelete=='true')
+                                                <a onclick="restore('#(templet.id)');" >
+                                                    还原
                                                 </a>
+                                                #else
+                                                <a onclick="deleteId('#(templet.id)')">
+                                                    删除
+                                                </a>
+                                                #end
                                                #end
                                             </div>
                                         </td>
@@ -160,6 +183,53 @@ function sendMsg(v){
         document.getElementById(allItem).checked=flag;//重新设置全选状态。
     }
 
+    var thisform=$("#queryform");
+    /**
+     * 普通查询
+     */
+    function normalData(){
+        thisform.find("[name='isDelete']").val(false);
+        thisform.submit();
+    }
+    /**
+     * 查回收站
+     */
+    function trashData(){
+        thisform.find("[name='isDelete']").val(true);
+        thisform.submit();
+    }
+
+    function batchDelete() {
+        if(confirm('确定要删除这些记录吗(放入回收站)？')) {
+            $('#dataform').attr("action","/admin/templet/deleteIds");
+            $('#dataform').submit();
+        }
+
+    }
+
+    function batchRestore() {
+        if(confirm('确定要还原这些记录吗？')) {
+            $('#dataform').attr("action","/admin/templet/restoreIds");
+            $('#dataform').submit();
+        }
+
+    }
+
+    function restore(id) {
+        if(confirm('确定要还原此记录吗？')) {
+            $('#dataform').attr("action","/admin/templet/restore?id="+id);
+            $('#dataform').submit();
+        }
+
+    }
+
+    function deleteId(id) {
+        if(confirm('确定要删除此记录吗？')) {
+            $('#dataform').attr("action","/admin/templet/delete?id="+id);
+            $('#dataform').submit();
+        }
+
+    }
 
 </script>
 </body>

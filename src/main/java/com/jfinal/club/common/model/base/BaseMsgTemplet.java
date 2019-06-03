@@ -73,12 +73,12 @@ public abstract class BaseMsgTemplet<M extends BaseMsgTemplet<M>> extends Model<
 		return getStr("propose_type");
 	}
 
-	public void setCreator(java.lang.String creator) {
+	public void setCreator(java.lang.Integer creator) {
 		set("creator", creator);
 	}
 	
-	public java.lang.String getCreator() {
-		return getStr("creator");
+	public java.lang.Integer getCreator() {
+		return getInt("creator");
 	}
 
 	public void setCreateTime(java.util.Date createTime) {
@@ -89,12 +89,12 @@ public abstract class BaseMsgTemplet<M extends BaseMsgTemplet<M>> extends Model<
 		return get("create_time");
 	}
 
-	public void setModifyBy(java.lang.String modifyBy) {
+	public void setModifyBy(java.lang.Integer modifyBy) {
 		set("modify_by", modifyBy);
 	}
 	
-	public java.lang.String getModifyBy() {
-		return getStr("modify_by");
+	public java.lang.Integer getModifyBy() {
+		return getInt("modify_by");
 	}
 
 	public void setModifyTime(java.util.Date modifyTime) {
@@ -103,6 +103,30 @@ public abstract class BaseMsgTemplet<M extends BaseMsgTemplet<M>> extends Model<
 	
 	public java.util.Date getModifyTime() {
 		return get("modify_time");
+	}
+
+	public void setIsDelete(java.lang.Boolean isDelete) {
+		set("is_delete", isDelete);
+	}
+	
+	public java.lang.Boolean getIsDelete() {
+		return get("is_delete");
+	}
+
+	public void setDeleteBy(java.lang.Integer deleteBy) {
+		set("delete_by", deleteBy);
+	}
+	
+	public java.lang.Integer getDeleteBy() {
+		return getInt("delete_by");
+	}
+
+	public void setDeleteTime(java.util.Date deleteTime) {
+		set("delete_time", deleteTime);
+	}
+	
+	public java.util.Date getDeleteTime() {
+		return get("delete_time");
 	}
 
 	public void setEventSn(java.lang.String eventSn) {
