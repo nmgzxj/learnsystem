@@ -112,7 +112,7 @@ public class UnitController extends BaseController {
 		else {
             LogKit.debug("x1status=" + Unit.dao.findById(getPara("unit")).getX1Status());
             LogKit.debug("operType=" + operType);
-			if (operType.equals("createConnection")) {
+			if ("createConnection".equals(operType)) {
 				createConnection();
 			} else if (operType.equals("a2")) {
 				a2();
@@ -166,7 +166,7 @@ public class UnitController extends BaseController {
         msg.setMsgType("未知消息");
         msg.setCreator(""+getLoginAccountId());
         msg.setCreateTime(new Date());
-        msg.setMemo("未知消息");
+        msg.setMemo(Encrypt.encode("未知消息"));
         msg.setMemo(Encrypt.encode(msg.getMemo()));
         msg.setX2ip(getPara("x2Ip"));
         msg.setX2port(getPara("x2Port"));
@@ -188,11 +188,11 @@ public class UnitController extends BaseController {
             case 1:
             case 2:
             case 3:
+			case 4:
             case 5:
             case 6:
                 netType = "4G";
                 break;
-            case 4:
             case 8:
             case 9:
             case 10:
@@ -871,165 +871,174 @@ public class UnitController extends BaseController {
 		msg = new X1msg();
 		setMsg(msg);
 		msg.setMsgType("用户信息查询响应");
-		if("4G".equalsIgnoreCase(getNetType(u.getUnitType()))||"IMS".equalsIgnoreCase(getNetType(u.getUnitType()))) {
+		LogKit.debug("unitType="+u.getUnitTypeView());
+		LogKit.debug("netType="+getNetType(u.getUnitType()));
+		if("IMS".equalsIgnoreCase(getNetType(u.getUnitType()))){
+			if("TEL".equals(getPara("numberFormat"))){
+				Number n = Number.dao.findFirst("select * from tnumber_user where id in (select number_user_id from tnumber_user_sub where impu_type='tel' and impu = '"+getPara("number")+"') ");
+				if(n==null){
+					processNotFound(msg);
+				}
+				else {
+					String unitView = u.getUnitTypeView();
+					if ("AS".equals(unitView)) {
+						msg.setMemo("协议版本号...........[2]<02>\\n" +
+								"消息类型.............[用户信息查询响应]\\n" +
+								"目标标识(M)..........[tel:"+ getPara("number") +"]<"+BCD.str2rBcdstr(getPara("number"))+">\\n" +
+								"操作结果(M)..........[成功]<00>\\n" +
+								"失败原因(C)..........[Invalid]\\n" +
+								"AS上报信息(C)\\n" +
+								"    补充业务类型列表(C)..\\n" +
+								"[  Service Type = [呼叫等待(sCW)]<05 00 00 00>\\n" +
+								"  Service Type = [呼叫保持(sCH)]<08 00 00 00>\\n" +
+								"  Service Type = [呼叫恢复(sResum)]<09 00 00 00>\\n" +
+								"]\\n" +
+								"    前转标识列表(C)......[Invalid]\\n" +
+								"HSS上报信息(C)\\n" +
+								"    用户状态(M)..........[Invalid]\\n" +
+								"    拜访网络标识列表(M)..[Invalid]\\n" +
+								"    S-CSCF名(C)..........[Invalid]\\n" +
+								"    AS名列表(C)..........[Invalid]\\n" +
+								"S-CSCF上报信息(C)\\n" +
+								"    用户状态(M)..........[Invalid]\\n" +
+								"    拜访网络标识(C)......[Invalid]\\n" +
+								"    HSS/SLF域名(M).......[Invalid]\\n" +
+								"    接入侧域名(M)........[Invalid]\\n" +
+								"    Contact地址(M).......[Invalid]\\n" +
+								"SBC地址(C)...............[Invalid]\\n" +
+								"MSISDN(C)................[Invalid]\\n" +
+								"IMSI(C)..................[Invalid]\\n" +
+								"[ 编码码流 ]:　Length = 47\\n" +
+								"30 2d 80 01 02 a1 28 ac 26 a0 14 80 12 74 65 6c 3a 2b 38 36 \\n" +
+								"31 38 33 33 32 31 34 32 34 32 34 81 01 00 a3 0b a0 09 0a 01 \\n" +
+								"05 0a 01 08 0a 01 09\\n");
+					}
+					else if ("IMSHSS".equals(unitView)) {
+						msg.setMemo("协议版本号...........[2]<02>\\n" +
+								"消息类型.............[用户信息查询响应]\\n" +
+								"目标标识(M)..........[tel:"+ getPara("number") +"]<"+BCD.str2rBcdstr(getPara("number"))+">\\n" +
+								"操作结果(M)..........[成功]<00>\\n" +
+								"失败原因(C)..........[Invalid]\\n" +
+								"AS上报信息(C)\\n" +
+								"    补充业务类型列表(C)..[Invalid]\\n" +
+								"    前转标识列表(C)......[Invalid]\\n" +
+								"    主附卡关联列表(C)(适用一号多终端AS)......[Invalid]\\n" +
+								"HSS上报信息(C)\\n" +
+								"    用户状态(M)..........[在线 (online)]<01>\\n" +
+								"    拜访网络标识列表(M)..\\n" +
+								"[\\n" +
+								"  VisitNetworkID =[pcscf01.zj.ims.chinaunicom.cn]<70 63 73 63 66 30 31 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
+								"  VisitNetworkID =[pcscf02.zj.ims.chinaunicom.cn]<70 63 73 63 66 30 32 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
+								"  VisitNetworkID =[agcf01.zj.ims.chinaunicom.cn]<61 67 63 66 30 31 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
+								"  VisitNetworkID =[agcf02.zj.ims.chinaunicom.cn]<61 67 63 66 30 32 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
+								"]\\n" +
+								"    S-CSCF名(C)..........[sip:scscf02.zj.ims.chinaunicom.cn]<73 69 70 3a 73 63 73 63 66 30 32 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
+								"    AS名列表(C)..........\\n" +
+								"[\\n" +
+								"  As Name=[sip:mmtel90.zj.ims.chinaunicom.cn]<73 69 70 3a 6d 6d 74 65 6c 39 30 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
+								"]\\n" +
+								"S-CSCF上报信息(C)\\n" +
+								"    用户状态(M)..........[Invalid]\\n" +
+								"    拜访网络标识(C)......[Invalid]\\n" +
+								"    HSS/SLF域名(M).......[Invalid]\\n" +
+								"    接入侧域名(M)........[Invalid]\\n" +
+								"    Contact地址(M).......[Invalid]\\n" +
+								"SBC地址(C)...............[Invalid]\\n" +
+								"MSISDN(C)................[Invalid]\\n" +
+								"IMSI(C)..................[Invalid]\\n" +
+								"接入侧互通AGCF上报信息(C)(适用互通节点接入侧互通AGCF)\\n" +
+								"    MSISDN(C)..........[Invalid]\\n" +
+								"    IMSI(C)......[Invalid]\\n" +
+								"    IMEI(C).......[Invalid]\\n" +
+								"    ISDN(C)........[Invalid]\\n" +
+								"    用户状态(C).......[Invalid]\\n" +
+								"    位置更新时间(C).......[Invalid]\\n" +
+								"    最新位置(C).......[Invalid]\\n");
+					}
+					else if ("S-CSCF".equals(unitView)) {
+						msg.setMemo(
+								"协议版本号...........[2]<02>\\n" +
+										"消息类型.............[用户信息查询响应]\\n" +
+										"目标标识(M)..........[tel:"+ getPara("number") +"]<"+BCD.str2rBcdstr(getPara("number"))+">\\n" +
+										"操作结果(M)..........[成功]<00>\\n" +
+										"失败原因(C)..........[Invalid]\\n" +
+										"AS上报信息(C)\\n" +
+										"    补充业务类型列表(C)..[Invalid]\\n" +
+										"    前转标识列表(C)......[Invalid]\\n" +
+										"    主附卡关联列表(C)(适用一号多终端AS)......[Invalid]\\n" +
+										"HSS上报信息(C)\\n" +
+										"    用户状态(M)..........[Invalid]\\n" +
+										"    拜访网络标识列表(M)..[Invalid]\\n" +
+										"    S-CSCF名(C)..........[Invalid]\\n" +
+										"    AS名列表(C)..........[Invalid]\\n" +
+										"S-CSCF上报信息(C).........\\n" +
+										"[\\n" +
+										"    用户状态(M)..........[在线 (online)]<01>\\n" +
+										"    拜访网络标识(C)......[\\n" +
+										"  VisitNetworkID =[pcscf01.zj.ims.chinaunicom.cn]<70 63 73 63 66 30 31 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
+										"  VisitNetworkID =[pcscf02.zj.ims.chinaunicom.cn]<70 63 73 63 66 30 32 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
+										"  VisitNetworkID =[agcf01.zj.ims.chinaunicom.cn]<61 67 63 66 30 31 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
+										"  VisitNetworkID =[agcf02.zj.ims.chinaunicom.cn]<61 67 63 66 30 32 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
+										"]\\n" +
+										"    HSS/SLF域名(M).......[hss.domain21.huawei.com]\\n" +
+										"    接入侧域名(M)........[pcscf.domain21.huawei.com]\\n" +
+										"    Contact地址(M).......[sip:+8617830939495@191.139.2.12:11169]\\n" +
+										"]\\n" +
+										"SBC地址(C)...............[Invalid]\\n" +
+										"MSISDN(C)................[Invalid]\\n" +
+										"IMSI(C)..................[Invalid]\\n" +
+										"接入侧互通AGCF上报信息(C)(适用互通节点接入侧互通AGCF)\\n" +
+										"    MSISDN(C)..........[Invalid]\\n" +
+										"    IMSI(C)......[Invalid]\\n" +
+										"    IMEI(C).......[Invalid]\\n" +
+										"    ISDN(C)........[Invalid]\\n" +
+										"    用户状态(C).......[Invalid]\\n" +
+										"    位置更新时间(C).......[Invalid]\\n" +
+										"    最新位置(C).......[Invalid]");
+					}
+					else if ("P-CSCF".equals(unitView) || "AGCF".equals(unitView)) {
+						msg.setMemo("协议版本号...........[2]<02>\\n" +
+								"消息类型.............[用户信息查询响应]\\n" +
+								"目标标识(M)..........[tel:"+ getPara("number") +"]<"+BCD.str2rBcdstr(getPara("number"))+">\\n" +
+								"操作结果(M)..........[成功]<00>\\n" +
+								"失败原因(C)..........[Invalid]\\n" +
+								"AS上报信息(C)\\n" +
+								"    补充业务类型列表(C)..[Invalid]\\n" +
+								"    前转标识列表(C)......[Invalid]\\n" +
+								"    主附卡关联列表(C)(适用一号多终端AS)......[Invalid]\\n" +
+								"HSS上报信息(C)\\n" +
+								"    用户状态(M)..........[Invalid]\\n" +
+								"    拜访网络标识列表(M)..[Invalid]\\n" +
+								"    S-CSCF名(C)..........[Invalid]\\n" +
+								"    AS名列表(C)..........[Invalid]\\n" +
+								"S-CSCF上报信息(C)\\n" +
+								"    用户状态(M)..........[Invalid]\\n" +
+								"    拜访网络标识(C)......[Invalid]\\n" +
+								"    HSS/SLF域名(M).......[Invalid]\\n" +
+								"    接入侧域名(M)........[Invalid]\\n" +
+								"    Contact地址(M).......[Invalid]\\n" +
+								"SBC地址(C)...............[10.188.101.97:5060]<31 30 2e 31 38 38 2e 31 30 31 2e 39 37 3a 35 30 36 30>\\n" +
+								"\\n" +
+								"MSISDN(C)................[Invalid]\\n" +
+								"IMSI(C)..................[Invalid]\\n" +
+								"接入侧互通AGCF上报信息(C)(适用互通节点接入侧互通AGCF)\\n" +
+								"    MSISDN(C)..........[Invalid]\\n" +
+								"    IMSI(C)......[Invalid]\\n" +
+								"    IMEI(C).......[Invalid]\\n" +
+								"    ISDN(C)........[Invalid]\\n" +
+								"    用户状态(C).......[Invalid]\\n" +
+								"    位置更新时间(C).......[Invalid]\\n" +
+								"    最新位置(C).......[Invalid]");
+					}
+				}
+			}
+		}
+		else if("4G".equalsIgnoreCase(getNetType(u.getUnitType()))) {
 			Number n = Number.dao.findFirst("select * from tnumber_user where "+getPara("numberFormat")+" = '"+getPara("number")+"' ");
 			if(n==null){
-				msg.setMemo("协议版本号........[1]<01>\\n"
-						+ "消息类型..........[用户信息查询响应]\\n"
-						+ "MB类型(M).......[" + getPara("numberFormat") + "]<" + BCD.getTargetType(getPara("numberFormat")) + ">	\\n"
-						+ "MB标识(M).......[" + getPara("number") + "]<" + BCD.str2rBcdstr(getPara("number")) + ">\\n"
-						+ "操作结果(M).......[失败]<00>\\n"
-						+ "命令失败原因(C)...[MB not exists]\\n");
-				msg.setOperationResult("失败");
+				processNotFound(msg);
 			}
 			else {
-				String unitView = u.getUnitTypeView();
-				if ("AS".equals(unitView)) {
-					msg.setMemo("协议版本号...........[2]<02>\\n" +
-							"消息类型.............[用户信息查询响应]\\n" +
-							"目标标识(M)..........[tel:"+ getPara("number") +"]<"+BCD.str2rBcdstr(getPara("number"))+">\\n" +
-							"操作结果(M)..........[成功]<00>\\n" +
-							"失败原因(C)..........[Invalid]\\n" +
-							"AS上报信息(C)\\n" +
-							"    补充业务类型列表(C)..\\n" +
-							"[  Service Type = [呼叫等待(sCW)]<05 00 00 00>\\n" +
-							"  Service Type = [呼叫保持(sCH)]<08 00 00 00>\\n" +
-							"  Service Type = [呼叫恢复(sResum)]<09 00 00 00>\\n" +
-							"]\\n" +
-							"    前转标识列表(C)......[Invalid]\\n" +
-							"HSS上报信息(C)\\n" +
-							"    用户状态(M)..........[Invalid]\\n" +
-							"    拜访网络标识列表(M)..[Invalid]\\n" +
-							"    S-CSCF名(C)..........[Invalid]\\n" +
-							"    AS名列表(C)..........[Invalid]\\n" +
-							"S-CSCF上报信息(C)\\n" +
-							"    用户状态(M)..........[Invalid]\\n" +
-							"    拜访网络标识(C)......[Invalid]\\n" +
-							"    HSS/SLF域名(M).......[Invalid]\\n" +
-							"    接入侧域名(M)........[Invalid]\\n" +
-							"    Contact地址(M).......[Invalid]\\n" +
-							"SBC地址(C)...............[Invalid]\\n" +
-							"MSISDN(C)................[Invalid]\\n" +
-							"IMSI(C)..................[Invalid]\\n" +
-							"[ 编码码流 ]:　Length = 47\\n" +
-							"30 2d 80 01 02 a1 28 ac 26 a0 14 80 12 74 65 6c 3a 2b 38 36 \\n" +
-							"31 38 33 33 32 31 34 32 34 32 34 81 01 00 a3 0b a0 09 0a 01 \\n" +
-							"05 0a 01 08 0a 01 09\\n");
-				} else if ("IMSHSS".equals(unitView)) {
-					msg.setMemo("协议版本号...........[2]<02>\\n" +
-							"消息类型.............[用户信息查询响应]\\n" +
-							"目标标识(M)..........[tel:"+ getPara("number") +"]<"+BCD.str2rBcdstr(getPara("number"))+">\\n" +
-							"操作结果(M)..........[成功]<00>\\n" +
-							"失败原因(C)..........[Invalid]\\n" +
-							"AS上报信息(C)\\n" +
-							"    补充业务类型列表(C)..[Invalid]\\n" +
-							"    前转标识列表(C)......[Invalid]\\n" +
-							"    主附卡关联列表(C)(适用一号多终端AS)......[Invalid]\\n" +
-							"HSS上报信息(C)\\n" +
-							"    用户状态(M)..........[在线 (online)]<01>\\n" +
-							"    拜访网络标识列表(M)..\\n" +
-							"[\\n" +
-							"  VisitNetworkID =[pcscf01.zj.ims.chinaunicom.cn]<70 63 73 63 66 30 31 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
-							"  VisitNetworkID =[pcscf02.zj.ims.chinaunicom.cn]<70 63 73 63 66 30 32 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
-							"  VisitNetworkID =[agcf01.zj.ims.chinaunicom.cn]<61 67 63 66 30 31 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
-							"  VisitNetworkID =[agcf02.zj.ims.chinaunicom.cn]<61 67 63 66 30 32 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
-							"]\\n" +
-							"    S-CSCF名(C)..........[sip:scscf02.zj.ims.chinaunicom.cn]<73 69 70 3a 73 63 73 63 66 30 32 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
-							"    AS名列表(C)..........\\n" +
-							"[\\n" +
-							"  As Name=[sip:mmtel90.zj.ims.chinaunicom.cn]<73 69 70 3a 6d 6d 74 65 6c 39 30 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
-							"]\\n" +
-							"S-CSCF上报信息(C)\\n" +
-							"    用户状态(M)..........[Invalid]\\n" +
-							"    拜访网络标识(C)......[Invalid]\\n" +
-							"    HSS/SLF域名(M).......[Invalid]\\n" +
-							"    接入侧域名(M)........[Invalid]\\n" +
-							"    Contact地址(M).......[Invalid]\\n" +
-							"SBC地址(C)...............[Invalid]\\n" +
-							"MSISDN(C)................[Invalid]\\n" +
-							"IMSI(C)..................[Invalid]\\n" +
-							"接入侧互通AGCF上报信息(C)(适用互通节点接入侧互通AGCF)\\n" +
-							"    MSISDN(C)..........[Invalid]\\n" +
-							"    IMSI(C)......[Invalid]\\n" +
-							"    IMEI(C).......[Invalid]\\n" +
-							"    ISDN(C)........[Invalid]\\n" +
-							"    用户状态(C).......[Invalid]\\n" +
-							"    位置更新时间(C).......[Invalid]\\n" +
-							"    最新位置(C).......[Invalid]\\n");
-				} else if ("S-CSCF".equals(unitView)) {
-					msg.setMemo(
-							"协议版本号...........[2]<02>\\n" +
-							"消息类型.............[用户信息查询响应]\\n" +
-							"目标标识(M)..........[tel:"+ getPara("number") +"]<"+BCD.str2rBcdstr(getPara("number"))+">\\n" +
-							"操作结果(M)..........[成功]<00>\\n" +
-							"失败原因(C)..........[Invalid]\\n" +
-							"AS上报信息(C)\\n" +
-							"    补充业务类型列表(C)..[Invalid]\\n" +
-							"    前转标识列表(C)......[Invalid]\\n" +
-							"    主附卡关联列表(C)(适用一号多终端AS)......[Invalid]\\n" +
-							"HSS上报信息(C)\\n" +
-							"    用户状态(M)..........[Invalid]\\n" +
-							"    拜访网络标识列表(M)..[Invalid]\\n" +
-							"    S-CSCF名(C)..........[Invalid]\\n" +
-							"    AS名列表(C)..........[Invalid]\\n" +
-							"S-CSCF上报信息(C).........\\n" +
-							"[\\n" +
-							"    用户状态(M)..........[在线 (online)]<01>\\n" +
-							"    拜访网络标识(C)......[\\n" +
-							"  VisitNetworkID =[pcscf01.zj.ims.chinaunicom.cn]<70 63 73 63 66 30 31 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
-							"  VisitNetworkID =[pcscf02.zj.ims.chinaunicom.cn]<70 63 73 63 66 30 32 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
-							"  VisitNetworkID =[agcf01.zj.ims.chinaunicom.cn]<61 67 63 66 30 31 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
-							"  VisitNetworkID =[agcf02.zj.ims.chinaunicom.cn]<61 67 63 66 30 32 2e 7a 6a 2e 69 6d 73 2e 63 68 69 6e 61 75 6e 69 63 6f 6d 2e 63 6e>\\n" +
-							"]\\n" +
-							"    HSS/SLF域名(M).......[hss.domain21.huawei.com]\\n" +
-							"    接入侧域名(M)........[pcscf.domain21.huawei.com]\\n" +
-							"    Contact地址(M).......[sip:+8617830939495@191.139.2.12:11169]\\n" +
-							"]\\n" +
-							"SBC地址(C)...............[Invalid]\\n" +
-							"MSISDN(C)................[Invalid]\\n" +
-							"IMSI(C)..................[Invalid]\\n" +
-							"接入侧互通AGCF上报信息(C)(适用互通节点接入侧互通AGCF)\\n" +
-							"    MSISDN(C)..........[Invalid]\\n" +
-							"    IMSI(C)......[Invalid]\\n" +
-							"    IMEI(C).......[Invalid]\\n" +
-							"    ISDN(C)........[Invalid]\\n" +
-							"    用户状态(C).......[Invalid]\\n" +
-							"    位置更新时间(C).......[Invalid]\\n" +
-							"    最新位置(C).......[Invalid]");
-				} else if ("P-CSCF".equals(unitView) || "AGCF".equals(unitView)) {
-					msg.setMemo("协议版本号...........[2]<02>\\n" +
-							"消息类型.............[用户信息查询响应]\\n" +
-							"目标标识(M)..........[tel:"+ getPara("number") +"]<"+BCD.str2rBcdstr(getPara("number"))+">\\n" +
-							"操作结果(M)..........[成功]<00>\\n" +
-							"失败原因(C)..........[Invalid]\\n" +
-							"AS上报信息(C)\\n" +
-							"    补充业务类型列表(C)..[Invalid]\\n" +
-							"    前转标识列表(C)......[Invalid]\\n" +
-							"    主附卡关联列表(C)(适用一号多终端AS)......[Invalid]\\n" +
-							"HSS上报信息(C)\\n" +
-							"    用户状态(M)..........[Invalid]\\n" +
-							"    拜访网络标识列表(M)..[Invalid]\\n" +
-							"    S-CSCF名(C)..........[Invalid]\\n" +
-							"    AS名列表(C)..........[Invalid]\\n" +
-							"S-CSCF上报信息(C)\\n" +
-							"    用户状态(M)..........[Invalid]\\n" +
-							"    拜访网络标识(C)......[Invalid]\\n" +
-							"    HSS/SLF域名(M).......[Invalid]\\n" +
-							"    接入侧域名(M)........[Invalid]\\n" +
-							"    Contact地址(M).......[Invalid]\\n" +
-							"SBC地址(C)...............[10.188.101.97:5060]<31 30 2e 31 38 38 2e 31 30 31 2e 39 37 3a 35 30 36 30>\\n" +
-							"\\n" +
-							"MSISDN(C)................[Invalid]\\n" +
-							"IMSI(C)..................[Invalid]\\n" +
-							"接入侧互通AGCF上报信息(C)(适用互通节点接入侧互通AGCF)\\n" +
-							"    MSISDN(C)..........[Invalid]\\n" +
-							"    IMSI(C)......[Invalid]\\n" +
-							"    IMEI(C).......[Invalid]\\n" +
-							"    ISDN(C)........[Invalid]\\n" +
-							"    用户状态(C).......[Invalid]\\n" +
-							"    位置更新时间(C).......[Invalid]\\n" +
-							"    最新位置(C).......[Invalid]");
-				} else {
 					msg.setMemo("协议版本号........[1]<01>\\n"
 							+ "消息类型..........[用户信息查询响应]\\n"
 							+ "MB类型(M).......[" + getPara("numberFormat") + "]<" + BCD.getTargetType(getPara("numberFormat")) + ">	\\n"
@@ -1048,7 +1057,6 @@ public class UnitController extends BaseController {
 							+ "  lastVisitedTAI[C]........[MCC460 MNC30 TAC20007]<64 f0 03 4e 27 >\\n"
 							+ "  taiList[C]......[Invalid]\\n"
 							+ "  ecgi[C].........[460 30 4294902530]<64 f0 03 ff ff 03 02 >\\n");
-				}
 			}
 		}
 		else if("WWW".equalsIgnoreCase(getNetType(u.getUnitType()))){
@@ -1081,6 +1089,16 @@ public class UnitController extends BaseController {
 		msg.setMemo(Encrypt.encode(msg.getMemo()));
 		msg.save();
 //		simulation1();
+	}
+
+	private void processNotFound(X1msg msg) {
+		msg.setMemo("协议版本号........[1]<01>\\n"
+				+ "消息类型..........[用户信息查询响应]\\n"
+				+ "MB类型(M).......[" + getPara("numberFormat") + "]<" + BCD.getTargetType(getPara("numberFormat")) + ">	\\n"
+				+ "MB标识(M).......[" + getPara("number") + "]<" + BCD.str2rBcdstr(getPara("number")) + ">\\n"
+				+ "操作结果(M).......[失败]<00>\\n"
+				+ "命令失败原因(C)...[MB not exists]\\n");
+		msg.setOperationResult("失败");
 	}
 
 	/**
@@ -1908,16 +1926,16 @@ public class UnitController extends BaseController {
 
 	public void x1_delete() {
 		Db.update("delete from tx1msg");
-		simulation1();
+		redirect("/admin/unit/simulation1");
 	}
 
 	public void x2_delete() {
 		Db.update("delete from tx2msg");
-		simulation2();
+		redirect("/admin/unit/simulation2");
 	}
 
 	public void x3_delete() {
 		Db.update("delete from tx3msg");
-		simulation3();
+		redirect("/admin/unit/simulation3");
 	}
 }

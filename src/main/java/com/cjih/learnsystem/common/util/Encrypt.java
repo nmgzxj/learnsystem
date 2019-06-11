@@ -160,7 +160,11 @@ public static String encode(String str) {
 	return Base64.getEncoder().encodeToString((Base64.getEncoder().encodeToString(str.getBytes()).getBytes()));
 }
 
-public static void main(String args[]) {
+public static void main(String[] args){
+	System.out.println(decode(decode("VGxoQ05XTlVWVEZMTW5jeFkyMUdTazVYT1Voa1p6MDk=")));
+}
+
+public static void main2(String args[]) {
 	Prop p = PropKit.use("jfinal_club_config_dev.txt")
 			.appendIfExists("jfinal_club_config_pro.txt");
 	DruidPlugin dp = new DruidPlugin(p.get("jdbcUrl"), p.get("user"), p.get("password").trim()); 
